@@ -1,16 +1,24 @@
 [user]
 	name = Mark Riedesel
 	email = mark@klowner.com
+
 [core]
 	editor = vim
+
 [gist]
 	private = yes
+
 [github]
 	user = klowner
+
 [color]
 	diff = auto
 	status = auto
 	branch = auto
+
 [log]
 	decorate = short
+
+[push]
+	default = simple
 
