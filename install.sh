@@ -2,7 +2,7 @@
 #
 # Shamelessly stolen and adapted from https://github.com/statico/dotfiles
 #
-# <strike>Ian's</strike> Mark's dotfile installer. Usage:
+# Mark's dotfile installer. Usage:
 #
 #   curl http://github.com/klowner/dotfiles/raw/master/install.sh | sh
 #
