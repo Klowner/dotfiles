@@ -14,8 +14,8 @@
 
 basedir=$HOME/.dotfiles
 bindir=$HOME/bin
-gitbase=git://github.com/klowner/dotfiles.git
-tarball=http://github.com/klowner/dotfiles/tarball/master
+gitbase=git://github.com/Klowner/dotfiles.git
+tarball=http://github.com/Klowner/dotfiles/tarball/master
 
 function has() {
     return $( which $1 >/dev/null )
