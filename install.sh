@@ -4,7 +4,7 @@
 #
 # Mark's dotfile installer. Usage:
 #
-#   curl http://github.com/klowner/dotfiles/raw/master/install.sh | sh
+#   curl https://raw.github.com/Klowner/dotfiles/master/install.sh | sh
 #
 # or:
 #
