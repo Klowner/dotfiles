@@ -58,7 +58,6 @@ repos=(
   https://github.com/tpope/vim-pathogen.git
   https://github.com/tpope/vim-ragtag.git
   https://github.com/tpope/vim-surround.git
-  https://github.com/vim-scripts/Railscasts-Theme-GUIand256color.git
   https://github.com/vim-scripts/keepcase.vim.git
   https://github.com/vim-scripts/lighttpd-syntax.git
   https://github.com/vim-scripts/oceandeep.git
@@ -66,6 +65,8 @@ repos=(
   https://github.com/wavded/vim-stylus.git
   https://github.com/tpope/vim-fugitive.git
   )
+
+#https://github.com/vim-scripts/Railscasts-Theme-GUIand256color.git
 
 # Here's a list of everything else to download in the format
 # <destination>;<url>[;<filename>]

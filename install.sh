@@ -6,7 +6,7 @@
 #
 #   curl https://raw.github.com/Klowner/dotfiles/master/install.sh | sh
 # or:
-#   curl http://tinyurl.com/klownerdot | sh
+#   curl -L http://tinyurl.com/klownerdot | sh
 # or:
 #
 #   ~/.dotfiles/install.sh
