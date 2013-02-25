@@ -12,6 +12,7 @@
 nmap \e :NERDTreeToggle<CR>
 nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
 nmap \T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+nmap \r :TagbarToggle<CR>
 
 "" buffa flippin'
 map <C-e> :e#<CR>
@@ -24,6 +25,13 @@ vnoremap <space> zf
 
 " Section: Plugin settings {{{1
 "------------------------------------------------------------------------------
+let mapleader = ","
+let maplocalleader = ","
+
+" vimspell.vim
+let spell_auto_type = ""
+
+
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 execute pathogen#helptags()
@@ -45,6 +53,10 @@ let g:ctrlp_dotfiles = 0
 let g:ctrlp_switch_buffer = 0
 nmap ; :CtrlPBuffer<CR>
 
+filetype plugin indent on
+
+
+
 " Section: Color and syntax {{{1
 "------------------------------------------------------------------------------
 " Helper to initialize Zenburn colors in 256-color mode.
@@ -57,7 +69,8 @@ endfunction
 if !has('gui_running')
     if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
         set t_Co=256
-        call ColorTermZenburn()
+        "call ColorTermZenburn()
+        colorscheme pablo
     elseif has("terminfo")
         colorscheme default
         set t_Co=8
@@ -74,22 +87,21 @@ syntax on
 
 
 if $TERM == "xterm-256color"
-	set t_Co=256
+ set t_Co=256
 endif
 
-"-------
+"
+"autocmd BufRead,BufNewFile *.frag,*.vert,*.vp,*.fp,*.glsl set filetype=glsl
+"
+"augroup stripTrailingWhitespace
+"	autocmd BufWritePre * :%s/\s\+$//e
+"augroup END
 
-autocmd BufRead,BufNewFile *.frag,*.vert,*.vp,*.fp,*.glsl set filetype=glsl
+"set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+"hi NonText ctermfg=8 guifg=grey
+"hi SpecialKey ctermfg=8
 
-augroup stripTrailingWhitespace
-	autocmd BufWritePre * :%s/\s\+$//e
-augroup END
-
-set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-hi NonText ctermfg=8 guifg=grey
-hi SpecialKey ctermfg=8
-
-:nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+":nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 "autoremove all trailing whitespace
 
@@ -105,6 +117,7 @@ augroup resCur
   autocmd!
   autocmd BufWinEnter * call ResCur()
 augroup END
+
 
 " Section: Vim options {{{1
 "------------------------------------------------------------------------------
@@ -123,3 +136,8 @@ set list                            " Show invisible characters in listchars
 set listchars=tab:▶\ ,trail:◀,extends:»,precedes:«
 set smartcase
 set showmatch                       " Hilight matching braces/parens/etc.
+
+
+" Section: Load ~/.vimlocal {{{1
+"------------------------------------------------------------------------------
+source ~/.vimlocal
