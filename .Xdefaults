@@ -7,21 +7,15 @@ urxvt*termName: xterm-256color
 urxvt*.transparent: true
 urxvt*.shading: 15
 
-#XTerm*termName: xterm-256color
-#URxvt*termName: rxvt-unicode
+!XTerm*termName: xterm-256color
+!URxvt*termName: rxvt-unicode
 
-!*font: xft:Envy Code R:style=Regular:size=10:antialias=true
-!urxvt*font: xft:Terminus:style=regular:size=9:antialias=false
-!urxvt*font: xft:Inconsolata:style=Regular:size=9
+URxvt*font: xft:Envy Code R:style=Regular:size=10:antialias=true
+!URxvt*imFont: xft:Envy Code R:style=Regular:size=10:antialias=true
+!URxvt*font: xft:Terminus:style=regular:size=9:antialias=false
+!URxvt*font: xft:Inconsolata:style=Regular:size=9
 
-URxvt*font: xft: Monaco:style=Regular:size=9:antialias=true
-!URxvt*font:	xft:Monaco:style=Regular:size=9,xft:Monaco for Powerline:style=Regular:size=9:antialias=true
-!URxvt*font: xft:Envy Code R for Powerline:style=regular:size=10
-
-!URxvt*imFont:	xft:Monaco for Powerline:style=Regular:size=9
-!URxvt*boldFont:	xft:Monaco for Powerline:style=Bold:size=9
-!URxvt*italicFont: xft:Monaco for Powerline:italic:size=8
-!URxvt*boldItalicFont: xft:Monaco for Powerline:bold:italic:size=8
+!URxvt*font: xft:Monaco:style=Regular:size=9:antialias=true
 
 urxvt.perl-ext-common: default,matcher
 urxvt.url-launcher: /usr/bin/google-chrome
@@ -45,6 +39,4 @@ urxvt.matcher.button: 1
 *color13: #bb88dd
 *color14: #4eb4fa
 *color15: #d0d0d0
-
-
 
