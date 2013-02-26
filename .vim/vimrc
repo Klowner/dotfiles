@@ -61,11 +61,13 @@ filetype plugin indent on
 "------------------------------------------------------------------------------
 " Helper to initialize Zenburn colors in 256-color mode.
 function! ColorTermZenburn()
-    colorscheme zenburn
     let g:zenburn_high_Contrast = 1
+    colorscheme zenburn
     highlight normal ctermbg=234
-    highlight SpecialKey ctermfg=235
+    highlight SpecialKey cterm=NONE ctermfg=235
 endfunction
+
+syntax on
 
 if !has('gui_running')
     if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
@@ -84,7 +86,8 @@ if !has('gui_running')
     endif
 endif
 
-syntax on
+
+
 
 
 "
