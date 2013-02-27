@@ -10,10 +10,13 @@ urxvt*.shading: 15
 !XTerm*termName: xterm-256color
 !URxvt*termName: rxvt-unicode
 
-URxvt*font: xft:Envy Code R for Powerline:size=10:antialias=false
-URxvt*boldFont: xft:Envy Code R for Powerline:bold:size=10
-URxvt*italicFont: xft:Envy Code R for Powerline:italic:size=10
-!URxvt*font: xft:Monaco:style=Regular:size=9:antialias=true
+URxvt*letterSpace: 1
+URxvt*font: xft:Envy Code R for Powerline:style=Regular:size=10
+URxvt*boldFont: xft:Envy Code R:style=Bold:size=10
+!URxvt*italicFont: xft:Envy Code R for Powerline:italic:size=10
+
+!URxvt*font: xft:Monaco:regular:pixelsize=12
+!URxvt*boldFont: xft:Monaco:bold:pixelsize=12:antialias=true
 !URxvt*font: xft:Terminus:style=regular:size=9:antialias=false
 !URxvt*font: xft:Inconsolata:style=Regular:size=9
 
