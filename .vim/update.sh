@@ -61,9 +61,7 @@ repos=(
   https://github.com/vim-scripts/keepcase.vim.git
   https://github.com/vim-scripts/lighttpd-syntax.git
   https://github.com/vim-scripts/oceandeep.git
-  https://github.com/vim-scripts/oceandeep.git
   https://github.com/wavded/vim-stylus.git
-  https://github.com/tpope/vim-fugitive.git
   )
 
 #https://github.com/vim-scripts/Railscasts-Theme-GUIand256color.git
