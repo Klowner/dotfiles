@@ -10,12 +10,12 @@ urxvt*.shading: 15
 !XTerm*termName: xterm-256color
 !URxvt*termName: rxvt-unicode
 
-URxvt*font: xft:Envy Code R:style=Regular:size=10:antialias=true
-!URxvt*imFont: xft:Envy Code R:style=Regular:size=10:antialias=true
+URxvt*font: xft:Envy Code R for Powerline:size=10:antialias=false
+URxvt*boldFont: xft:Envy Code R for Powerline:bold:size=10
+URxvt*italicFont: xft:Envy Code R for Powerline:italic:size=10
+!URxvt*font: xft:Monaco:style=Regular:size=9:antialias=true
 !URxvt*font: xft:Terminus:style=regular:size=9:antialias=false
 !URxvt*font: xft:Inconsolata:style=Regular:size=9
-
-!URxvt*font: xft:Monaco:style=Regular:size=9:antialias=true
 
 urxvt.perl-ext-common: default,matcher
 urxvt.url-launcher: /usr/bin/google-chrome
