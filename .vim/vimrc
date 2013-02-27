@@ -106,6 +106,9 @@ augroup resCur
   autocmd BufWinEnter * call ResCur()
 augroup END
 
+" Additional syntax modes
+autocmd BufRead,BufNewFile *.frag,*.vert,*.vp,*.fp,*glsl set filetype=glsl
+
 " Section: Vim options {{{1
 "------------------------------------------------------------------------------
 set ts=4
