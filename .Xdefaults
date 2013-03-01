@@ -10,7 +10,7 @@ urxvt*.shading: 15
 !XTerm*termName: xterm-256color
 !URxvt*termName: rxvt-unicode
 
-URxvt*letterSpace: 1
+URxvt*letterSpace: 0
 URxvt*font: xft:Envy Code R for Powerline:style=Regular:size=10
 URxvt*boldFont: xft:Envy Code R:style=Bold:size=10
 !URxvt*italicFont: xft:Envy Code R for Powerline:italic:size=10
@@ -23,6 +23,13 @@ URxvt*boldFont: xft:Envy Code R:style=Bold:size=10
 urxvt.perl-ext-common: default,matcher
 urxvt.url-launcher: /usr/bin/google-chrome
 urxvt.matcher.button: 1
+
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
 
 !*background: #101010
 *cursorColor: #d0d0d0
