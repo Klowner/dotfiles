@@ -148,6 +148,9 @@ set scrolloff=15                    " Keep cursor away from this many chars top/
 set scroll=4
 set nobackup
 
+set matchtime=2
+set modelines=5
+
 " Section: Load ~/.vimlocal {{{1
 "------------------------------------------------------------------------------
 source ~/.vimlocal
