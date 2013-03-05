@@ -1,0 +1,51 @@
+background no
+out_to_console yes
+out_to_x no
+double_buffer no
+update_interval 1.0
+total_run_times 0
+use_spacer right
+short_units yes
+pad_percents 2
+temperature_unit fahrenheit
+
+#lua_load scripts/colorize.lua
+lua_load ~/.dotfiles/dzen2/scripts/colorizer.lua
+lua_load ~/.dotfiles/dzen2/scripts/cpu.lua
+
+
+TEXT
+#############################
+#ARCH LOGO AND KERNEL VERSION
+ ^fg(\#606060)^i(/home/mark/.dotfiles/dzen2/xbm8x8/arch.xbm)\
+ ^fg(\#ffffff)${kernel}\
+    \
+####################
+## CPU UTILIZATION
+${lua cpustats /home/mark/.dotfiles/dzen2/xbm8x8/cpu.xbm #606060 #ff6060}\
+   \
+## TEMPERATURE
+^fg(\#606060)\
+^i(/home/mark/.dotfiles/dzen2/xbm8x8/temp.xbm) \
+^fg(\#ffffff)\
+${platform coretemp.0 temp 2} \
+${platform coretemp.0 temp 3} \
+${platform coretemp.0 temp 4} \
+${platform coretemp.0 temp 5}\
+   \
+^fg(\#606060)^i(/home/mark/.dotfiles/dzen2/xbm8x8/net_up_02.xbm) \
+^fg(\#ffffff)${upspeed}\
+   \
+^fg(\#606060)^i(/home/mark/.dotfiles/dzen2/xbm8x8/net_down_02.xbm) \
+^fg(\#ffffff)${downspeed}\
+   \
+^fg(\#606060)^i(/home/mark/.dotfiles/dzen2/xbm8x8/net_wired.xbm) \
+^fg(\#ffffff)${addr eth0}\
+   \
+^fg(\#606060)^i(/home/mark/.dotfiles/dzen2/xbm8x8/wifi_01.xbm) \
+^fg(\#ffffff)${addr wlan0}\
+   \
+^fg(\#606060)^i(/home/mark/.dotfiles/dzen2/xbm8x8/clock.xbm) \
+^fg(\#ffffff)${time %a %b %d} ^fg(\#606060)${time %m/%d/%Y} ^fg(\#ffffff)${time %r}\
+ \
+

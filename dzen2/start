@@ -1,0 +1,7 @@
+#!/bin/bash
+FONT='drift'
+WIDTH=1920
+
+conky -c ~/.dotfiles/dzen2/conkyrc | dzen2 -w $WIDTH -sa r -ta r -e - -fn $FONT
+
+
