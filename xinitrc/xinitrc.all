@@ -1,0 +1,7 @@
+#!/bin/sh
+xsetroot -cursor_name left_ptr &
+dispcalGUI-apply-profiles &
+feh --bg-scale -z ~/Dropbox/Wallpapers/external &
+thunar --daemon &
+clipit &
+

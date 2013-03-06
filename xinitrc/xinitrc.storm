@@ -1,0 +1,5 @@
+#!/bin/sh
+junglediskdesktop &
+pnmixer &
+dunst -mon 2 &
+
