@@ -1,0 +1,3 @@
+#!/bin/sh
+gvolwheel -d hw:1 &
+

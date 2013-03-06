@@ -1,20 +1,15 @@
 *.foreground: white
 *.background: black
 
-urxvt*scrollBar: false
-urxvt*depth: 32
-urxvt*termName: xterm-256color
-urxvt*.transparent: true
-urxvt*.shading: 15
-
-!XTerm*termName: xterm-256color
-!URxvt*termName: rxvt-unicode
-
+URxvt*scrollBar: false
+URxvt*depth: 32
+URxvt*termName: xterm-256color
+URxvt*.transparent: true
+URxvt*.shading: 15
 URxvt*letterSpace: 0
 URxvt*font: xft:Envy Code R for Powerline:style=Regular:size=10
 URxvt*boldFont: xft:Envy Code R:style=Bold:size=10
 !URxvt*italicFont: xft:Envy Code R for Powerline:italic:size=10
-
 !URxvt*font: xft:Monaco:regular:pixelsize=12
 !URxvt*boldFont: xft:Monaco:bold:pixelsize=12:antialias=true
 !URxvt*font: xft:Terminus:style=regular:size=9:antialias=false
@@ -23,6 +18,8 @@ URxvt*boldFont: xft:Envy Code R:style=Bold:size=10
 urxvt.perl-ext-common: default,matcher
 urxvt.url-launcher: /usr/bin/google-chrome
 urxvt.matcher.button: 1
+URxvt.internalBorder: 4
+URxvt.pointerBlank: true
 
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
@@ -49,4 +46,3 @@ Xft.rgba: rgb
 *color13: #bb88dd
 *color14: #4eb4fa
 *color15: #d0d0d0
-
