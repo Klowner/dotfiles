@@ -75,7 +75,7 @@ endfunction
 function! ColorTermSolarized()
     let g:solarized_termcolors=256
     let g:solarized_contrast="high"
-    let g:solarized_termtrans=1
+    let g:solarized_termtrans=0
     colorscheme solarized
     highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=None
 endfunction
