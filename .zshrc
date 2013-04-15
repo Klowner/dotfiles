@@ -10,10 +10,11 @@ ZSH_THEME="fishy"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias sudo="nocorrect sudo"
+alias wallpaper="feh --bg-scale -z"
+alias svim='EDITOR=vim sudoedit'
+alias sudo="nocurrect sudo"
 alias steam="SDL_AUDIODRIVER=alsa steam"
-alias wallpaper="feh --bg-scale -z ~/Dropbox/Wallpapers/external"
-alias pacman="pacman-color"
+
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -33,11 +34,16 @@ alias pacman="pacman-color"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow git-extras node themes rsync screen systemd archlinux gnu-utils python pip ssh-agent)
+plugins=(git git-extras extract node npm python pip rsync systemd archlinux ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
-export EDITOR=vim
 
+# npm modules
+export PATH=$PATH:/home/mark/node_modules/.bin
+
+# Misc exports
+export LOCAL_PACKAGE_SOURCES=$HOME/Downloads
+export EDITOR=vim
