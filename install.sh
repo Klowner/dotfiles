@@ -112,10 +112,12 @@ done
 
 note "Installing bin/ directory..."
 mkdir -v -p $bindir
-for path in bin/* ; do
-    relpath=$( basename $path )
-    link $basedir/$path $bindir/$relpath
-done
+if [ -d bin ]; then
+	for path in bin/* ; do
+		relpath=$( basename $path )
+		link $basedir/$path $bindir/$relpath
+	done
+fi
 
 note "Symlinking Vim configurations..."
 for rc in vim gvim; do

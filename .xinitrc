@@ -10,7 +10,7 @@ fi
 
 # Run xinitrc.all and then xinitrc.{hostname}
 if [ -d ~/.dotfiles/xinitrc ]; then
-	for x in "all" "$(hostname -s)"; do
+	for x in "all" "$(cat /etc/hostname)"; do
 		x=~/.dotfiles/xinitrc/xinitrc.$x
 		[ -x "$x" ] && . "$x"
 	done
