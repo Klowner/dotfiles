@@ -14,7 +14,7 @@ alias wallpaper="feh --bg-scale -z"
 alias svim='EDITOR=vim sudoedit'
 alias sudo="nocorrect sudo"
 alias steam="SDL_AUDIODRIVER=alsa steam"
-
+alias chrome="chrome --audio-buffer-size=2048"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
