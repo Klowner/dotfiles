@@ -12,7 +12,7 @@ ZSH_THEME="fishy"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias wallpaper="feh --bg-scale -z"
 alias svim='EDITOR=vim sudoedit'
-alias sudo="nocurrect sudo"
+alias sudo="nocorrect sudo"
 alias steam="SDL_AUDIODRIVER=alsa steam"
 
 
