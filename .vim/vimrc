@@ -8,6 +8,7 @@
 " Mark's .vimrc
 "-----------------------------
 " Section: Key Mappings {{{1
+"
 "------------------------------------------------------------------------------
 nmap \e :NERDTreeToggle<CR>
 nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
@@ -18,6 +19,13 @@ nmap \r :TagbarToggle<CR>
 map <C-e> :e#<CR>
 map <C-n> :bnext<CR>
 map <C-p> :bprev<CR>
+
+"" Retab
+:command! -range=% -nargs=0 Tab2Space execute '<line1>,<line2>s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
+:command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
+
+"" :R read output
+:command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
 
 nnoremap <space> za
 nnoremap <CR> za
@@ -55,7 +63,6 @@ let g:ctrlp_switch_buffer = 0
 nmap ; :CtrlPBuffer<CR>
 
 filetype plugin indent on
-
 
 
 " Section: Color and syntax {{{1
