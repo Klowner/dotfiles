@@ -26,7 +26,7 @@ function! g:SyntasticLoclist.New(rawLoclist)
     return newObj
 endfunction
 
-function! g:SyntasticLoclist.Current()
+function! g:SyntasticLoclist.current()
     if !exists("b:syntastic_loclist")
         let b:syntastic_loclist = g:SyntasticLoclist.New([])
     endif
@@ -146,11 +146,7 @@ endfunction
 " Non-method functions {{{1
 
 function! g:SyntasticLoclistHide()
-    if len(filter( range(1, bufnr('$')), 'syntastic#util#bufIsActive(v:val)' )) == 1
-        quit
-    else
-        lclose
-    endif
+    silent! lclose
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:
