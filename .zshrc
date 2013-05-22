@@ -17,7 +17,7 @@ alias steam="SDL_AUDIODRIVER=alsa steam"
 alias chrome="google-chrome --audio-buffer-size=2048"
 
 # Add extra identities to ssh-agent plugin
-zstyle :omz:plugins:ssh-agent id_rsa id_rsa_storm
+zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_storm
 
 # Enable agent forwarding
 zstyle :omz:plugins:ssh-agent agent-forwarding on
