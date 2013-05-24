@@ -1,0 +1,3 @@
+#!/bin/zsh
+export WINDIR=1
+$(source ~/.zshrc && dmenu_path_c | yeganesh)
