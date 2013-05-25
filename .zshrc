@@ -51,6 +51,9 @@ export PATH=$HOME/bin:$PATH
 # npm modules
 export PATH=$PATH:/home/mark/node_modules/.bin
 
+# Android SDK paths
+export PATH=$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools/
+
 # Misc exports
 export LOCAL_PACKAGE_SOURCES=$HOME/Downloads
 export EDITOR=vim
