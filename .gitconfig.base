@@ -22,3 +22,5 @@
 [push]
 	default = simple
 
+[alias]
+	branchlog = !git log $1..HEAD --date=short --format=\"git:%h %ad %s\"
