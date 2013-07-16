@@ -51,6 +51,9 @@ export PATH=$HOME/bin:$PATH
 # npm modules
 export PATH=$PATH:/home/mark/node_modules/.bin
 
+# ruby gems
+export PATH=$HOME/.gem/ruby/2.0.0/bin
+
 # Misc exports
 export LOCAL_PACKAGE_SOURCES=$HOME/Downloads
 export EDITOR=vim

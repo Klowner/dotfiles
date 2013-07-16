@@ -23,4 +23,4 @@
 	default = simple
 
 [alias]
-	branchlog = !git log $1..HEAD --date=short --format=\"git:%h %ad %s\"
+	branchlog = !git log ${1+}${1-master}..HEAD --reverse --date=short --format=\"git:%h %ad %s\"
