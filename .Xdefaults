@@ -16,7 +16,7 @@ URxvt*boldFont: xft:Envy Code R:style=Bold:size=10
 !URxvt*font: xft:Inconsolata:style=Regular:size=9
 
 urxvt.perl-ext-common: default,matcher
-urxvt.url-launcher: /usr/bin/google-chrome
+urxvt.url-launcher: /usr/bin/firefox
 urxvt.matcher.button: 1
 URxvt.internalBorder: 4
 URxvt.pointerBlank: true
