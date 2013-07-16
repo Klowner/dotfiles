@@ -1,0 +1,30 @@
+#!/bin/bash
+
+git for-each-ref refs/remotes/svn/tags | cut -d / -f 5- |
+while read ref
+do
+	# Check to see if tag exists
+	git show-ref --tags --verify --quiet "refs/tags/$ref"
+
+	if [[ $? -gt 0 ]]; then
+		# Tag does not exist.
+
+		# Find SHA1 of the svn branch tag target.
+		sha1=$(git show-ref $ref | cut -d ' ' -f 1)
+
+		# Find parent of that branch (should be in master. This due to the
+		# policy of branching and then tagging
+		sha1_parent=$(git rev-list $sha1 --parents --max-count=1 | awk '{print $NF}')
+
+		# Create light tag
+		#git tag $ref $sha1_parent
+		git tag "$ref" "refs/remotes/svn/tags/$ref"
+
+		if [[ $? -gt 0 ]]; then
+			echo "$ref was not tagged"
+		else
+			echo "Created tag: $ref -> $sha1"
+		fi
+	fi
+done
+
