@@ -52,7 +52,7 @@ export PATH=$HOME/bin:$PATH
 export PATH=$PATH:/home/mark/node_modules/.bin
 
 # ruby gems
-export PATH=$HOME/.gem/ruby/2.0.0/bin
+export PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
 
 # Misc exports
 export LOCAL_PACKAGE_SOURCES=$HOME/Downloads
