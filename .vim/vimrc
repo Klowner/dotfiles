@@ -64,6 +64,8 @@ nmap ; :CtrlPBuffer<CR>
 
 filetype plugin indent on
 
+" Python stuff
+au BufRead,BufNewFile *.py,*pyw set expandtab
 
 " Section: Color and syntax {{{1
 "------------------------------------------------------------------------------
