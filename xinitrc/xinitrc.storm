@@ -2,4 +2,5 @@
 junglediskdesktop &
 pnmixer &
 dunst -mon 2 &
+dropboxd &
 
