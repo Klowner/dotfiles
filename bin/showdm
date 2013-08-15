@@ -1,4 +1,4 @@
 #!/bin/bash
 export WINDIR=1
-$(dmenu_path_c | dmenu) # | yeganesh)
+$(dmenu_path_c | yeganesh)
 
