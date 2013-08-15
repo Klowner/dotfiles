@@ -26,7 +26,7 @@ URxvt.keysym.M-C-4: command:\033]710;xft:Envy Code R for Powerline:style=Regular
 !URxvt*font: xft:Inconsolata:style=Regular:size=9
 
 urxvt.perl-ext-common: default,matcher
-urxvt.url-launcher: /usr/bin/google-chrome
+urxvt.url-launcher: /usr/bin/firefox
 urxvt.matcher.button: 1
 URxvt.internalBorder: 4
 URxvt.pointerBlank: true
