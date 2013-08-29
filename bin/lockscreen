@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ls ~/wallpaper/*.jpg | sort -R | tail -1 | while read file; do
+	convert $file /tmp/lockwall.png
+	i3lock-spy -i /tmp/lockwall.png -u -c 000000 -t
+done
