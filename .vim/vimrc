@@ -73,6 +73,11 @@ au BufRead,BufNewFile *.py,*pyw set expandtab
 syntax on
 set background=dark
 
+" Spell checking
+map <leader>ss :setlocal spell!<cr>
+map <leader>sn ]s
+map <leader>sp [s
+
 " Helper to initialize Zenburn colors in 256-color mode.
 function! ColorTermZenburn()
     let g:zenburn_high_Contrast=1

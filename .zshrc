@@ -60,3 +60,5 @@ export PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
 # Misc exports
 export LOCAL_PACKAGE_SOURCES=$HOME/Downloads
 export EDITOR=vim
+
+export XDG_CONFIG_HOME=~/.config
