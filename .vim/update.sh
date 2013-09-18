@@ -64,6 +64,7 @@ repos=(
   https://github.com/wavded/vim-stylus.git
   https://github.com/groenewege/vim-less
   https://github.com/tomtom/tcomment_vim.git
+  https://github.com/alderz/smali-vim.git
   )
 
 #https://github.com/vim-scripts/Railscasts-Theme-GUIand256color.git
