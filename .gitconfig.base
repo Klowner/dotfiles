@@ -23,8 +23,19 @@
 [push]
 	default = simple
 
+[pack]
+	windowMemory = 2048m
+
 [alias]
 	branchlog = !git log ${1+}${1-master}..HEAD --reverse --date=short --format=\"git:%h %ad %s\"
+
+[merge]
+	tool = diffconflicts
+
+[mergetool "diffconflicts"]
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	trustExitCode = true
+	keepBackup = false
 
 [apply]
 	whitespace = fix
