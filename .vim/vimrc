@@ -31,6 +31,40 @@ nnoremap <space> za
 nnoremap <CR> za
 vnoremap <space> zf
 
+
+" Section: Vundle Bundles {{{1
+"------------------------------------------------------------------------------
+set rtp+=~/.dotfiles/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'FuzzyFinder'
+Bundle 'L9'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'ap/vim-css-color'
+Bundle 'gregsexton/gitv'
+Bundle 'kien/ctrlp.vim'
+Bundle 'majutsushi/tagbar'
+Bundle 'nono/vim-handlebars'
+Bundle 'pangloss/vim-javascript'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'tComment'
+Bundle 'timcharper/textile.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-pathogen'
+Bundle 'tpope/vim-ragtag'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-scripts/bufkill.vim'
+Bundle 'tomasr/molokai'
+
+filetype plugin indent on
+
+
 " Section: Plugin settings {{{1
 "------------------------------------------------------------------------------
 let mapleader = ","
@@ -41,8 +75,10 @@ let spell_auto_type = ""
 
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-execute pathogen#helptags()
+if exists("*pathogen")
+    execute pathogen#infect()
+    execute pathogen#helptags()
+endif
 
 " NERD_tree.vim
 let NERDTreeIgnore = ['\~$', '\.pyc$']
@@ -66,6 +102,9 @@ filetype plugin indent on
 
 " Python stuff
 au BufRead,BufNewFile *.py,*pyw set expandtab
+
+"allow auto switching
+set autowrite
 
 " Section: Color and syntax {{{1
 "------------------------------------------------------------------------------
@@ -95,6 +134,13 @@ function! ColorTermSolarized()
     highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=None
 endfunction
 
+function! ColorTermMolokai()
+    let g:molokai_original=1
+    try
+        colorscheme molokai
+    endtry
+endfunction
+
 " Highlight trailing whitespace with garish color
 function! HighlightExtraWhitespace()
     highlight ExtraWhitespace ctermfg=red
@@ -106,8 +152,9 @@ endfunction
 if !has('gui_running')
     if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
         set t_Co=256
-        call ColorTermZenburn()
+        "call ColorTermZenburn()
         "call ColorTermSolarized()
+        call ColorTermMolokai()
         call HighlightExtraWhitespace()
     elseif has("terminfo")
         colorscheme default
