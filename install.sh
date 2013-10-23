@@ -127,6 +127,12 @@ for rc in vim gvim; do
     fi
 done
 
+note "Installing git submodules..."
+if has git; then
+	git submodule init
+	git submodule update
+fi
+
 note "Initializing tools..."
 if has git; then
     # Post-install scripts might customize this further.
