@@ -134,7 +134,9 @@ if has git; then
 fi
 if has vim; then
   cd $basedir
-  ./.vim/update.sh all
+  #./.vim/update.sh all
+  git clone https://github.com/gmarik/vundle.git .vim/bundle/vundle
+  vim +BundleInstall +qall
 fi
 
 note "Running post-install script, if any..."
