@@ -56,11 +56,13 @@ Bundle 'timcharper/textile.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-pathogen'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/bufkill.vim'
+
+" Color schemes
 Bundle 'tomasr/molokai'
+Bundle "jnurmine/Zenburn"
 
 filetype plugin indent on
 
@@ -72,13 +74,6 @@ let maplocalleader = ","
 
 " vimspell.vim
 let spell_auto_type = ""
-
-
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-if exists("*pathogen")
-    execute pathogen#infect()
-    execute pathogen#helptags()
-endif
 
 " NERD_tree.vim
 let NERDTreeIgnore = ['\~$', '\.pyc$']
@@ -121,7 +116,10 @@ map <leader>sp [s
 function! ColorTermZenburn()
     let g:zenburn_high_Contrast=1
     let g:zenburn_disable_Label_underline=1
-    colorscheme zenburn
+    try
+        colorscheme zenburn
+    catch
+    endtry
     highlight normal ctermbg=234
     highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=None
 endfunction
@@ -130,7 +128,10 @@ function! ColorTermSolarized()
     let g:solarized_termcolors=256
     let g:solarized_contrast="high"
     let g:solarized_termtrans=0
-    colorscheme solarized
+    try
+        colorscheme solarized
+    catch
+    endtry
     highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=None
 endfunction
 
@@ -140,6 +141,7 @@ function! ColorTermMolokai()
         colorscheme molokai
     catch
     endtry
+    highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=None
 endfunction
 
 " Highlight trailing whitespace with garish color
