@@ -1,0 +1,19 @@
+#!/bin/bash
+DEFAULT_USERNAME=mriedesel.cipa
+
+IP=$1
+
+if [[ -z $USERNAME ]]; then
+	USERNAME=$DEFAULT_USERNAME
+fi
+
+if [[ -z $IP ]]; then
+	echo "Retrieve root password for a desired host"
+	echo "Usage: $0 ipaddr"
+	echo ""
+	echo "Optional USERNAME (default: $DEFAULT_USERNAME)"
+	exit 0;
+fi
+
+echo $(ssh $USERNAME@$IP grep ^root /usr/cipafilter/init.d/config/users | awk '{print $4}')
+
