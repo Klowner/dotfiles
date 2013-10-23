@@ -138,6 +138,7 @@ function! ColorTermMolokai()
     let g:molokai_original=1
     try
         colorscheme molokai
+    catch
     endtry
 endfunction
 
