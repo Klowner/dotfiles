@@ -17,5 +17,8 @@ if [ -d ~/.dotfiles/xinitrc ]; then
 	unset x
 fi
 
+# Update i3 configs
+~/.dotfiles/i3/generate
+
 # Launch the ever so wonderful i3
 exec i3

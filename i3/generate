@@ -1,0 +1,32 @@
+#!/bin/sh
+HOSTNAME=$(cat /etc/hostname)
+I3_CONFIG_TARGET=~/.config/i3/config
+I3_CONFIG_GLOBAL=~/.dotfiles/i3/config.all
+I3_CONFIG_HOST=~/.dotfiles/i3/config.${HOSTNAME}
+I3STATUS_TARGET=~/.config/i3/i3status
+
+if [[ ! -e ~/.config/i3 ]]; then
+	mkdir -p ~/.config/i3
+fi
+
+# Generate i3config
+if [[ ! -e $I3_CONFIG_TARGET || $I3_CONFIG_HOST -nt $I3_CONFIG_TARGET || $I3_CONFIG_GLOBAL -nt $I3_CONFIG_TARGET ]]; then
+	if [[ -e $I3_CONFIG_HOST ]]; then
+		cat $I3_CONFIG_GLOBAL $I3_CONFIG_HOST > $I3_CONFIG_TARGET
+	else
+		echo $I3_CONFIG_GLOBAL
+		cp $I3_CONFIG_GLOBAL $I3_CONFIG_TARGET
+	fi
+fi
+
+# Generate i3status
+if [[ -e ~/.dotfiles/i3/i3status.${HOSTNAME} ]]; then
+	I3STATUS_SOURCE=~/.dotfiles/i3/i3status.${HOSTNAME}
+else
+	I3STATUS_SOURCE=~/.dotfiles/i3/i3status.default
+fi
+if [[ "${I3STATUS_TARGET}" != "$I3STATUS_SOURCE" ]]; then
+	rm $I3STATUS_TARGET
+	ln -s $I3STATUS_SOURCE $I3STATUS_TARGET
+fi
+
