@@ -30,6 +30,9 @@ for_window [Class="Gimp"] floating enable
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# screen lock
+bindsym $mod+LAlt+l i3lock-spy -c 000000
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -162,3 +165,4 @@ bar {
 	font xft:Monaco 7
 }
 
+new_window 1pixel
