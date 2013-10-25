@@ -138,10 +138,10 @@ if has git; then
     # Post-install scripts might customize this further.
     cp -v $basedir/.gitconfig.base $HOME/.gitconfig
 fi
+
+note "Installing Vim bundles..."
 if has vim; then
   cd $basedir
-  #./.vim/update.sh all
-  git clone https://github.com/gmarik/vundle.git .vim/bundle/vundle
   vim +BundleInstall +qall
 fi
 
