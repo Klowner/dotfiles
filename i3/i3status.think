@@ -1,0 +1,71 @@
+general {
+	colors = true
+	interval = 1
+	output_format = "i3bar"
+
+	color_good = "#6da206"
+	color_degraded = "#0695a2"
+	color_bad = "#a93b81"
+	color_separator = "#00ff00"
+}
+
+order += "ethernet eth0"
+order += "wireless wlan0"
+order += "run_watch VPN"
+order += "disk /"
+order += "cpu_usage"
+order += "battery 1"
+#order += "cpu_temperature 0"
+#order += "cpu_temperature 1"
+#order += "cpu_temperature 2"
+#order += "cpu_temperature 3"
+order += "time"
+
+
+ethernet eth0 {
+	format_up = "eth0: %ip (%speed)"
+	format_down = "eth0: down"
+}
+
+wireless wlan0 {
+	format_up = "wlan0: (%essid %quality, %bitrate) %ip)"
+	format_down = "wlan0: down"
+}
+
+disk "/" {
+	format = "/ %avail free"
+}
+
+battery 1 {
+	format = "%status %percentage %remaining"
+}
+
+time {
+	format = "%a %b %m/%d/%Y %r"
+}
+
+run_watch VPN {
+	pidfile = "/var/run/ppp*.pid"
+}
+
+/*
+cpu_temperature 0 {
+	format = "T: %degrees"
+	path = "/sys/devices/platform/coretemp.0/temp2_input"
+}
+
+cpu_temperature 1 {
+	format = "T: %degrees"
+	path = "/sys/devices/platform/coretemp.0/temp3_input"
+}
+
+cpu_temperature 2 {
+	format = "T: %degrees"
+	path = "/sys/devices/platform/coretemp.0/temp4_input"
+}
+
+cpu_temperature 3 {
+	format = "T: %degrees"
+	path = "/sys/devices/platform/coretemp.0/temp5_input"
+}
+*/
