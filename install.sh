@@ -141,8 +141,7 @@ fi
 
 note "Installing Vim bundles..."
 if has vim; then
-  cd $basedir
-  vim +BundleInstall +qall
+  vim -e -s -c BundleInstall -c qall
 fi
 
 note "Running post-install script, if any..."
