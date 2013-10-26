@@ -1,0 +1,9 @@
+# Multi monitor placement bindings
+
+bindsym $mod+Shift+comma move container to output DFP7
+bindsym $mod+Shift+period move container to output DFP5
+bindsym $mod+Shift+slash move container to output DFP1
+bindsym $mod+comma focus output DFP7
+bindsym $mod+period focus output DFP5
+bindsym $mod+slash focus output DFP1
+
