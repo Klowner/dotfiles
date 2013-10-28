@@ -30,6 +30,9 @@ for_window [Class="Gimp"] floating enable
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# screen lock
+bindsym $mod+LAlt+l i3lock-spy -c 000000
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -110,6 +113,7 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+<<<<<<< HEAD
 bindsym $mod+Shift+comma move container to output DFP1
 bindsym $mod+Shift+period move container to output DFP9
 bindsym $mod+Shift+slash move container to output DFP11
@@ -117,6 +121,8 @@ bindsym $mod+comma focus output DFP1
 bindsym $mod+period focus output DFP9
 bindsym $mod+slash focus output DFP11
 
+=======
+>>>>>>> 1e74f0717597c4f1dafb402a002c786eedf2ca88
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -162,3 +168,4 @@ bar {
 	font xft:Monaco 7
 }
 
+new_window 1pixel
