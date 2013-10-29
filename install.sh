@@ -98,6 +98,11 @@ else
     fi
 fi
 
+note "Installing oh-my-zsh..."
+if [[ ! -e ~/.oh-my-zsh ]]; then
+	curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+fi
+
 note "Installing dotfiles..."
 for path in .* ; do
     case $path in
@@ -144,6 +149,7 @@ if has vim; then
   cd $basedir
   vim +BundleInstall +qall
 fi
+
 
 note "Running post-install script, if any..."
 postinstall=$HOME/.postinstall
