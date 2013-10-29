@@ -1,4 +1,10 @@
 #!/bin/bash
 export WINDIR=1
-$(dmenu_path_c | yeganesh)
 
+case "$HOSTNAME" in
+	"finn")
+		$(dmenu_path_c | dmenu)
+	;;
+	*)
+		$(dmenu_path_c | yeganesh)
+esac

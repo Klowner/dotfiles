@@ -1,0 +1,55 @@
+#!/bin/bash
+
+echo '
+general {
+	colors = true
+	interval = 1
+	output_format = "i3bar"
+
+	color_good = "#6da206"
+	color_degraded = "#0695a2"
+	color_bad = "#a93b81"
+	color_separator = "#00ff00"
+}
+'
+
+NET_IFACES=$(cat /proc/net/dev | grep ':' | cut -d ':' -f 1 | tr -d ' ')
+
+for f in $NET_IFACES; do
+	if [[ $f == en* ]]; then
+		echo "
+ethernet $f {
+	format_up = \"$f: (%quality at %essid, %bitrate) %ip\"
+	format_down = \"$f: down\"
+}
+
+order += \"ethernet $f\"
+		"
+	elif [[ $f == wl* ]]; then
+		echo "
+wireless $f {
+	format_up = \"$f: (%quality at %essid, %bitrate) %ip\"
+	format_down = \"$f: down\"
+}
+order += \"wireless $f\"
+		"
+	fi
+done
+
+
+echo '
+run_watch VPN {
+	pidfile = "/var/run/ppp*.pid"
+}
+order += "run_watch VPN"
+
+disk "/" {
+	format = "/ %avail"
+}
+order += "disk /"
+
+time {
+	format = "%a, %b %e %m/%d/%Y %r"
+}
+order += "time"
+'

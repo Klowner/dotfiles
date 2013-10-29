@@ -37,7 +37,7 @@ bindsym $mod+LAlt+l i3lock-spy -c 000000
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec ~/.dotfiles/bin/showdm
 
 # change focus
 bindsym $mod+j focus left
@@ -154,8 +154,8 @@ floating_modifier $mod
 # finds out, if available)
 bar {
 	position top
-	status_command i3status -c ~/.config/i3/i3status
+	status_command i3status -c /tmp/i3-mark/i3status # generate script places this config
 	font xft:Monaco 7
 }
 
-new_window 1pixel
+new_window pixel 2
