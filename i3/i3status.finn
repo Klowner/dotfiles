@@ -16,16 +16,16 @@ general {
 NET_IFACES=$(cat /proc/net/dev | grep ':' | cut -d ':' -f 1 | tr -d ' ')
 
 for f in $NET_IFACES; do
-	if [[ $f == en* ]]; then
+	if [[ "$f" =~ ^en ]]; then
 		echo "
 ethernet $f {
-	format_up = \"$f: (%quality at %essid, %bitrate) %ip\"
+	format_up = \"$f: %ip (%speed) %ip\"
 	format_down = \"$f: down\"
 }
 
 order += \"ethernet $f\"
 		"
-	elif [[ $f == wl* ]]; then
+	elif [[ "$f" =~ ^wl ]]; then
 		echo "
 wireless $f {
 	format_up = \"$f: (%quality at %essid, %bitrate) %ip\"
