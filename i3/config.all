@@ -28,7 +28,7 @@ for_window [Class="Steam"] floating enable
 for_window [Class="Gimp"] floating enable
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec ~/.dotfiles/bin/terminal
 
 # screen lock
 bindsym $mod+LAlt+l i3lock-spy -c 000000
