@@ -191,6 +191,15 @@ augroup END
 autocmd BufRead,BufNewFile *.frag,*.vert,*.vp,*.fp,*glsl set filetype=glsl
 autocmd BufRead,BufNewFile *.py set expandtab
 
+" Section: Spellcheck {{{1
+"------------------------------------------------------------------------------
+
+" Spell check all git commit messages
+au BufNewFile,BufRead COMMIT_EDITMSG set spell
+
+" Underline mispellings
+hi clear SpellBad
+hi SpellBad cterm=underline
 
 " Section: Vim options {{{1
 "------------------------------------------------------------------------------
