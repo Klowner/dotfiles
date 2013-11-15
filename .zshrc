@@ -64,13 +64,14 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
+
+source /etc/profile.d/*.sh
+
+# My local ~/bin
 export PATH=$HOME/bin:$PATH
 
 # npm modules
 export PATH=$PATH:/home/mark/node_modules/.bin
-
-# Android SDK paths
-export PATH=$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools/
 
 # ruby gems
 export PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
