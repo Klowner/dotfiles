@@ -59,6 +59,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/bufkill.vim'
+Bundle 'groenewege/vim-less'
 
 " Color schemes
 Bundle 'tomasr/molokai'
