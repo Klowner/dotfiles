@@ -62,10 +62,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
-
-source /etc/profile.d/*.sh
+source /etc/profile
 
 # My local ~/bin
 export PATH=$HOME/bin:$PATH
