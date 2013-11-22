@@ -19,7 +19,7 @@ for f in $NET_IFACES; do
 	if [[ "$f" =~ ^en ]]; then
 		echo "
 ethernet $f {
-	format_up = \"$f: %ip (%speed) %ip\"
+	format_up = \"$f: (%speed) %ip\"
 	format_down = \"$f: down\"
 }
 
