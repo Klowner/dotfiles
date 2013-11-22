@@ -1,3 +1,0 @@
-#!/bin/sh
-# Stupid google chrome audio buffer stuttering
-google-chrome --audio-buffer-size=2048
