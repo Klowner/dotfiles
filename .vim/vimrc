@@ -198,6 +198,9 @@ autocmd BufRead,BufNewFile *.py set expandtab
 " Spell check all git commit messages
 au BufNewFile,BufRead COMMIT_EDITMSG set spell
 
+" Spell check all the things
+set spell
+
 " Underline mispellings
 hi clear SpellBad
 hi SpellBad cterm=underline
