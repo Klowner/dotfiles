@@ -42,7 +42,8 @@ Bundle 'gmarik/vundle'
 Bundle 'FuzzyFinder'
 Bundle 'L9'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/powerline'
+"Bundle 'Lokaltog/powerline'
+Bundle "bling/vim-airline"
 Bundle 'ap/vim-css-color'
 Bundle 'gregsexton/gitv'
 Bundle 'kien/ctrlp.vim'
@@ -64,6 +65,7 @@ Bundle 'groenewege/vim-less'
 " Color schemes
 Bundle 'tomasr/molokai'
 Bundle "jnurmine/Zenburn"
+Bundle "altercation/vim-colors-solarized"
 
 filetype plugin indent on
 
@@ -95,6 +97,17 @@ let g:ctrlp_switch_buffer = 0
 nmap ; :CtrlPBuffer<CR>
 
 filetype plugin indent on
+
+" vim-airline
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols = {}
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+
 
 " Python stuff
 au BufRead,BufNewFile *.py,*pyw set expandtab
@@ -230,6 +243,7 @@ set nobackup
 
 set matchtime=2
 set modelines=5
+
 
 " Section: Load ~/.vimlocal {{{1
 "------------------------------------------------------------------------------
