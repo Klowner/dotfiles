@@ -201,6 +201,11 @@ augroup resCur
   autocmd BufWinEnter * call ResCur()
 augroup END
 
+" Section: Special options for specific filetypes
+"------------------------------------------------------------------------------
+autocmd FileType less setlocal noexpandtab
+autocmd FileType css setlocal noexpandtab
+
 " Additional syntax modes
 autocmd BufRead,BufNewFile *.frag,*.vert,*.vp,*.fp,*glsl set filetype=glsl
 autocmd BufRead,BufNewFile *.py set expandtab
