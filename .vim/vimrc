@@ -203,8 +203,8 @@ augroup END
 
 " Section: Special options for specific filetypes
 "------------------------------------------------------------------------------
-autocmd FileType less setlocal noexpandtab
-autocmd FileType css setlocal noexpandtab
+autocmd FileType less setlocal noexpandtab sw=4
+autocmd FileType css setlocal noexpandtab sw=4
 
 " Additional syntax modes
 autocmd BufRead,BufNewFile *.frag,*.vert,*.vp,*.fp,*glsl set filetype=glsl

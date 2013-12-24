@@ -24,8 +24,8 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # Always float
-for_window [Class="Steam"] floating enable
-for_window [Class="Gimp"] floating enable
+#for_window [Class="Steam"] floating enable
+#for_window [Class="Gimp"] floating enable
 
 # start a terminal
 bindsym $mod+Return exec ~/.dotfiles/bin/terminal

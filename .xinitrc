@@ -22,3 +22,5 @@ fi
 
 # Launch the ever so wonderful i3
 exec i3 -c /tmp/i3-$USER/config
+
+#exec awesome
