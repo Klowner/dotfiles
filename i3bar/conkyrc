@@ -1,0 +1,23 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+
+short_units yes
+
+lua_load ~/.dotfiles/i3bar/scripts/graphs.lua
+lua_load ~/.dotfiles/i3bar/scripts/colorizer.lua
+lua_load ~/.dotfiles/i3bar/scripts/mystats.lua
+
+
+TEXT
+[
+	{ ${lua mystats_memory } },
+	{ ${lua mystats_wireless wlan0 } },
+	{ ${lua mystats_ethernet eth0 } },
+	{ ${lua mystats_filesystem /} },
+	{ ${lua mystats_filesystem /home} },
+	{ ${lua mystats_battery } },
+	{ "full_text" : "${time %a, %b %e %m/%d/%Y %r}", "color": "\#aaaab0" }
+],

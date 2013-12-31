@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo '{"version":1}'
+echo '['
+echo '[],'
+exec conky -u 1 -c $HOME/.dotfiles/i3bar/conkyrc

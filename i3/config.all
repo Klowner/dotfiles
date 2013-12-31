@@ -171,8 +171,17 @@ floating_modifier $mod
 # finds out, if available)
 bar {
 	position top
-	status_command i3status -c /tmp/i3-mark/i3status # generate script places this config
-	font xft:Monaco 7
+	#status_command i3status -c /tmp/i3-mark/i3status # generate script places this config
+	status_command ~/.dotfiles/i3bar/conky-i3bar
+	#font xft:Monaco 7
+	#font pango:Convergence 9
+	font pango:Ohsnap.Icons 9
+
+	colors {
+		separator #222222
+		statusline #aaaab0
+		background #303030
+	}
 }
 
 new_window pixel 2

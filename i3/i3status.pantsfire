@@ -1,6 +1,6 @@
 general {
 	colors = true
-	interval = 1
+	interval = 2
 	output_format = "i3bar"
 
 	color_bad = "#a93b81"
