@@ -42,7 +42,6 @@ Bundle 'gmarik/vundle'
 Bundle 'FuzzyFinder'
 Bundle 'L9'
 Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'Lokaltog/powerline'
 Bundle "bling/vim-airline"
 Bundle 'ap/vim-css-color'
 Bundle 'gregsexton/gitv'
@@ -61,6 +60,7 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'groenewege/vim-less'
+Bundle 'Valloric/YouCompleteMe'
 
 " Color schemes
 Bundle 'tomasr/molokai'
