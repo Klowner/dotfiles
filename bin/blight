@@ -4,6 +4,9 @@ case "$(hostname)" in
 	"pantsfire")
 		DEV="/sys/devices/pci0000:00/0000:00:03.0/0000:02:00.0/drm/card0/card0-LVDS-1/radeon_bl0/brightness"
 		;;
+	"think")
+		DEV="/sys/devices/pci0000:00/0000:00:01.0/drm/card0/card0-LVDS-1/radeon_bl0/brightness"
+		;;
 	*)
 		exit 2
 esac
