@@ -35,7 +35,8 @@ else
 fi
 
 if [[ $2 == "unmount" ]]; then
-	ssh $USERNAME@$IP sudo fusermount -u /usr/cipafilter/www/$DSTPATH && echo -e "${G}successfully unmounted $DSTPATH${DEF}"
+	DSTPATH=/usr/cipafilter/www/$DSTPATH
+	ssh $USERNAME@$IP "sudo fusermount -u $DSTPATH && sudo rmdir $DSTPATH" && echo -e "${G}successfully unmounted $DSTPATH${DEF}"
 	exit
 fi
 
