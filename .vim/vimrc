@@ -66,6 +66,7 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'tomasr/molokai'
 Bundle "jnurmine/Zenburn"
 Bundle "altercation/vim-colors-solarized"
+Bundle 'kchmck/vim-coffee-script'
 
 filetype plugin indent on
 
@@ -108,6 +109,8 @@ let g:airline_symbols.branch = '⭠'
 let g:airline_symbols.readonly = '⭤'
 let g:airline_symbols.linenr = '⭡'
 
+" Fugitive
+map \b :Gblame<CR>
 
 " Python stuff
 au BufRead,BufNewFile *.py,*pyw set expandtab
