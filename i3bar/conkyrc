@@ -13,12 +13,14 @@ lua_load ~/.dotfiles/i3bar/scripts/mystats.lua
 
 TEXT
 [
-	{ ${lua mystats_memory } },
 	{ ${lua mystats_wireless wlan0 } },
 	{ ${lua mystats_ethernet eth0 } },
+	{ ${lua mystats_ethernet vnet0 } },
+	{ ${lua mystats_ethernet vnet1 } },
 	{ "full_text" : "vpn ${if_up ppp0}up${else}down${endif}", "color": "${if_up ppp0}\#00b9d9${else}\#f7208b${endif}" },
 	{ ${lua mystats_filesystem /} },
 	{ ${lua mystats_filesystem /home} },
 	{ ${lua mystats_battery } },
+	{ ${lua mystats_memory } },
 	{ "full_text" : "${time %a, %b %e %m/%d/%Y %r}", "color": "\#aaaab0" }
 ],
