@@ -4,8 +4,9 @@ MYSELF=$(whoami)
 IP=$1
 DIRPATH=$2
 
-G='\e[0;32m'
+G='\e[1;32m'
 R='\e[1;31m'
+B='\e[1;36m'
 DEF='\e[0m'
 
 if [[ -z $USERNAME ]]; then
@@ -36,14 +37,16 @@ fi
 
 if [[ $2 == "unmount" ]]; then
 	DSTPATH=/usr/cipafilter/www/$DSTPATH
-	ssh $USERNAME@$IP "sudo fusermount -u $DSTPATH && sudo rmdir $DSTPATH" && echo -e "${G}successfully unmounted $DSTPATH${DEF}"
+	sh $USERNAME@$IP "sudo fusermount -u $DSTPATH && sudo rmdir $DSTPATH" && echo -e "${G}SUCCESS${DEF} - unmounted ${B}$DSTPATH${DEF}"
 	exit
 fi
 
 ssh -T $USERNAME@$IP 1> /dev/null <<EOF
-	which sshfs || sudo apt-get install -y sshfs
 	MYIP=\$(echo \$SSH_CLIENT | cut -d ' ' -f 1)
 	DSTPATH=/usr/cipafilter/www/$DSTPATH
+
+	# Install sshfs
+	which sshfs 1> /dev/null || sudo apt-get install -y sshfs
 
 	# Unmount if mounted
 	mountpoint -q \$DSTPATH && sudo fusermount -u \$DSTPATH
@@ -56,9 +59,14 @@ ssh -T $USERNAME@$IP 1> /dev/null <<EOF
 		sudo chown www-data:www-data \$DSTPATH
 	fi
 
-	sudo -E sshfs -o nonempty,allow_other,user=www-data $MYSELF@\$MYIP:$ABSDIRPATH \$DSTPATH
-	exit
+	#sudo -E sshfs -o nonempty,allow_other,user=www-data $MYSELF@\$MYIP:$ABSDIRPATH \$DSTPATH 2>&1> /dev/null
+	sudo -E sshfs -o StrictHostKeyChecking=no,nonempty,allow_other,user=www-data $MYSELF@\$MYIP:$ABSDIRPATH \$DSTPATH
+	exit \$?
 EOF
 
-echo -e "${G}Possibly successfully mounted ${DEF}$ABSDIRPATH${G} to ${DEF}$DSTPATH on $IP"
+if [[ $? -eq '0' ]]; then
+	echo -e "${G}SUCCESS${DEF} - mounted ${B}${ABSDIRPATH}${DEF} to ${B}${IP} ${DSTPATH}${DEF}"
+else
+	echo -e "${R}FAILURE${DEF} - unable to mount ${B}${ABSDIRPATH}${DEF} on ${B}${IP}${DEF}"
+fi
 
