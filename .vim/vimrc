@@ -251,7 +251,7 @@ set nobackup
 
 set matchtime=2
 set modelines=5
-
+set modeline
 
 " Section: Load ~/.vimlocal {{{1
 "------------------------------------------------------------------------------
