@@ -6,5 +6,9 @@ case "$HOSTNAME" in
 		$(dmenu_path_c | dmenu)
 	;;
 	*)
-		$(dmenu_path_c | yeganesh)
+		if [[ -e /usr/bin/yeganesh ]]; then
+			$(dmenu_path_c | yeganesh)
+		else
+			$(dmenu_path_c | dmenu)
+		fi
 esac

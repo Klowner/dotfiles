@@ -4,4 +4,4 @@ dispcalGUI-apply-profiles &
 feh --bg-scale -z ~/wallpaper/*.* &
 thunar --daemon &
 clipit &
-
+urxvtd &

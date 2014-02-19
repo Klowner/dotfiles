@@ -111,11 +111,11 @@ function full_line(text, color)
 			'"'
 end
 
-
 function conky_mystats_battery()
-	local battery_short = conky_parse("${battery_short}")
-	local battery_percent = tonumber(conky_parse("${battery_percent}"))
-	local battery_time = conky_parse("${battery_time}")
+	local bat = sysdetect.battery()
+	local battery_short = conky_parse("${battery_short " ..  bat .. "}")
+	local battery_percent = tonumber(conky_parse("${battery_percent " .. bat .. "}"))
+	local battery_time = conky_parse("${battery_time " .. bat .. "}")
 	local warn_thresh = 10
 	local color = COLOR_GOOD
 
@@ -164,3 +164,4 @@ function conky_mystats_wireless(iface)
 		conky_mystats_wifi_color(iface)
 	)
 end
+

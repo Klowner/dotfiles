@@ -8,8 +8,9 @@ short_units yes
 
 lua_load ~/.dotfiles/i3bar/scripts/graphs.lua
 lua_load ~/.dotfiles/i3bar/scripts/colorizer.lua
+lua_load ~/.dotfiles/i3bar/scripts/sysdetect.lua
+lua_load ~/.dotfiles/i3bar/scripts/config.lua
 lua_load ~/.dotfiles/i3bar/scripts/mystats.lua
-
 
 TEXT
 [
