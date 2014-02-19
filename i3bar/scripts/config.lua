@@ -1,6 +1,4 @@
 require 'io'
-require 'table'
-require 'string'
 
 function finder(find_cmd, match_fn)
 	local i = 1
@@ -53,19 +51,28 @@ function finder_wlan()
 	return finder('find /sys/class/net/ -name wl*')
 end
 
-function finder_vnet()
-	return finder('find /sys/class/net/ -name vnet*')
+function finder_vnet(path)
+	return finder_configfiles(path .. '/vnet')
 end
 
 function finder_filesystems(path)
 	return finder_configfiles(path .. '/filesystems')
 end
 
-finder_wlan()
-finder_ethernet()
-finder_battery()
-finder_vnet()
-finder_filesystems('/home/mark/.dotfiles/i3bar/config')
+local _cfg
 
+function conky_config_load(config_path)
+	if _cfg == nil then
+		_cfg = {}
+		_cfg['wlan'] = finder_wlan()
+		_cfg['eth'] = finder_ethernet()
+		_cfg['vnet'] = finder_vnet(config_path)
+		_cfg['bat'] = finder_battery()
+		_cfg['fs'] = finder_filesystems(config_path)
+	end
+end
 
+function get_config()
+	return _cfg
+end
 

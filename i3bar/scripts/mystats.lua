@@ -27,6 +27,16 @@ function conky_mystats_vgraph(value)
 	return graphs.vert_single(tonumber(value))
 end
 
+function dynamic_config_stats(key, fn)
+	local cfg = get_config()[key]
+	local out = ''
+	for i, item in ipairs(cfg) do
+		out = out .. '{ ' .. fn(item) .. '},'
+	end
+	return out
+end
+
+
 function conky_mystats_wifi_status(iface)
 	local link_qual_perc = tonumber(conky_parse("${wireless_link_qual_perc " .. iface .. "}"))
 	local link_essid = conky_parse("${wireless_essid " .. iface .. "}")
@@ -111,8 +121,7 @@ function full_line(text, color)
 			'"'
 end
 
-function conky_mystats_battery()
-	local bat = sysdetect.battery()
+function conky_mystats_battery(bat)
 	local battery_short = conky_parse("${battery_short " ..  bat .. "}")
 	local battery_percent = tonumber(conky_parse("${battery_percent " .. bat .. "}"))
 	local battery_time = conky_parse("${battery_time " .. bat .. "}")
@@ -165,3 +174,22 @@ function conky_mystats_wireless(iface)
 	)
 end
 
+function conky_mystats_dynamic_wireless()
+	return dynamic_config_stats('wlan', conky_mystats_wireless)
+end
+
+function conky_mystats_dynamic_ethernet()
+	return dynamic_config_stats('eth', conky_mystats_ethernet)
+end
+
+function conky_mystats_dynamic_vnet()
+	return dynamic_config_stats('vnet', conky_mystats_ethernet)
+end
+
+function conky_mystats_dynamic_filesystems()
+	return dynamic_config_stats('fs', conky_mystats_filesystem)
+end
+
+function conky_mystats_dynamic_battery()
+	return dynamic_config_stats('bat', conky_mystats_battery)
+end

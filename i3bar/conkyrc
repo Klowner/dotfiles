@@ -8,20 +8,19 @@ short_units yes
 
 lua_load ~/.dotfiles/i3bar/scripts/graphs.lua
 lua_load ~/.dotfiles/i3bar/scripts/colorizer.lua
-lua_load ~/.dotfiles/i3bar/scripts/sysdetect.lua
 lua_load ~/.dotfiles/i3bar/scripts/config.lua
 lua_load ~/.dotfiles/i3bar/scripts/mystats.lua
 
+
 TEXT
 [
-	{ ${lua mystats_wireless wlan0 } },
-	{ ${lua mystats_ethernet eth0 } },
-	{ ${lua mystats_ethernet vnet0 } },
-	{ ${lua mystats_ethernet vnet1 } },
+	${lua config_load /home/mark/.dotfiles/i3bar/config }
+	${lua mystats_dynamic_wireless }
+	${lua mystats_dynamic_ethernet }
+	${lua mystats_dynamic_vnet }
 	{ "full_text" : "vpn ${if_up ppp0}up${else}down${endif}", "color": "${if_up ppp0}\#00b9d9${else}\#f7208b${endif}" },
-	{ ${lua mystats_filesystem /} },
-	{ ${lua mystats_filesystem /home} },
-	{ ${lua mystats_battery } },
+	${lua mystats_dynamic_filesystems }
+	${lua mystats_dynamic_battery }
 	{ ${lua mystats_memory } },
 	{ "full_text" : "${time %a, %b %e %m/%d/%Y %r}", "color": "\#aaaab0" }
 ],
