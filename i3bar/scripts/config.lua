@@ -70,6 +70,7 @@ function conky_config_load(config_path)
 		_cfg['bat'] = finder_battery()
 		_cfg['fs'] = finder_filesystems(config_path)
 	end
+	return ''
 end
 
 function get_config()
