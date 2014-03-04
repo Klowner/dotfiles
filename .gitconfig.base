@@ -16,6 +16,7 @@
 	diff = auto
 	status = auto
 	branch = auto
+	blame = auto
 
 [log]
 	decorate = short
@@ -28,6 +29,7 @@
 
 [alias]
 	branchlog = !git log ${1+}${1-master}..HEAD --reverse --date=short --format=\"git:%h %ad %s\"
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
 
 [merge]
 	tool = diffconflicts
