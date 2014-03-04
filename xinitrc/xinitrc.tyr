@@ -1,0 +1,4 @@
+syndaemon -t 1 &
+pa-applet &
+google-chrome-stable --no-startup-window &
+
