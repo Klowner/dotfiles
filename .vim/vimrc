@@ -256,6 +256,10 @@ set matchtime=2
 set modelines=5
 set modeline
 
+" Don't exit visual mode when shifting
+vnoremap < <gv
+vnoremap > >gv
+
 " Section: Load ~/.vimlocal {{{1
 "------------------------------------------------------------------------------
 source ~/.vimlocal
