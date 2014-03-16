@@ -132,8 +132,10 @@ function conky_mystats_battery(bat)
 		color = COLOR_BAD
 	end
 
+	local status = string.sub(battery_short, 0, 1) == 'D' and 'battery' or 'ac power'
+
 	return full_line(
-		'battery' ..
+		status ..
 		' ' .. graphs.vert_single(battery_percent) ..
 		' ' .. battery_percent .. '%' ..
 		' ' .. battery_time
