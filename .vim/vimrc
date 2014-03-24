@@ -39,10 +39,10 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
-Bundle 'FuzzyFinder'
 Bundle 'L9'
+Bundle 'FuzzyFinder'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle "bling/vim-airline"
+Bundle 'bling/vim-airline'
 Bundle 'gregsexton/gitv'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
@@ -50,9 +50,13 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tComment'
 Bundle 'timcharper/textile.vim'
+Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-eunuch'
+Bundle 'tpope/vim-sleuth'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'groenewege/vim-less'
 Bundle 'Valloric/YouCompleteMe'
@@ -64,12 +68,12 @@ Bundle 'tpope/vim-markdown'
 Bundle 'ap/vim-css-color'
 Bundle 'nono/vim-handlebars'
 Bundle 'pangloss/vim-javascript'
+Bundle 'kchmck/vim-coffee-script'
 
 " Color schemes
 Bundle 'tomasr/molokai'
-Bundle "jnurmine/Zenburn"
-Bundle "altercation/vim-colors-solarized"
-Bundle 'kchmck/vim-coffee-script'
+Bundle 'jnurmine/Zenburn'
+Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on
 
