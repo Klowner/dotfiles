@@ -118,6 +118,7 @@ let g:airline_symbols.linenr = '⭡'
 
 " Fugitive
 map \b :Gblame<CR>
+map \l :Glog<CR>
 
 " Python stuff
 au BufRead,BufNewFile *.py,*pyw set expandtab
