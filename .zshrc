@@ -60,6 +60,20 @@ source $ZSH/oh-my-zsh.sh
 
 source /etc/profile
 
+# Thank you, Adam Stankiewicz!
+fancy-ctrl-z () {
+	if [[ $#BUFFER -eq 0 ]]; then
+		fg
+		zle redisplay
+	else
+		zle push-input
+		zle clear-screen
+	fi
+}
+zle -N fancy-ctrl-z
+
+bindkey '^Z' fancy-ctrl-z
+
 # My local ~/bin
 export PATH=$HOME/bin:$PATH
 
