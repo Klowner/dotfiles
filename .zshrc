@@ -47,16 +47,12 @@ plugins=(
 	extract
 	git-extras
 	gitfast
-	node
 	npm
-	per-directory-history
 	pip
-	python
 	rsync
 	screen
 	ssh-agent
 	systemd
-	virtualenvwrapper
 	vundle
 	)
 
