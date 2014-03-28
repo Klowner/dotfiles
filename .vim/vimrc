@@ -32,51 +32,68 @@ nnoremap <CR> za
 vnoremap <space> zf
 
 
-" Section: Vundle Bundles {{{1
+
+" Section: NeoBundle Config {{{1
 "------------------------------------------------------------------------------
-set rtp+=~/.dotfiles/.vim/bundle/vundle
-call vundle#rc()
+if has('vim_starting')
+    set nocompatible
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-Bundle 'gmarik/vundle'
+call neobundle#rc(expand('~/.vim/bundle/'))
 
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'bling/vim-airline'
-Bundle 'gregsexton/gitv'
-Bundle 'kien/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'tComment'
-Bundle 'timcharper/textile.vim'
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-ragtag'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-eunuch'
-Bundle 'tpope/vim-sleuth'
-Bundle 'vim-scripts/bufkill.vim'
-Bundle 'groenewege/vim-less'
-Bundle 'Valloric/YouCompleteMe'
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+let g:make = 'gmake'
+if system('uname -o') =~ '^GNU/'
+    let g:make = 'make'
+endif
+
+" Section: NeoBundle Bundles {{{1
+"------------------------------------------------------------------------------
+
+NeoBundle 'Shougo/vimproc.vim', {'build': {'unix': g:make}}
+
+
+NeoBundle 'L9'
+NeoBundle 'FuzzyFinder'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'gregsexton/gitv'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'tComment'
+NeoBundle 'timcharper/textile.vim'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-ragtag'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-eunuch'
+NeoBundle 'tpope/vim-sleuth'
+NeoBundle 'vim-scripts/bufkill.vim'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'Valloric/YouCompleteMe', {'build': {'unix': './install.sh' }}
 
 " Syntax
-Bundle 'digitaltoad/vim-jade'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
-Bundle 'ap/vim-css-color'
-Bundle 'nono/vim-handlebars'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'tpope/vim-haml'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'ap/vim-css-color'
+NeoBundle 'nono/vim-handlebars'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'kchmck/vim-coffee-script'
 
 " Color schemes
-Bundle 'tomasr/molokai'
-Bundle 'jnurmine/Zenburn'
-Bundle 'altercation/vim-colors-solarized'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'jnurmine/Zenburn'
+NeoBundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on
 
+NeoBundleCheck
 
 " Section: Plugin settings {{{1
 "------------------------------------------------------------------------------

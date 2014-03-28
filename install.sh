@@ -4,9 +4,9 @@
 #
 # Mark's dotfile installer. Usage:
 #
-#   curl https://raw.github.com/Klowner/dotfiles/master/install.sh | sh
+#   curl https://raw.github.com/Klowner/dotfiles/master/install.sh | bash
 # or:
-#   curl -L http://tinyurl.com/klownerdot | sh
+#   curl -L http://tinyurl.com/klownerdot | bash
 # or:
 #
 #   ~/.dotfiles/install.sh
@@ -100,7 +100,7 @@ fi
 
 note "Installing oh-my-zsh..."
 if [[ ! -e ~/.oh-my-zsh ]]; then
-	curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+  curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 fi
 
 note "Installing dotfiles..."
@@ -124,7 +124,14 @@ if [ -d bin ]; then
 	done
 fi
 
-note "Symlinking Vim configurations..."
+note "Installing neobundle..."
+if has git; then
+  if [[ ! -d ~/.vim/bundle/neobundle.vim ]]; then
+    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+  fi
+fi
+
+note "Symlinking vim configurations..."
 for rc in vim gvim; do
     link $basedir/.vim/${rc}rc $HOME/.${rc}rc
     if [ ! -e $HOME/.${rc}local ]; then
@@ -144,10 +151,10 @@ if has git; then
     cp -v $basedir/.gitconfig.base $HOME/.gitconfig
 fi
 
-note "Installing Vim bundles..."
+note "Installing vim bundles..."
 if has vim; then
   cd $basedir
-  vim +BundleInstall +qall
+  ~/.vim/bundle/neobundle.vim/bin/neoinstall
 fi
 
 
