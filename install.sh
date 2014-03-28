@@ -55,7 +55,7 @@ function link() {
     fi
 
     # Update existing or create new symlinks.
-    ln -vsf $src $dest
+    $(which ln) -vsf $src $dest
 }
 
 function unpack_tarball() {
@@ -151,11 +151,11 @@ if has git; then
     cp -v $basedir/.gitconfig.base $HOME/.gitconfig
 fi
 
-note "Installing vim bundles..."
-if has vim; then
-  cd $basedir
-  ~/.vim/bundle/neobundle.vim/bin/neoinstall
-fi
+#note "Installing vim bundles..."
+#if has vim; then
+#  cd $basedir
+#  ~/.vim/bundle/neobundle.vim/bin/neoinstall
+#fi
 
 
 note "Running post-install script, if any..."
