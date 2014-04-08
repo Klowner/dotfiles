@@ -56,9 +56,13 @@ plugins=(
 	vundle
 	)
 
-source $ZSH/oh-my-zsh.sh
-
 source /etc/profile
+
+if [ -e $HOME/.zshrc.local ]; then
+	source $HOME/.zshrc.local
+fi
+
+source $ZSH/oh-my-zsh.sh
 
 # Thank you, Adam Stankiewicz!
 fancy-ctrl-z () {
