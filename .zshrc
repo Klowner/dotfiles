@@ -10,7 +10,7 @@ ZSH_THEME="fishy"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias wallpaper="feh --bg-scale -z"
+alias wallpaper="feh --bg-fill -z"
 alias svim='EDITOR=vim sudoedit'
 alias sudo="nocorrect sudo"
 alias steam="SDL_AUDIODRIVER=alsa steam"
