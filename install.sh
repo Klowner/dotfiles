@@ -127,7 +127,7 @@ fi
 note "Installing neobundle..."
 if has git; then
   if [[ ! -d ~/.vim/bundle/neobundle.vim ]]; then
-    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+    $basedir/neobundle.sh
   fi
 fi
 
