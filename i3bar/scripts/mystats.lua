@@ -36,20 +36,24 @@ function dynamic_config_stats(key, fn)
 	return out
 end
 
-
 function conky_mystats_wifi_status(iface)
 	local link_qual_perc = tonumber(conky_parse("${wireless_link_qual_perc " .. iface .. "}"))
 	local link_essid = conky_parse("${wireless_essid " .. iface .. "}")
 	local link_ip = conky_parse("${addr " .. iface .. "}")
 
 	if not is_up(iface) then
-		return iface .. " down"
+		return {
+			iface .. " down",
+			iface
+		}
 	else
-		return iface .. " " ..
+		return {iface .. " " ..
 			graphs.vert_single(tonumber(conky_parse("${wireless_link_qual_perc " .. iface .. "}") or '0')) ..
-			" (" .. link_essid .. ")" ..
-			" " .. link_ip ..
-			" " .. speed(iface)
+				" (" .. link_essid .. ")" ..
+				" " .. link_ip ..
+				" " .. speed(iface),
+			iface
+		}
 	end
 end
 
@@ -57,11 +61,17 @@ function conky_mystats_eth_status(iface)
 	local link_ip = conky_parse("${addr " .. iface .. "}")
 
 	if not is_up(iface) then
-		return iface .. " down"
+		return {
+			iface .. " down",
+			iface
+		}
 	else
-		return iface ..
-		" " .. link_ip ..
-		" " .. speed(iface)
+		return {
+			iface ..
+				" " .. link_ip ..
+				" " .. speed(iface),
+			iface
+		}
 	end
 end
 
@@ -103,11 +113,13 @@ function conky_mystats_memory()
 	local color = colorizer.above_threshold_gradient(mem_perc_used, COLOR_GOOD, COLOR_BAD, warn_thresh)
 
 	return full_line(
+		color,
 		"memory " ..
-		graphs.vert_single(mem_perc_used) ..
-		conky_parse(" ${mem} (${memmax} total)")
-		,
-		color
+			graphs.vert_single(mem_perc_used) ..
+			conky_parse(" ${mem} (${memmax} total)"),
+		"ram " ..
+			graphs.vert_single(mem_perc_used) ..
+			conky_parse(" ${mem}")
 		)
 end
 
@@ -115,8 +127,10 @@ function conky_mystats_disk(device)
 	return conky_parse("${diskio sda}")
 end
 
-function full_line(text, color)
+function full_line(color, text, short)
+	short = short or text
 	return '"full_text" : "' .. text ..
+			'", "short_text" : "' .. short ..
 			'", "color" : "' .. color ..
 			'"'
 end
@@ -135,12 +149,13 @@ function conky_mystats_battery(bat)
 	local status = string.sub(battery_short, 0, 1) == 'D' and 'battery' or 'ac power'
 
 	return full_line(
+		color,
 		status ..
 		' ' .. graphs.vert_single(battery_percent) ..
 		' ' .. battery_percent .. '%' ..
-		' ' .. battery_time
-		,
-		color
+		' ' .. battery_time,
+
+		graphs.vert_single(battery_percent) .. ' ' .. battery_percent .. '%'
 	)
 
 end
@@ -154,25 +169,25 @@ function conky_mystats_filesystem(fs)
 	color = colorizer.above_threshold_gradient(fs_used_perc, COLOR_GOOD, COLOR_BAD, warn_thresh)
 
 	return full_line(
+		color,
 		fs .. ' ' ..
-		graphs.vert_single(fs_used_perc) .. ' ' ..
-		fs_free .. ' free' ..
-		''
-		,
-		color)
+			graphs.vert_single(fs_used_perc) .. ' ' ..
+			fs_free .. ' free',
+		fs .. ' ' .. graphs.vert_single(fs_used_perc)
+		)
 end
 
 function conky_mystats_ethernet(iface)
 	return full_line(
-		conky_mystats_eth_status(iface),
-		conky_mystats_eth_color(iface)
+		conky_mystats_eth_color(iface),
+		unpack(conky_mystats_eth_status(iface))
 	)
 end
 
 function conky_mystats_wireless(iface)
 	return full_line(
-		conky_mystats_wifi_status(iface),
-		conky_mystats_wifi_color(iface)
+		conky_mystats_wifi_color(iface),
+		unpack(conky_mystats_wifi_status(iface))
 	)
 end
 
