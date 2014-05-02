@@ -39,6 +39,9 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec ~/.dotfiles/bin/showdm
 
+# start thunar
+bindsym $mod+Home exec thunar
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
