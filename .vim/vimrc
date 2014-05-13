@@ -76,6 +76,7 @@ NeoBundle 'tpope/vim-sleuth'
 NeoBundle 'vim-scripts/bufkill.vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'Valloric/YouCompleteMe', {'build': {'unix': './install.sh' }}
+NeoBundle 'embear/vim-localvimrc'
 
 " Syntax
 NeoBundle 'digitaltoad/vim-jade'
@@ -96,6 +97,7 @@ NeoBundle 'altercation/vim-colors-solarized'
 filetype plugin indent on
 
 NeoBundleCheck
+
 
 " Section: Plugin settings {{{1
 "------------------------------------------------------------------------------
@@ -140,6 +142,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Fugitive
 map \b :Gblame<CR>
 map \l :Glog<CR>
+
+" localvimrc
+let g:localvimrc_persistent = 2
 
 " Python stuff
 au BufRead,BufNewFile *.py,*pyw set expandtab
@@ -294,6 +299,20 @@ set modeline
 " Don't exit visual mode when shifting
 vnoremap < <gv
 vnoremap > >gv
+
+" Section: Optional features {{{1
+"------------------------------------------------------------------------------
+
+
+" Add let g:TrimWhitespace=1 to .lvimrc to enable automatic whitespace trim
+function! StripWhitespaceIfEnabled()
+    if exists('g:TrimWhitespace')
+        call StripExtraWhitespace()
+    end
+endfunction
+
+autocmd BufWritePre * call StripWhitespaceIfEnabled()
+
 
 " Section: Load ~/.vimlocal {{{1
 "------------------------------------------------------------------------------
