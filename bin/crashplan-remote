@@ -1,0 +1,29 @@
+#!/bin/bash
+
+HOST=$1
+CRASHPLANDIR=/opt/crashplan
+
+if [[ -z $HOST ]]; then
+	echo "Usage: $0 <hostname>"
+	exit
+fi
+
+ssh -fnNTL 4200:localhost:4243 $HOST
+PID=$!
+
+mkdir -p ~/.crashplan
+echo "servicePort=4200" > ~/.crashplan/my.ui.properties
+
+. ${CRASHPLANDIR}/install.vars
+. ${CRASHPLANDIR}/bin/run.conf
+
+cd $TARGETDIR
+
+${JAVACOMMON} ${GUI_JAVA_OPTS} -classpath "./lib/com.backup42.desktop.jar:./lang:./skin" com.backup42.desktop.CPDesktop
+
+CMD="ps -eo pid,args | grep 'ssh -fnNTL 4200:localhost:4243' | grep -v 'grep' | cut -c1-6"
+PID=$(eval $CMD)
+kill -9 $PID
+
+
+
