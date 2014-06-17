@@ -72,11 +72,13 @@ NeoBundle 'tpope/vim-ragtag'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-eunuch'
-NeoBundle 'tpope/vim-sleuth'
+NeoBundle 'ciaranm/detectindent'
 NeoBundle 'vim-scripts/bufkill.vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'Valloric/YouCompleteMe', {'build': {'unix': './install.sh' }}
 NeoBundle 'embear/vim-localvimrc'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-lua-ftplugin'
 
 " Syntax
 NeoBundle 'digitaltoad/vim-jade'
@@ -277,6 +279,7 @@ set autoindent                      " Carry over indenting from previous line
 set autoread                        " Auto read when a file changes
 set backspace=indent,eol,start
 set cindent
+set smarttab
 
 silent! set foldmethed=marker       " Use braces by default
 set hlsearch                        " Highlight searching
