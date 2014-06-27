@@ -79,6 +79,10 @@ NeoBundle 'Valloric/YouCompleteMe', {'build': {'unix': './install.sh' }}
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-lua-ftplugin'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'amdt/vim-niji'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mattn/gist-vim'
 
 " Syntax
 NeoBundle 'digitaltoad/vim-jade'
