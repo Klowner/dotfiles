@@ -307,6 +307,9 @@ set modeline
 vnoremap < <gv
 vnoremap > >gv
 
+" Hotkey ctrl-o to :sort in visual mode
+vmap <C-o> :sort<cr>
+
 " Section: Optional features {{{1
 "------------------------------------------------------------------------------
 
