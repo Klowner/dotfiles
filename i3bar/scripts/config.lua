@@ -44,7 +44,7 @@ function finder_battery()
 end
 
 function finder_ethernet()
-	return finder('find /sys/class/net/ -name e[tn]*')
+	return finder('find /sys/class/net/ -name e*')
 end
 
 function finder_wlan()

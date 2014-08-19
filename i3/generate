@@ -21,11 +21,11 @@ if [[ ! -e $I3_CONFIG_TARGET || $I3_CONFIG_HOST -nt $I3_CONFIG_TARGET || $I3_CON
 fi
 
 # Generate i3status
-if [[ -e ~/.dotfiles/i3/i3status.${HOSTNAME} ]]; then
-	I3STATUS_SOURCE=~/.dotfiles/i3/i3status.${HOSTNAME}
-else
-	I3STATUS_SOURCE=~/.dotfiles/i3/i3status.default
-fi
+#if [[ -e ~/.dotfiles/i3/i3status.${HOSTNAME} ]]; then
+#	I3STATUS_SOURCE=~/.dotfiles/i3/i3status.${HOSTNAME}
+#else
+#	I3STATUS_SOURCE=~/.dotfiles/i3/i3status.default
+#fi
 
 if [[ -x $I3STATUS_SOURCE ]]; then
 	exec $I3STATUS_SOURCE > $I3STATUS_TARGET

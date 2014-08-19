@@ -1,6 +1,7 @@
 #!/bin/bash
 
 HOST=$1
+FWDHOST=$2
 CRASHPLANDIR=/opt/crashplan
 MYCONFIG=${CRASHPLANDIR}/conf/ui_$(whoami).properties
 
@@ -9,12 +10,16 @@ if [[ -z $HOST ]]; then
 	exit
 fi
 
-ssh -fnNTL 4200:localhost:4243 $HOST
+if [[ -z $FWDHOST ]]; then
+	FWDHOST='localhost'
+fi
+
+ssh -fnNTL 4200:$FWHOST:4243 $HOST
 PID=$!
 
 mkdir -p ~/.crashplan
 echo "servicePort=4200" > ~/.crashplan/my.ui.properties
-ln -s ~/.crashplan/my.ui.properties ${MYCONFIG}
+sudo ln -s ~/.crashplan/my.ui.properties ${MYCONFIG}
 
 . ${CRASHPLANDIR}/install.vars
 . ${CRASHPLANDIR}/bin/run.conf
@@ -23,7 +28,7 @@ cd $TARGETDIR
 
 ${JAVACOMMON} ${GUI_JAVA_OPTS} -classpath "./lib/com.backup42.desktop.jar:./lang:./skin" com.backup42.desktop.CPDesktop
 
-rm ${MYCONFIG}
+sudo rm ${MYCONFIG}
 
 CMD="ps -eo pid,args | grep 'ssh -fnNTL 4200:localhost:4243' | grep -v 'grep' | cut -c1-6"
 PID=$(eval $CMD)
