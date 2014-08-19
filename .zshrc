@@ -55,7 +55,6 @@ plugins=(
 	systemd
 	vundle
 	)
-plugins=()
 
 source /etc/profile
 
