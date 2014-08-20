@@ -297,7 +297,7 @@ set showmatch                       " Hilight matching braces/parens/etc.
 set laststatus=2                    " So powerline shows up
 set scrolloff=15                    " Keep cursor away from this many chars top/bottom
 set scroll=4
-set nobackup
+set backupdir=~/tmp
 
 set matchtime=2
 set modelines=5
