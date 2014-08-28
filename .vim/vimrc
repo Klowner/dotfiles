@@ -94,6 +94,7 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'vim-scripts/django.vim'
 NeoBundle 'mitsuhiko/vim-jinja'
+NeoBundle '0rca/vim-mikrotik'
 
 " Color schemes
 NeoBundle 'tomasr/molokai'
