@@ -1,0 +1,26 @@
+#!/bin/bash
+
+wolcmd=$(which wol 2>/dev/null)
+storm=54:04:a6:0b:fd:d1
+
+if [[ $wolcmd = "" ]]; then
+	echo "wol command not available on this machine"
+	exit 0;
+fi
+
+while [[ "$input" != quit ]]; do
+	echo "Who would you like me to wake?"
+	echo "s) storm"
+	echo "q) quit"
+	read input
+
+	case $input in
+		s)
+			$wolcmd $storm
+			exit 1;
+			;;
+		*)
+			exit 1;
+	esac
+
+done
