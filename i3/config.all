@@ -178,12 +178,8 @@ floating_modifier $mod
 # finds out, if available)
 bar {
 	position top
-	#status_command i3status -c /tmp/i3-mark/i3status # generate script places this config
 	status_command ~/.dotfiles/i3bar/conky-i3bar
-	#font xft:Monaco 7
-	#font pango:Convergence 8
-	#font pango:Ohsnap.Icons 9
-	font xft:Monaco 7
+	font xft:lime.se 7 # from artwiz-fonts
 
 	colors {
 		separator #a4e42b
