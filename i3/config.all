@@ -182,8 +182,8 @@ bar {
 	status_command ~/.dotfiles/i3bar/conky-i3bar
 	#font xft:Monaco 7
 	#font pango:Convergence 8
-	#font pango:Ohsnap.Icons 9
-	font xft:Monaco 7
+	font pango:Ohsnap.Icons 9
+	#font xft:Monaco 7
 
 	colors {
 		separator #a4e42b

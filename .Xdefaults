@@ -10,7 +10,7 @@ URxvt*.letterSpace: 0
 URxvt*.font: xft:Envy Code R for Powerline:style=Regular:size=10
 URxvt*.boldFont: xft:Envy Code R:style=Bold:size=10
 URXvt*.fade: 10
-URxvt*.background: rgba:0000/0000/0000/ea00
+URxvt*.background: rgba:0000/0000/0000/eeee
 
 !Font resizing!
 URxvt.keysym.M-C-1: command:\033]710;xft:Envy Code R for Powerline:style=Regular:size=8\007\033]711;xft:Envy Code R:style=Bold:size=8\007
@@ -28,7 +28,7 @@ URxvt.keysym.M-C-4: command:\033]710;xft:Envy Code R for Powerline:style=Regular
 !URxvt*font: xft:Inconsolata:style=Regular:size=9
 
 urxvt.perl-ext-common: default,matcher
-urxvt.url-launcher: /usr/bin/firefox
+urxvt.url-launcher: /usr/bin/google-chrome-beta
 urxvt.matcher.button: 1
 URxvt.internalBorder: 4
 URxvt.pointerBlank: true

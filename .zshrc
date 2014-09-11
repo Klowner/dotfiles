@@ -8,13 +8,10 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="fishy"
 
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias wallpaper="feh --bg-fill -z"
 alias svim='EDITOR=vim sudoedit'
 alias sudo="nocorrect sudo"
 alias steam="SDL_AUDIODRIVER=alsa steam"
-alias chrome="google-chrome --audio-buffer-size=2048"
 
 # Add extra identities to ssh-agent plugin
 zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_storm
@@ -32,10 +29,10 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 # DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -43,17 +40,17 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 plugins=(
 	archlinux
 	django
-	encode
-	extract
+	#encode
+	#extract
 	git-extras
 	gitfast
-	npm
-	pip
-	rsync
-	screen
+	#npm
+	#pip
+	#rsync
+	#screen
 	ssh-agent
 	systemd
-	vundle
+	#vundle
 	)
 
 source /etc/profile
