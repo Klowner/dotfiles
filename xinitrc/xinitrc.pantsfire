@@ -1,3 +1,4 @@
 #!/bin/sh
 pnmixer &
 compton --config ~/.dotfiles/compton/compton-pantsfire.conf &
+dropboxd &
