@@ -55,10 +55,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -67,10 +67,12 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+h split h
+#bindsym $mod+h split h
+bindsym $mod+u split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+#bindsym $mod+v split v
+bindsym $mod+i split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -119,6 +121,13 @@ bindsym $mod+Shift+0 move container to workspace 10
 # pageup/pagedown for workspace cycle
 bindsym $mod+Prior workspace prev_on_output
 bindsym $mod+Next workspace next_on_output
+
+bindsym $mod+Shift+bracketleft workspace prev_on_output
+bindsym $mod+Shift+bracketright workspace next_on_output
+
+# shift focus to workspace directionally
+bindsym $mod+bracketleft focus output left
+bindsym $mod+bracketright focus output right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
