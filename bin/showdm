@@ -10,8 +10,8 @@ case "$HOSTNAME" in
 	;;
 	*)
 		if [[ -e /usr/bin/yeganesh ]]; then
-			$(dmenu_path_c | yeganesh -- -fn $DMENU_FONT -h $DMENU_HEIGHT -y 17)
+			$(dmenu_path_c | yeganesh -- -fn $DMENU_FONT -h $DMENU_HEIGHT -y 16)
 		else
-			$(dmenu_path_c | dmenu -fn $DMENU_FONT -h $DMENU_HEIGHT -y 17)
+			$(dmenu_path_c | dmenu -fn $DMENU_FONT -h $DMENU_HEIGHT -y 16)
 		fi
 esac
