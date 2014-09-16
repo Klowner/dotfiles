@@ -1,1 +1,1 @@
-autocmd BufWritePre * :call StripExtraWhitespace()
+let g:TrimWhitespace=1
