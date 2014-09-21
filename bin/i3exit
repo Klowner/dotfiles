@@ -1,6 +1,8 @@
 #!/bin/sh
 lock() {
-    i3lock
+	if [ -e "$(which i3lock)" ]; then
+		i3lock
+	fi
 }
 
 case "$1" in
