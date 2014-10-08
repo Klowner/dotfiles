@@ -75,6 +75,9 @@ zle -N fancy-ctrl-z
 
 bindkey '^Z' fancy-ctrl-z
 
+# Vim navigation!
+#bindkey -v
+
 # My local ~/bin
 export PATH=$HOME/bin:$PATH
 
