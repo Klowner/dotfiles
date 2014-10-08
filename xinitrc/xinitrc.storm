@@ -3,4 +3,7 @@ junglediskdesktop &
 pnmixer &
 dunst -mon 2 &
 dropboxd &
+~/.screenlayout/vert-horiz-vert.sh
+compton --config ~/.dotfiles/compton/compton-storm.conf &
+feh --bg-fill -z /home/mark/wallpaper &
 
