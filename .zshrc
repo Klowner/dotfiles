@@ -39,10 +39,10 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
 	archlinux
-	django
+	#django
 	#encode
 	#extract
-	git-extras
+	#git-extras
 	gitfast
 	#npm
 	#pip

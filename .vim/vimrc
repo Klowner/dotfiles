@@ -40,7 +40,7 @@ if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
@@ -54,36 +54,37 @@ endif
 
 NeoBundle 'Shougo/vimproc.vim', {'build': {'unix': g:make}}
 
-
-NeoBundle 'L9'
 NeoBundle 'FuzzyFinder'
+NeoBundle 'L9'
 NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Valloric/YouCompleteMe', {'build': {'unix': './install.sh' }}
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'amdt/vim-niji'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'ciaranm/detectindent'
+NeoBundle 'docunext/closetag.vim'
+NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'gregsexton/gitv'
+NeoBundle 'groenewege/vim-less'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'mattn/gist-vim'
+NeoBundle 'mattn/webapi-vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tComment'
 NeoBundle 'timcharper/textile.vim'
 NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-eunuch'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-ragtag'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-eunuch'
-NeoBundle 'ciaranm/detectindent'
 NeoBundle 'vim-scripts/bufkill.vim'
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'Valloric/YouCompleteMe', {'build': {'unix': './install.sh' }}
-NeoBundle 'embear/vim-localvimrc'
-NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-lua-ftplugin'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'amdt/vim-niji'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'mattn/gist-vim'
-NeoBundle 'docunext/closetag.vim'
+NeoBundle 'xolox/vim-misc'
 
 " Syntax
 NeoBundle 'digitaltoad/vim-jade'
@@ -103,6 +104,8 @@ NeoBundle 'evidens/vim-twig'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'jnurmine/Zenburn'
 NeoBundle 'altercation/vim-colors-solarized'
+
+call neobundle#end()
 
 filetype plugin indent on
 
