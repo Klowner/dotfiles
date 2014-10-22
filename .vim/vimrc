@@ -27,10 +27,10 @@ map <C-p> :bprev<CR>
 "" :R read output
 :command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
 
-nnoremap <space> za
 nnoremap <CR> za
-vnoremap <space> zf
 
+let mapleader = " "
+let maplocalleader = " "
 
 
 " Section: NeoBundle Config {{{1
@@ -59,6 +59,7 @@ NeoBundle 'L9'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Valloric/YouCompleteMe', {'build': {'unix': './install.sh' }}
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'amdt/vim-niji'
@@ -68,7 +69,7 @@ NeoBundle 'docunext/closetag.vim'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'groenewege/vim-less'
-NeoBundle 'kien/ctrlp.vim'
+""NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'mattn/webapi-vim'
@@ -114,9 +115,6 @@ NeoBundleCheck
 
 " Section: Plugin settings {{{1
 "------------------------------------------------------------------------------
-let mapleader = ","
-let maplocalleader = ","
-
 " vimspell.vim
 let spell_auto_type = ""
 
@@ -130,15 +128,31 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_javascript_jslint_conf = "--nomen"
 
 " Ctrlp.vim
-let g:ctrlp_map = '<Leader>t'
+"let g:ctrlp_map = '<Leader>t'
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_dotfiles = 0
 let g:ctrlp_switch_buffer = 0
-nmap ; :CtrlPBuffer<CR>
+"nmap ; :CtrlPBuffer<CR>
 
 filetype plugin indent on
+
+" Unite
+let g:unite_source_history_yank_enable = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files     -start-insert file_rec/async:!<cr>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files     -start-insert file<cr>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files     -start-insert file<cr>
+
+nnoremap ; :<C-u>Unite -buffer-name=mru -start-insert file_mru<cr>
+
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+    " Enable ctrl-j and ctrl-k navigation
+    imap <buffer> <C-j>    <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>    <Plug>(unite_select_previous_line)
+endfunction
 
 " vim-airline
 let g:airline_left_sep = '⮀'
