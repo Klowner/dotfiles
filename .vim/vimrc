@@ -20,6 +20,9 @@ map <C-e> :e#<CR>
 map <C-n> :bnext<CR>
 map <C-p> :bprev<CR>
 
+"" Fix indent
+map <F7> mzgg=G`z<CR>
+
 "" Retab
 :command! -range=% -nargs=0 Tab2Space execute '<line1>,<line2>s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
 :command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
@@ -32,6 +35,12 @@ nnoremap <CR> za
 let mapleader = " "
 let maplocalleader = " "
 
+"" toggle line numbers
+nmap <leader>n :set invnumber<cr>
+
+"" use MultiSearch on selected item
+nmap <leader>s :Search <C-R><C-W>*<cr>
+nmap <leader>S :SearchReset<cr>
 
 " Section: NeoBundle Config {{{1
 "------------------------------------------------------------------------------
@@ -86,6 +95,7 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'vim-scripts/bufkill.vim'
 NeoBundle 'xolox/vim-lua-ftplugin'
 NeoBundle 'xolox/vim-misc'
+NeoBundle 'vim-scripts/MultipleSearch2.vim'
 
 " Syntax
 NeoBundle 'digitaltoad/vim-jade'
@@ -176,6 +186,9 @@ let g:localvimrc_persistent = 2
 
 " Python stuff
 au BufRead,BufNewFile *.py,*pyw set expandtab
+
+"" gitgutter
+let g:gitgutter_max_signs = 5000
 
 "allow auto switching
 set autowrite
