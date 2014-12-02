@@ -4,13 +4,14 @@
 URxvt*.scrollBar: false
 URxvt*.depth: 32
 URxvt*.termName: xterm-256color
-!URxvt*.transparent: true
-URxvt*.shading: 15
+URxvt*.transparent: true
+URxvt*.shading: 10
 URxvt*.letterSpace: 0
 URxvt*.font: xft:Envy Code R for Powerline:style=Regular:size=10
 URxvt*.boldFont: xft:Envy Code R:style=Bold:size=10
 URXvt*.fade: 10
-URxvt*.background: rgba:0000/0000/0000/eeee
+URXvt*.fadeColor: black
+!URxvt*.background: rgba:0000/0000/0000/eeee
 
 !Font resizing!
 URxvt.keysym.M-C-1: command:\033]710;xft:Envy Code R for Powerline:style=Regular:size=8\007\033]711;xft:Envy Code R:style=Bold:size=8\007

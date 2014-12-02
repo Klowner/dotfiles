@@ -136,6 +136,7 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_javascript_jslint_conf = "--nomen"
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 
 " Ctrlp.vim
 "let g:ctrlp_map = '<Leader>t'
