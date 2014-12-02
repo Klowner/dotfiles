@@ -1,4 +1,4 @@
 syndaemon -t 1 &
 pa-applet &
 google-chrome-stable --no-startup-window &
-compton --config ~/.dotfiles/compton/compton-tyr.conf &
+#compton --config ~/.dotfiles/compton/compton-tyr.conf &
