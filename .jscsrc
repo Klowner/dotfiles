@@ -3,5 +3,15 @@
 	"validateQuoteMarks": {
 		"mark": true,
 		"escape": true
+	},
+	"maximumLineLength": {
+		"value": 120,
+		"tabSize": 4
+	},
+	"disallowMultipleLineBreaks": null,
+	"disallowSpacesInFunctionExpression": null,
+	"disallowSpacesInAnonymousFunctionExpression": null,
+	"requireSpacesInAnonymousFunctionExpression": {
+		"beforeOpeningRoundBrace": true
 	}
 }
