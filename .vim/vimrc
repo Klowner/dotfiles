@@ -151,18 +151,22 @@ filetype plugin indent on
 
 " Unite
 let g:unite_source_history_yank_enable = 1
+let g:unite_enable_start_insert = 1
+let g:unite_winheight = 10
+let g:unite_split_rule = "botright"
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files     -start-insert file_rec/async:!<cr>
 nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files     -start-insert file<cr>
-nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files     -start-insert file<cr>
 
-nnoremap ; :<C-u>Unite -buffer-name=mru -start-insert file_mru<cr>
+nnoremap ; :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
 
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
     " Enable ctrl-j and ctrl-k navigation
     imap <buffer> <C-j>    <Plug>(unite_select_next_line)
     imap <buffer> <C-k>    <Plug>(unite_select_previous_line)
+    nmap <buffer> <ESC>    <Plug>(unite_exit)
 endfunction
 
 " vim-airline
