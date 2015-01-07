@@ -1,0 +1,128 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+#
+# a simple python script for toggline xinput devices via dmenu
+# Written by Mark "Klowner" Riedesel 2015
+#
+# License: MIT yadda yadda, do what you want
+
+import subprocess
+import re
+import argparse
+
+FONT = 'lime-9'
+re_device_state = re.compile('(\d+)$')
+re_device_list = re.compile('^\W*([\w\s]*)[^=]*id=(\d+)[^\[]*\[(\w+)\s+(\w+)')
+
+class Device(object):
+    def __init__(self, name, ident, cls, dtype):
+        self.name = name
+        self.ident = int(ident)
+        self.cls = cls
+        self.dtype = dtype
+
+    def is_enabled(self):
+        return get_input_state(self.ident)
+
+    def enable(self, enable):
+        run_command('xinput %s %d' % ('enable' if enable else 'disable', self.ident))
+
+    def toggle(self):
+        return self.enable(not self.is_enabled())
+
+
+def dmenu(options, dmenu):
+    '''Call dmenu with options.'''
+
+    cmd = subprocess.Popen(dmenu,
+                           shell=True,
+                           stdin=subprocess.PIPE,
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE)
+    stdout, _ = cmd.communicate('\n'.join(options).encode('utf-8'))
+    return stdout.decode('utf-8').strip('\n')
+
+
+def run_command(command):
+    '''Execute shell command and return the output'''
+
+    cmd = subprocess.Popen(command,
+                           shell=True,
+                           stdin=subprocess.PIPE,
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE
+                           )
+
+    stdout, _ = cmd.communicate()
+    return stdout.decode('utf-8')
+
+
+def input_devices():
+    '''Get a list of all xinput devices'''
+
+    devices = []
+    for row in run_command('xinput list').split('\n'):
+        match = re_device_list.search(row)
+        if match:
+            groups = map(lambda x:x.strip(), match.groups())
+
+            devices.append(Device(*groups))
+
+    return devices
+
+
+def get_input_state(input_id):
+    '''Queries the input state of the requested device id'''
+
+    result = run_command('xinput --list-props %d | grep "Device Enabled"' % input_id)
+    match = re_device_state.search(result)
+    if match:
+        return match.groups()[0] == '1'
+
+    return False
+
+
+def main(args):
+    devs = input_devices()
+
+    dmenu_cmd = 'dmenu -fn ' + FONT + ' -i -w 300 -y 16'
+
+    if args.lines:
+        dmenu_cmd += ' -l %d' % (args.lines if args.lines else len(devs))
+
+    if args.input_type:
+        devs = filter(lambda x:x.dtype == args.input_type, devs)
+
+    devs = filter(lambda x: (x.cls == 'master' and args.masters) or
+                            (x.cls == 'slave' and args.slaves),
+                  devs)
+    devs = list(devs)
+
+    menu_items = list(map(lambda x: u'%s %s' % ('O' if x.is_enabled() else ' ', x.name), devs))
+    menu_items.sort()
+
+    result = dmenu(menu_items, dmenu_cmd)[2:]
+
+    if result:
+        for d in devs:
+            if d.name == result:
+                d.toggle()
+                continue
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--types', dest='input_type', choices=['pointer', 'keyboard'], required=False)
+    parser.set_defaults(input_type=None)
+    parser.add_argument('--slaves', dest='slaves', action='store_true')
+    parser.set_defaults(slaves=False)
+    parser.add_argument('--masters', dest='masters', action='store_true')
+    parser.set_defaults(masters=False)
+    parser.add_argument('-l', '--lines', type=int, required=False)
+    args = parser.parse_args()
+
+    if not args.masters and not args.slaves:
+        parser.error("You need to specify at least one of --masters and/or --slaves")
+
+    main(args)
+

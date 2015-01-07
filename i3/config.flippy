@@ -1,0 +1,4 @@
+# show pointer input toggle
+bindsym $mod+Shift+p exec ~/.dotfiles/bin/xintoggleptr
+
+
