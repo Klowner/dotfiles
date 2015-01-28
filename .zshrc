@@ -12,6 +12,7 @@ alias wallpaper="feh --bg-fill -z"
 alias svim='EDITOR=vim sudoedit'
 alias sudo="nocorrect sudo"
 alias steam="SDL_AUDIODRIVER=alsa steam"
+alias gulp="node_modules/.bin/gulp"
 
 # Add extra identities to ssh-agent plugin
 zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_storm

@@ -110,6 +110,7 @@ NeoBundle 'mitsuhiko/vim-jinja'
 NeoBundle '0rca/vim-mikrotik'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'evidens/vim-twig'
+NeoBundle 'joshtronic/php.vim'
 
 " Color schemes
 NeoBundle 'tomasr/molokai'

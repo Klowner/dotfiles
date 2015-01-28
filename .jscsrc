@@ -13,5 +13,6 @@
 	"disallowSpacesInAnonymousFunctionExpression": null,
 	"requireSpacesInAnonymousFunctionExpression": {
 		"beforeOpeningRoundBrace": true
-	}
+	},
+	"requireSpacesInsideArrayBrackets": null
 }
