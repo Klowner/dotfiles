@@ -1,18 +1,82 @@
 {
-	"preset": "jquery",
+	"requireCurlyBraces": [
+		"if",
+		"else",
+		"for",
+		"while",
+		"do",
+		"try",
+		"catch"
+	],
+	"maximumLineLength": {
+		"value": 120,
+		"tabSize": 4,
+		"allowUrlComments": true,
+		"allowRegex": true
+	},
 	"validateQuoteMarks": {
 		"mark": true,
 		"escape": true
 	},
-	"maximumLineLength": {
-		"value": 120,
-		"tabSize": 4
-	},
-	"disallowMultipleLineBreaks": null,
-	"disallowSpacesInFunctionExpression": null,
-	"disallowSpacesInAnonymousFunctionExpression": null,
+
+	"disallowMixedSpacesAndTabs": true,
+	"requireSpaceBeforeKeywords": true,
+	"requireSpaceBeforeObjectValues": true,
+	"disallowKeywordsOnNewLine": ["else"],
+	"disallowNewlineBeforeBlockStatements": true,
+	"requireSpaceAfterKeywords": [
+		"if",
+		"else",
+		"for",
+		"while",
+		"do",
+		"switch",
+		"try",
+		"catch"
+	],
+	"requireSpaceBeforeKeywords": [
+		"else",
+		"catch"
+	],
+	"disallowSpaceAfterObjectKeys": true,
+	"disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~", "!"],
+	"requireSpaceBeforeBinaryOperators": [
+		"=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=",
+		"&=", "|=", "^=", "+=",
+		"+", "-", "*", "/", "%", "<<", ">>", ">>>", "&",
+		"|", "^", "&&", "||", "===", "==", ">=",
+		"<=", "<", ">", "!=", "!=="
+	],
+	"disallowTrailingComma": true,
+	"disallowTrailingWhitespace": true,
+	"disallowYodaConditions": true,
+	"requireBlocksOnNewline": 1,
+	"requireCamelCaseOrUpperCaseIdentifiers": true,
+	"requireCapitalizedConstructors": true,
+	"requireCommaBeforeLineBreak": true,
+	"requireCurlyBraces": [
+		"if",
+		"else",
+		"for",
+		"while",
+		"do",
+		"try",
+		"catch",
+		"case",
+		"default"
+	],
+	"requireDotNotation": true,
+	"requireMultipleVarDecl": true,
+	"requireParenthesesAroundIIFE": true,
+	"requireSpaceBeforeBlockStatements": true,
+	"requireSpaceBeforeKeywords": true,
+	"requireSpaceBeforeObjectValues": true,
 	"requireSpacesInAnonymousFunctionExpression": {
-		"beforeOpeningRoundBrace": true
+		"beforeOpeningRoundBrace": true,
+		"beforeOpeningCurlyBrace": true
 	},
-	"requireSpacesInsideArrayBrackets": null
+	"requireSpacesInConditionalExpression": true,
+	"safeContextKeyword": "self",
+	"validateParameterSeparator": ", ",
+	"validateIndentation": "\t"
 }
