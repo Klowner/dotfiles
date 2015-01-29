@@ -20,7 +20,6 @@
 	},
 
 	"disallowMixedSpacesAndTabs": true,
-	"requireSpaceBeforeKeywords": true,
 	"requireSpaceBeforeObjectValues": true,
 	"disallowKeywordsOnNewLine": ["else"],
 	"disallowNewlineBeforeBlockStatements": true,
@@ -69,7 +68,6 @@
 	"requireMultipleVarDecl": true,
 	"requireParenthesesAroundIIFE": true,
 	"requireSpaceBeforeBlockStatements": true,
-	"requireSpaceBeforeKeywords": true,
 	"requireSpaceBeforeObjectValues": true,
 	"requireSpacesInAnonymousFunctionExpression": {
 		"beforeOpeningRoundBrace": true,
