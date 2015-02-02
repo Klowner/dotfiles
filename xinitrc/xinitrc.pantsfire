@@ -2,7 +2,5 @@
 ~/.screenlayout/hdmi-rightof-vertical.sh
 feh --bg-fill -z ~/wallpaper
 pnmixer &
-compton --config ~/.dotfiles/compton/compton-pantsfire.conf &
 dropboxd &
-~
 
