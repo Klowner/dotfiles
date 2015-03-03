@@ -1,0 +1,199 @@
+#!/usr/bin/env python
+
+import locale
+import re
+import glob
+import subprocess
+from os import path, makedirs, unlink, environ
+from dialog import Dialog
+
+
+try:
+    BASEDIR=path.abspath(environ['CIPAVMROOT'])
+except KeyError:
+    print("$CIPAVMROOT not set, please set it to the directory that your base images reside")
+    exit(1)
+
+
+CLONEDIR=path.join(BASEDIR, 'clones/')
+DATAPATH=path.join(BASEDIR, 'cipafilter-data.qcow2')
+
+if not path.exists(CLONEDIR):
+    makedirs(CLONEDIR)
+
+def initDialog():
+    locale.setlocale(locale.LC_ALL, '')
+    d = Dialog(dialog="dialog")
+    d.set_background_title("Cipafilter VM Controller")
+    return d
+
+def chooseCloneName(d, **kwargs):
+    code, tag = d.inputbox("Enter a name for the clone")
+    if code == 'ok':
+        kwargs['clone_name'] = tag.replace(' ', '-')
+        return kwargs
+
+def confirmBase(d, base_version, **kwargs):
+    clone_images = getCloneDiskImages(base_version)
+    clone_names = [path.basename(x[0]).rsplit('.', 1)[0] for x in clone_images]
+
+    code = d.yesno("Running a base VM will destroy all child VMs\n\n" + '\n'.join(clone_names), width=40)
+
+    if code == 'ok':
+        for filepath, version in clone_images:
+            unlink(filepath)
+
+        kwargs['base_version'] = base_version
+        return kwargs
+
+
+def chooseBase(d, **kwargs):
+    base_images = getBaseDiskImages()
+
+    code, tag = d.menu("Choose base image", choices=[
+       (x[1], path.basename(x[0]).rsplit('.', 1)[0]) for x in base_images
+    ])
+
+    if code == 'ok':
+        kwargs['base_path'] = dict([(x[1], x[0]) for x in base_images])[tag]
+        kwargs['base_version'] = tag
+        return kwargs
+
+def chooseClone(d, **kwargs):
+    clone_images = getCloneDiskImages()
+    
+    if not clone_images:
+        d.msgbox("No clones")
+        return
+
+    code, tag = d.menu("Choose image", choices=[
+        (path.basename(x[0]).rsplit('.', 1)[0], '') for x in clone_images
+    ])
+
+    if code == 'ok':
+        kwargs['clone_path'] = dict([(path.basename(x[0]), x[0]) for x in clone_images])[tag + '.qcow2']
+        kwargs['clone_version'] = tag
+        return kwargs
+
+
+def getBaseDiskImages():
+    version_re = re.compile('(\d+\.\d+)')
+    results = []
+
+    for item in glob.glob(path.join(BASEDIR, '*base*.qcow2')):
+        results.append((item, version_re.search(item).groups()[0]))
+
+    return results
+
+def getCloneDiskImages(version=None):
+    version_re = re.compile('(\d+\.\d+)')
+    results = []
+
+    for item in glob.glob(path.join(CLONEDIR, '*.qcow2')):
+        match = version_re.search(item)
+
+        if version and match and match.groups()[0] != version:
+            continue
+
+        results.append((item, match.groups()[0]))
+    return results
+
+def createNewClone(d, clone_name, base_version, base_path, **kwargs):
+    source = base_path
+    dest = path.join(CLONEDIR, clone_name + '-' + base_version) + '.qcow2'
+    subprocess.call(['qemu-img', 'create', '-f', 'qcow2', '-b', source, dest])
+    d.msgbox("Created " + clone_name + "-" + base_version)
+
+
+def deleteClone(d, clone_path, **kwargs):
+    unlink(clone_path)
+    d.msgbox("Deleted " + path.basename(clone_path))
+    return
+
+
+def runClone(d, clone_path, **kwargs):
+    kwargs['hda'] = clone_path
+    kwargs['hdb'] = DATAPATH
+    return kwargs
+
+def runBase(d, base_path, **kwargs):
+    kwargs['hda'] = base_path
+    kwargs['hdb'] = DATAPATH
+    return kwargs
+
+def launchQEMU(d, hda, hdb, **kwargs):
+    d.clear()
+    print("Launching QEMU...")
+    subprocess.call([
+        'qemu-system-x86_64',
+        '-boot', 'c',
+        '-m', '2048',
+        '-hda', hda,
+        '-hdb', hdb,
+        '-net', 'nic,model=virtio',
+        '-net', 'bridge,br=vnet0',
+        '-net', 'nic,model=virtio',
+        '-net', 'bridge,br=vnet1',
+        '-enable-kvm'
+        ])
+
+    return False
+
+def selectCloneOrBase(d, **kwargs):
+    code, tag = d.menu("What would you like to launch from?", choices=[
+        ('b', 'Base images'),
+        ('c', 'Clone images'),
+        ])
+
+    if code == 'ok':
+        kwargs['list-source'] = {
+            'c': 'clone',
+            'b': 'base'
+            }[tag]
+        return kwargs
+
+
+def main(d):
+    running = True
+    while running:
+        result = chooseMainAction(d)
+
+        if result == False:
+            running = False
+
+def chooseMainAction(d):
+
+    code, tag = d.menu("What would you like to do?", choices=[
+        ('run clone', 'Launch a VM'),
+        ('run base', 'Launch a base VM'),
+        ('create', 'Create a new clone from a base machine'),
+        ('delete', 'Delete a clone'),
+        ('quit', 'Quit this utility'),
+        ])
+
+    if (code == 'ok'):
+        functions = {
+            'create': [ chooseBase , chooseCloneName, createNewClone ],
+            'delete': [ chooseClone, deleteClone ],
+            'run clone': [ chooseClone, runClone, launchQEMU ],
+            'run base': [ chooseBase, confirmBase, runBase, launchQEMU ],
+            'quit': [ lambda x: False ]
+        }[tag]
+
+        params = {}
+        for fn in functions:
+            params = fn(d, **params)
+            if not params:
+                if params == False:
+                    return False
+                return
+
+
+    else:
+        return False
+
+if __name__ == '__main__':
+    d = initDialog()
+    main(d)
+
+
