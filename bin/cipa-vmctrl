@@ -103,7 +103,7 @@ def createNewClone(d, clone_name, base_version, base_path, **kwargs):
     dest = path.join(CLONEDIR, clone_name + '-' + base_version) + '.qcow2'
     subprocess.call(['qemu-img', 'create', '-f', 'qcow2', '-b', source, dest])
     d.msgbox("Created " + clone_name + "-" + base_version)
-
+    return True
 
 def deleteClone(d, clone_path, **kwargs):
     unlink(clone_path)
@@ -123,21 +123,27 @@ def runBase(d, base_path, **kwargs):
 
 def launchQEMU(d, hda, hdb, **kwargs):
     d.clear()
-    print("Launching QEMU...")
+
+    vncport = ':2'
+
+    print("Launching QEMU (VNC %s)..." % (vncport))
+
     subprocess.call([
         'qemu-system-x86_64',
         '-boot', 'c',
         '-m', '2048',
-        '-hda', hda,
-        '-hdb', hdb,
+        '-drive', 'file=' + hda, # + ',if=virtio',
+        '-drive', 'file=' + hdb, # + ',if=virtio',
         '-net', 'nic,model=virtio',
         '-net', 'bridge,br=vnet0',
         '-net', 'nic,model=virtio',
         '-net', 'bridge,br=vnet1',
-        '-enable-kvm'
+        '-enable-kvm',
+        '-cpu', 'host',
+        '-smp', '4',
+        '-vnc', vncport,
         ])
 
-    return False
 
 def selectCloneOrBase(d, **kwargs):
     code, tag = d.menu("What would you like to launch from?", choices=[

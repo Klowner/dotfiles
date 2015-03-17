@@ -1,1 +1,1 @@
-let g:TrimWhitespace=1
+set background=light
