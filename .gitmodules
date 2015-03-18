@@ -1,4 +1,4 @@
-[submodule "vimrc"]
+[submodule ".vim"]
 	path = .vim
-	url = git@github.com:Klowner/vimrc
+	url = git@github.com:Klowner/vimrc.git
 	branch = master
