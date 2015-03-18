@@ -8,7 +8,6 @@
 # or:
 #   curl -L http://tinyurl.com/klownerdot | bash
 # or:
-#
 #   ~/.dotfiles/install.sh
 #
 # (It doesn't descend into directories.)
@@ -100,10 +99,16 @@ fi
 
 note "Installing oh-my-zsh..."
 if [[ ! -e ~/.oh-my-zsh ]]; then
-  curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 fi
 
-note "Installing dotfiles..."
+note "Installing git submodules..."
+if has git; then
+    git submodule init
+    git submodule update
+fi
+
+note "Symlinking dotfiles..."
 for path in .* ; do
     case $path in
         .|..|.git)
@@ -118,31 +123,10 @@ done
 note "Installing bin/ directory..."
 mkdir -v -p $bindir
 if [ -d bin ]; then
-	for path in bin/* ; do
-		relpath=$( basename $path )
-		link $basedir/$path $bindir/$relpath
-	done
-fi
-
-note "Installing neobundle..."
-if has git; then
-  if [[ ! -d ~/.vim/bundle/neobundle.vim ]]; then
-    $basedir/neobundle.sh
-  fi
-fi
-
-note "Symlinking vim configurations..."
-for rc in vim gvim; do
-    link $basedir/.vim/${rc}rc $HOME/.${rc}rc
-    if [ ! -e $HOME/.${rc}local ]; then
-        touch $HOME/.${rc}local
-    fi
-done
-
-note "Installing git submodules..."
-if has git; then
-	git submodule init
-	git submodule update
+    for path in bin/* ; do
+        relpath=$( basename $path )
+        link $basedir/$path $bindir/$relpath
+    done
 fi
 
 note "Initializing tools..."
@@ -151,12 +135,10 @@ if has git; then
     cp -v $basedir/.gitconfig.base $HOME/.gitconfig
 fi
 
-#note "Installing vim bundles..."
-#if has vim; then
-#  cd $basedir
-#  ~/.vim/bundle/neobundle.vim/bin/neoinstall
-#fi
-
+note "Installing vim plugins..."
+if has vim; then
+    vim +PlugInstall +qall now
+fi
 
 note "Running post-install script, if any..."
 postinstall=$HOME/.postinstall
@@ -166,3 +148,5 @@ if [ -e $postinstall ]; then
 fi
 
 note "Done."
+
+# vim:ts=4:sw=4:et:
