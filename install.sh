@@ -97,11 +97,6 @@ else
     fi
 fi
 
-note "Installing oh-my-zsh..."
-if [[ ! -e ~/.oh-my-zsh ]]; then
-    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-fi
-
 note "Installing git submodules..."
 if has git; then
     git submodule init
