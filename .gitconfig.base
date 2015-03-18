@@ -103,3 +103,7 @@
 
 [apply]
 	whitespace = fix
+
+[filter "spellfile"]
+	smudge = cat
+	clean = sort -u
