@@ -90,17 +90,11 @@ else
         git clone $gitbase $basedir
         cd $basedir
         git submodule init
-        git submodule update
+        git submodule update --init --recursive
     else
         warn "Git not installed."
         unpack_tarball
     fi
-fi
-
-note "Installing git submodules..."
-if has git; then
-    git submodule init
-    git submodule update
 fi
 
 note "Symlinking dotfiles..."
@@ -133,6 +127,13 @@ fi
 note "Installing vim plugins..."
 if has vim; then
     vim +PlugInstall +qall now
+fi
+
+note "Installing zsh configurations..."
+if has zsh; then
+    if [ -e "$HOME/.dotfiles/zsh/install.sh" ]; then
+        $HOME/.dotfiles/zsh/install.sh
+    fi
 fi
 
 note "Running post-install script, if any..."
