@@ -1,15 +1,44 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#   Mark Riedesel <mark@klowner.com>
+#           _
+#   _______| |__
+#  |_  / __| '_ \
+#   / /\__ \ | | |
+#  /___|___/_| |_|
 #
 
-# Source Prezto.
+# Prezto!
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customisations
-#
+
+#/// functions
+
+# Fancy ctrl-z (thanks, Adam Stankiewicz!)
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    fg
+    zle redisplay
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+
+bindkey '^Z' fancy-ctrl-z
+
+
+#/// My local bin
+export PATH=$HOME/bin:$PATH
+
+#/// npm bin
+export PATH=$HOME/node_modules/.bin:$PATH
+
+#/// misc exports
+export EDITOR=vim
+export XDG_CONFIG_HOME=$HOME/.config
+
+#/// aliases aplenty
+alias wallpaper="feh -bg-fill -z"
+alias svim="EDITOR=vim sudoedit"
+alias gulp="node_modules/.bin/gulp"
