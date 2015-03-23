@@ -2,11 +2,11 @@
 	path = .vim
 	url = git@github.com:Klowner/vimrc.git
 	branch = master
-[submodule "antigen"]
-	path = antigen
-	url = https://github.com/zsh-users/antigen.git
-	branch = master
 [submodule "zsh/prezto"]
 	path = zsh/prezto
 	url = git://github.com/sorin-ionescu/prezto.git
+	branch = master
+[submodule "zsh/antigen"]
+	path = zsh/antigen
+	url = https://github.com/zsh-users/antigen.git
 	branch = master

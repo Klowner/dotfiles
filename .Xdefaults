@@ -32,7 +32,7 @@ URxvt.preeditType: OverTheSpot
 !URxvt*font: xft:Inconsolata:style=Regular:size=9
 
 urxvt.perl-ext-common: default,matcher
-urxvt.url-launcher: /usr/bin/chromium
+urxvt.url-launcher: /usr/bin/google-chrome-beta
 urxvt.matcher.button: 1
 URxvt.internalBorder: 4
 URxvt.pointerBlank: true
