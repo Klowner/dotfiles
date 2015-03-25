@@ -34,8 +34,17 @@ fancy-ctrl-z () {
   fi
 }
 zle -N fancy-ctrl-z
-
 bindkey '^Z' fancy-ctrl-z
+
+updot () {
+  pushd
+  cd ~/.dotfiles
+  git stash
+  git pull --rebase
+  git stash pop
+  git submodule update --recursive --init
+  popd
+}
 
 
 #/// My local bin
