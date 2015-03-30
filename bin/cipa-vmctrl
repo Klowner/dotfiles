@@ -61,7 +61,7 @@ def chooseBase(d, **kwargs):
 
 def chooseClone(d, **kwargs):
     clone_images = getCloneDiskImages()
-    
+
     if not clone_images:
         d.msgbox("No clones")
         return
@@ -126,14 +126,32 @@ def launchQEMU(d, hda, hdb, **kwargs):
 
     vncport = ':2'
 
-    print("Launching QEMU (VNC %s)..." % (vncport))
+    print("Launching QEMU (VNC %s) %s %s..." % (vncport, hda, hdb))
 
-    subprocess.call([
+    args = [
         'qemu-system-x86_64',
         '-boot', 'c',
         '-m', '2048',
         '-drive', 'file=' + hda, # + ',if=virtio',
         '-drive', 'file=' + hdb, # + ',if=virtio',
+        '-net', 'nic,model=virtio',
+        '-net', 'bridge,br=vnet0',
+        '-net', 'nic,model=virtio',
+        '-net', 'bridge,br=vnet1',
+        '-enable-kvm',
+        '-cpu', 'host',
+        '-smp', '4',
+        #'-vnc', vncport,
+        ]
+
+    print("Command: %s" % (' '.join(args)))
+
+    subprocess.call([
+        'qemu-system-x86_64',
+        '-boot', 'c',
+        '-m', '2048',
+        '-drive', 'file=' + hda + ',if=virtio',
+        '-drive', 'file=' + hdb + ',if=virtio',
         '-net', 'nic,model=virtio',
         '-net', 'bridge,br=vnet0',
         '-net', 'nic,model=virtio',

@@ -55,6 +55,7 @@ export PATH=$HOME/node_modules/.bin:$PATH
 
 #/// misc exports
 export EDITOR=vim
+export VISUAL=$EDITOR
 export XDG_CONFIG_HOME=$HOME/.config
 
 #/// aliases aplenty
