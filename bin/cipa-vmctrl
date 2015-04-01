@@ -132,36 +132,20 @@ def launchQEMU(d, hda, hdb, **kwargs):
         'qemu-system-x86_64',
         '-boot', 'c',
         '-m', '2048',
-        '-drive', 'file=' + hda, # + ',if=virtio',
-        '-drive', 'file=' + hdb, # + ',if=virtio',
-        '-net', 'nic,model=virtio',
-        '-net', 'bridge,br=vnet0',
-        '-net', 'nic,model=virtio',
-        '-net', 'bridge,br=vnet1',
-        '-enable-kvm',
-        '-cpu', 'host',
-        '-smp', '4',
-        #'-vnc', vncport,
-        ]
-
-    print("Command: %s" % (' '.join(args)))
-
-    subprocess.call([
-        'qemu-system-x86_64',
-        '-boot', 'c',
-        '-m', '2048',
-        '-drive', 'file=' + hda + ',if=virtio',
-        '-drive', 'file=' + hdb + ',if=virtio',
-        '-net', 'nic,model=virtio',
-        '-net', 'bridge,br=vnet0',
+        '-drive', 'file=' + hda + ',if=virtio,cache=none,aio=native',
+        '-drive', 'file=' + hdb + ',if=virtio,cache=none,aio=native',
+        '-net', 'nic,model=virtio,macaddr=08:00:27:7B:B3:74',
+        '-net', 'bridge,br=veth0',
         '-net', 'nic,model=virtio',
         '-net', 'bridge,br=vnet1',
         '-enable-kvm',
         '-cpu', 'host',
         '-smp', '4',
         '-vnc', vncport,
-        ])
+        ]
 
+    print("Command: %s" % (' '.join(args)))
+    subprocess.check_call(args)
 
 def selectCloneOrBase(d, **kwargs):
     code, tag = d.menu("What would you like to launch from?", choices=[
