@@ -1,9 +1,8 @@
 #!/bin/sh
 junglediskdesktop &
-pnmixer &
+pasystray &
 dunst -mon 2 &
 dropboxd &
-~/.screenlayout/vert-horiz-vert-nvidia.sh
-#compton --config ~/.dotfiles/compton/compton-storm.conf &
+~/.screenlayout/horiz-vert.sh
 feh --bg-fill -z /home/mark/wallpaper &
 

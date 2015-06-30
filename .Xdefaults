@@ -7,7 +7,7 @@ URxvt*.termName: xterm-256color
 URxvt*.transparent: true
 URxvt*.shading: 10
 URxvt*.letterSpace: 0
-URxvt*.font: xft:Envy Code R for Powerline:style=Regular:size=10
+URxvt*.font: xft:Envy Code R for Powerline:style=Regular:size=10, xft:unifont:style=Medium,antialias=true
 URxvt*.boldFont: xft:Envy Code R:style=Bold:size=10
 URXvt*.fade: 10
 URXvt*.fadeColor: black
