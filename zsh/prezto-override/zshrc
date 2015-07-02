@@ -53,6 +53,10 @@ export PATH=$HOME/bin:$PATH
 #/// npm bin
 export PATH=$HOME/node_modules/.bin:$PATH
 
+#/// Go
+export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/go/bin
+
 #/// misc exports
 export EDITOR=vim
 export VISUAL=$EDITOR
