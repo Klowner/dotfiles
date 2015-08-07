@@ -7,5 +7,5 @@ thunar --daemon &
 clipit &
 urxvtd &
 pulseaudio --start &
-dunst --config ~/.dotfiles/dunstrc
-xmodmap ~/.dotfiles/xmodmaprc
+dunst --config ~/.dotfiles/dunstrc &
+xmodmap ~/.dotfiles/xmodmaprc &
