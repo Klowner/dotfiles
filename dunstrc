@@ -1,0 +1,11 @@
+[global]
+	font = glisp 8
+	allow_markup = yes
+	format ="%s <b>%a</b>"
+	sort = yes
+	geometry = "0x0-0+16"
+	ignore_newline = no
+	follow = mouse
+	padding = 2
+	horizontal_padding = 2
+	separator_color = frame

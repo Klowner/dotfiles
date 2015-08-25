@@ -1,0 +1,28 @@
+#!/bin/zsh
+
+typeset -A ROUTES
+
+ROUTES['dfw']=172.17.0.1
+ROUTES['clean']=172.17.0.4
+ROUTES['test']=172.20.10.10
+
+CURRENT=$(ip route | grep default | cut -f3 -d ' ')
+
+if [[ "${1}" ]]; then
+	ROUTE=${ROUTES['${1}']}
+	if [ ! "${ROUTE}" ]; then
+		echo "unknown route, please specify one of ${(k)ROUTES}"
+		exit 1
+	fi
+else
+	if [ "${CURRENT}" = "${ROUTES['test']}" ]; then
+		ROUTE=$ROUTES['clean']
+	else
+		ROUTE=$ROUTES['test']
+	fi
+fi
+
+sudo ip route del default
+sudo ip route add default via ${ROUTE}
+
+echo "default route set to ${ROUTE}"

@@ -1,8 +1,7 @@
 #!/bin/sh
 junglediskdesktop &
-pasystray &
-dunst -mon 2 &
-dropboxd &
+dunst -mon 2 -config ~/.dotfiles/dunstrc &
+dropbox &
 ~/.screenlayout/horiz-vert.sh
 feh --bg-fill -z /home/mark/wallpaper &
 

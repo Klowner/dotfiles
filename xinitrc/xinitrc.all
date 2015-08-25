@@ -1,10 +1,11 @@
 #!/bin/sh
 xsetroot -cursor_name left_ptr &
+pasystray &
 dispcalGUI-apply-profiles &
 feh --bg-fill -z ~/wallpaper/*.* &
 thunar --daemon &
 clipit &
 urxvtd &
 pulseaudio --start &
-#xmodmap ~/.dotfiles/xmodmaprc
 setxkbmap -option caps:escape &
+dunst --config ~/.dotfiles/dunstrc &

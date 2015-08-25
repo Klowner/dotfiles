@@ -47,6 +47,7 @@ ssh -A -T $USERNAME@$IP 1> /dev/null <<EOF
 
 	# Install sshfs
 	which sshfs 1> /dev/null || sudo apt-get install -y sshfs
+	sudo chmod 744 /etc/fuse.conf
 
 	# Unmount if mounted
 	mountpoint -q \$DSTPATH && sudo fusermount -u \$DSTPATH
@@ -55,8 +56,8 @@ ssh -A -T $USERNAME@$IP 1> /dev/null <<EOF
 	#[ "\$(ls \$DSTPATH)" ] && sudo mv \$DSTPATH \$DSTPATH.original
 
 	if [[ ! -e \$DSTPATH ]]; then
-		sudo mkdir -p \$DSTPATH
-		sudo chown www-data:www-data \$DSTPATH
+		sudo mkdir -m 775 -p \$DSTPATH
+		sudo chown $USERNAME:www-data \$DSTPATH
 	fi
 
 	#sudo -E sshfs -o nonempty,allow_other,user=www-data $MYSELF@\$MYIP:$ABSDIRPATH \$DSTPATH 2>&1> /dev/null
