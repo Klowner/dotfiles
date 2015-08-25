@@ -6,4 +6,5 @@ thunar --daemon &
 clipit &
 urxvtd &
 pulseaudio --start &
-xmodmap ~/.dotfiles/xmodmaprc
+#xmodmap ~/.dotfiles/xmodmaprc
+setxkbmap -option caps:escape &
