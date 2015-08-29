@@ -9,7 +9,7 @@ case "$HOSTNAME" in
 		$(dmenu_path_c | dmenu)
 	;;
 	*)
-		if [[ -e ~/bin/yegonesh ]]; then
+		if [[ -e /usr/bin/yegonesh ]]; then
 			$($HOME/bin/yegonesh -- -fn $DMENU_FONT -h $DMENU_HEIGHT -y 16)
 		elif [[ -e /usr/bin/yeganesh ]]; then
 			$(dmenu_path_c | yeganesh -- -fn $DMENU_FONT -h $DMENU_HEIGHT -y 16)
