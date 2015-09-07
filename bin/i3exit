@@ -18,6 +18,9 @@ case "$1" in
     hibernate)
         lock && systemctl hibernate
         ;;
+    blank)
+        sleep 1; xset dpms force off
+        ;;
     reboot)
         systemctl reboot
         ;;
@@ -25,7 +28,7 @@ case "$1" in
         systemctl poweroff
         ;;
     *)
-        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        echo "Usage: $0 {lock|logout|suspend|hibernate|blank|reboot|shutdown}"
         exit 2
 esac
 
