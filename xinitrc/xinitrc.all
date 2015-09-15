@@ -8,4 +8,4 @@ clipit &
 urxvtd &
 pulseaudio --start &
 setxkbmap -option caps:escape &
-dunst --config ~/.dotfiles/dunstrc &
+dunst -config ~/.dotfiles/dunstrc &

@@ -75,5 +75,7 @@
 	},
 	"requireSpacesInConditionalExpression": true,
 	"safeContextKeyword": "self",
-	"validateParameterSeparator": ", "
+	"validateParameterSeparator": ", ",
+	"validateIndentation": "\t",
+	"disallowSpacesInsidePerenthesis": true
 }
