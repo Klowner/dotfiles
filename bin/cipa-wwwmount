@@ -14,7 +14,7 @@ if [[ -z $USERNAME ]]; then
 fi
 
 if [[ -z $IP || -z $DIRPATH ]]; then
-	echo "Use sshfs to mount target directory to IP's /usr/cipafilter/www"
+	echo "Use sshfs to mount target directory to IP's /usr/cipafilter"
 	echo ""
 	echo "To mount"
 	echo -e "Usage: ${G}$0  <ip>  <localdir>  <relative remotedir>${DEF}"
@@ -36,14 +36,26 @@ else
 fi
 
 if [[ $2 == "unmount" ]]; then
-	DSTPATH=/usr/cipafilter/www/$DSTPATH
-	ssh $USERNAME@$IP "sudo fusermount -u $DSTPATH && sudo rmdir $DSTPATH" && echo -e "${G}SUCCESS${DEF} - unmounted ${B}$DSTPATH${DEF}"
+	DSTPATH=/usr/cipafilter/$DSTPATH
+	ssh -A -T $USERNAME@$IP 1> /dev/null <<EOF
+
+	# Unmount
+	sudo fusermount -u $DSTPATH
+	sudo rmdir $DSTPATH
+
+	# Check for DSTPATH.original
+	if [[ -e \${DSTPATH}.original ]]; then
+		mv \${DSTPATH}.original \${DSTPATH}
+	fi
+EOF
+
+	#ssh $USERNAME@$IP "sudo fusermount -u $DSTPATH && sudo rmdir $DSTPATH" && echo -e "${G}SUCCESS${DEF} - unmounted ${B}$DSTPATH${DEF}"
 	exit
 fi
 
 ssh -A -T $USERNAME@$IP 1> /dev/null <<EOF
 	MYIP=\$(echo \$SSH_CLIENT | cut -d ' ' -f 1)
-	DSTPATH=/usr/cipafilter/www/$DSTPATH
+	DSTPATH=/usr/cipafilter/$DSTPATH
 
 	# Install sshfs
 	which sshfs 1> /dev/null || sudo apt-get install -y sshfs

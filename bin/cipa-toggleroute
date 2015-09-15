@@ -4,7 +4,7 @@ typeset -A ROUTES
 
 ROUTES['dfw']=172.17.0.1
 ROUTES['clean']=172.17.0.4
-ROUTES['test']=172.20.10.10
+ROUTES['test']=172.20.10.177
 
 CURRENT=$(ip route | grep default | cut -f3 -d ' ')
 
