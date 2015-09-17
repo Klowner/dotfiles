@@ -57,6 +57,9 @@ export PATH=$HOME/node_modules/.bin:$PATH
 export GOPATH=$HOME/go
 export PATH=$PATH:$HOME/go/bin
 
+#/// Libvirt
+export LIBVIRT_DEFAULT_URI="qemu:///system"
+
 #/// misc exports
 export EDITOR=vim
 export VISUAL=$EDITOR
