@@ -167,16 +167,17 @@ bindsym $mod+r mode "resize"
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-	bindsym l exec --no-startup-id ~/bin/i3exit lock, mode "default"
-	bindsym e exec --no-startup-id ~/bin/i3exit logout, mode "default"
-	bindsym s exec --no-startup-id ~/bin/i3exit suspend, mode "default"
-	bindsym h exec --no-startup-id ~/bin/i3exit hibernate, mode "default"
-	bindsym r exec --no-startup-id ~/bin/i3exit reboot, mode "default"
-	bindsym Shift+s exec --no-startup-id ~/bin/i3exit shutdown, mode "default"
+        bindsym l exec --no-startup-id ~/bin/i3exit lock, mode "default"
+        bindsym e exec --no-startup-id ~/bin/i3exit logout, mode "default"
+        bindsym s exec --no-startup-id ~/bin/i3exit suspend, mode "default"
+        bindsym h exec --no-startup-id ~/bin/i3exit hibernate, mode "default"
+        bindsym r exec --no-startup-id ~/bin/i3exit reboot, mode "default"
+        bindsym b exec --no-startup-id ~/bin/i3exit blank, mode "default"
+        bindsym Shift+s exec --no-startup-id ~/bin/i3exit shutdown, mode "default"
 
-	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
 }
 bindsym $mod+Shift+e mode "$mode_system"
 #bindsym $mod+Pause mode "$mode_system"
@@ -190,8 +191,8 @@ floating_modifier $mod
 # finds out, if available)
 bar {
   position top
-	status_command ~/.dotfiles/i3bar/conky-i3bar
-	font xft:lime 7
+        status_command ~/.dotfiles/i3bar/conky-i3bar
+        font xft:lime 7
   colors {
     separator #444444
     background #222222
