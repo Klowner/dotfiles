@@ -165,7 +165,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system System (l) lock, (e) logout, (b) blank, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
         bindsym l exec --no-startup-id ~/bin/i3exit lock, mode "default"
         bindsym e exec --no-startup-id ~/bin/i3exit logout, mode "default"
