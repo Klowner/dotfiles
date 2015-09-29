@@ -29,8 +29,11 @@
 	windowMemory = 2048m
 
 [alias]
-	branchlog = !git log ${1+}${1-master}..HEAD --reverse --date=short --format=\"git:%h %ad %s\"
+	# A much nicer log
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+
+	# Branch log - show the log between HEAD and the current branch's parent branch
+	blg = !git lg $(git pb)..HEAD
 
 	# from http://stackoverflow.com/questions/591923/make-git-automatically-remove-trailing-whitespace-before-committing/15398512
 	# Logic:
@@ -92,6 +95,25 @@
 		    git rebase --whitespace=fix HEAD~ && \
 		    git reset --soft HEAD~ ; \
 		  fi"
+
+	# Current branch
+	cb = rev-parse --abbrev-ref HEAD
+
+	# Parent branch
+	pb = !"git show-branch -a 2>/dev/null | grep '\\*' | grep -v \"$(git cb)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//'"
+
+	# Backport the working branch to the specified branch using cherry-pick
+	bp = !"\
+		if [[ -n '${1}' ]]; then \
+			RELVER=$(echo ${1} | sed -n 's/[^\\/]*\\/\\([0-9]*\\)/\\1/p'); \
+			PARENT=$(git pb); \
+			SOURCE=$(git cb); \
+			NEWBRANCH=${SOURCE}-${RELVER}; \
+			git branch ${NEWBRANCH} ${1} && \
+			git checkout ${NEWBRANCH} && \
+			git cherry-pick -x ${PARENT}..${SOURCE}; \
+		fi; echo ${1-Please specify a branch to backport to} "
+
 
 [merge]
 	tool = diffconflicts
