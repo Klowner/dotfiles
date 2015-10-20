@@ -17,6 +17,11 @@ if [ -d ~/.dotfiles/xinitrc ]; then
 	unset x
 fi
 
+# Update Xresources database
+if [ -f $HOME/.Xresources ]; then
+	xrdb -merge ~/.Xresources
+fi
+
 # Update i3 configs
 ~/.dotfiles/i3/generate
 
