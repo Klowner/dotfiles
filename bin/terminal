@@ -1,2 +1,6 @@
-#!/bin/bash
-/usr/bin/urxvtc
+#!/bin/sh
+if which xfce4-terminal >/dev/null; then
+	(xfce4-terminal &)
+else
+	(urxvtc &)
+fi

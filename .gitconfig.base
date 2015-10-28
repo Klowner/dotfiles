@@ -35,6 +35,12 @@
 	# Branch log - show the log between HEAD and the current branch's parent branch
 	blg = !git lg $(git pb)..HEAD
 
+	# Branch diff
+	bdiff = !git diff $(git btail)..HEAD
+
+	# Branch tail - the first commit on this branch
+	btail = !git merge-base --fork-point $(git pb)
+
 	# from http://stackoverflow.com/questions/591923/make-git-automatically-remove-trailing-whitespace-before-committing/15398512
 	# Logic:
 	#
@@ -103,7 +109,7 @@
 	pb = !"git show-branch -a 2>/dev/null | grep '\\*' | grep -v \"$(git cb)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//'"
 
 	# Backport the working branch to the specified branch using cherry-pick
-	bp = !"\
+	backport = !"\
 		if [[ -n '${1}' ]]; then \
 			RELVER=$(echo ${1} | sed -n 's/[^\\/]*\\/\\([0-9]*\\)/\\1/p'); \
 			PARENT=$(git pb); \
