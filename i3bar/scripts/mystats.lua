@@ -155,7 +155,7 @@ function conky_mystats_battery(bat)
 		' ' .. battery_percent .. '%' ..
 		' ' .. battery_time,
 
-		graphs.vert_single(battery_percent) .. ' ' .. battery_percent .. '%'
+		graphs.battery(battery_percent) .. ' ' .. battery_percent .. '%'
 	)
 
 end
