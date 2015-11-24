@@ -204,7 +204,7 @@ bar {
   }
 }
 
-new_window pixel 2
+new_window pixel 1
 client.focused #d70a53 #d70a53 #ffffff #8c0333
 client.focused_inactive #333333 #333333 #888888 #333333
 client.unfocused #333333 #333333 #888888 #333333
