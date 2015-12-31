@@ -7,3 +7,5 @@ bindsym $mod+comma focus output DFP7
 bindsym $mod+period focus output DFP5
 bindsym $mod+slash focus output DFP1
 
+gaps inner 10
+gaps outer 2

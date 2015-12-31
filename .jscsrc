@@ -76,6 +76,5 @@
 	"requireSpacesInConditionalExpression": true,
 	"safeContextKeyword": "self",
 	"validateParameterSeparator": ", ",
-	"validateIndentation": "\t",
-	"disallowSpacesInsidePerenthesis": true
+	"validateIndentation": "\t"
 }
