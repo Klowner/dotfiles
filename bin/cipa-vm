@@ -1,0 +1,194 @@
+#!/usr/bin/env python2
+
+import libvirt
+import uuid
+import argparse
+import time
+from StringIO import StringIO
+from lxml import etree
+
+
+DEFAULT_SOURCE_VM = '8.8base'
+
+
+def all_domain_names(conn):
+    return [x.name() for x in conn.listAllDomains()]
+
+
+def find_domains_by_pattern(conn, pattern):
+    matches = [x for x in conn.listAllDomains() if x.name().endswith(pattern)]
+    if len(matches) > 1:
+        print('Multiple matches found for "%s" -- please be more specific.' % pattern)
+        print('\n'.join([x.name() for x in matches]))
+        exit()
+
+    if not matches:
+        print('No matches found for "%s"' % pattern)
+        exit()
+
+    print('Found %s' % matches[0].name())
+
+    return matches[0]
+
+
+def find_domain(conn, pattern):
+    matches = [x for x in allDomainNames(conn) if pattern in x]
+    if len(matches) > 1:
+        print('Multiple matches found for "%s" -- please be more specific.' % pattern)
+        print('\n'.join(matches))
+        exit()
+
+    return ''.join(matches[:1]) or None
+
+
+def shutdown_domain(domain):
+    state, _ = domain.state()
+    if state != libvirt.VIR_DOMAIN_SHUTOFF:
+        domain.shutdown()
+
+    now = time.time()
+    name = domain.name()
+
+    while domain.state()[0] != libvirt.VIR_DOMAIN_SHUTOFF and time.time() < (now + 60.0):
+        print('waiting for %s to shutdown...' % name)
+        time.sleep(2)
+
+def parse_xml(obj):
+    return etree.parse(StringIO(obj.XMLDesc(0)))
+
+def clone_disks(conn, dom, clone_name):
+    dom_tree = parse_xml(dom)
+    out_vols = []
+
+    disk_paths = dom_tree.xpath('/domain/devices/disk/source/@file')
+
+    # the first disk will be transient, and use the base image
+    # as a backing store
+
+
+    disk_path = disk_paths[0]
+
+    backing_store_xml = """
+        <volume type='file'>
+            <name>%(name)s.qcow2</name>
+            <capacity unit='bytes'>4294967296</capacity>
+            <target>
+                <format type='qcow2'/>
+                <permissions>
+                    <mode>0644</mode>
+                    <owner>99</owner>
+                    <group>78</group>
+                </permissions>
+                <compat>1.1</compat>
+            </target>
+
+            <backingStore>
+                <path>%(backing)s</path>
+                <format type='qcow2'/>
+            </backingStore>
+        </volume>
+        """ % {
+            'name': clone_name,
+            'backing': disk_path
+        }
+
+
+    # Create a new volume
+    transient_pool = conn.storagePoolLookupByName('cipafilter-transient')
+    new_main_vol = transient_pool.createXML(backing_store_xml)
+    out_vols.append(new_main_vol)
+
+    # Data volumes are just shared
+    for disk_path in disk_paths[1:]:
+        vol = conn.storageVolLookupByPath(disk_path)
+        out_vols.append(vol)
+
+    return out_vols
+
+
+def clone_machine(conn, dom, volumes, clone_name):
+    tree = parse_xml(dom)
+
+
+    tree.xpath('/domain/name')[0].text = clone_name
+    tree.xpath('/domain/uuid')[0].text = str(uuid.uuid1())
+    disk_source = tree.xpath('/domain/devices/disk/source')[0]
+
+    disk_source.attrib['file'] = volumes[0].path()
+
+    conn.defineXML(etree.tostring(tree))
+
+    print('created ' + clone_name)
+
+def clone_main(args):
+    clone_name = 'cipafilter-' + uuid.uuid1().hex[:4].upper()
+    conn = libvirt.open(args.host)
+    dom = find_domains_by_pattern(conn, args.source)
+    shutdown_domain(dom)
+    volumes = clone_disks(conn, dom, clone_name)
+
+    print([x.name() for x in volumes])
+    clone_machine(conn, dom, volumes, clone_name)
+
+
+def ip_main(args):
+    conn = libvirt.open(args.host)
+    for domain in conn.listAllDomains():
+        if domain.state()[0] == libvirt.VIR_DOMAIN_RUNNING:
+            interfaces = domain.interfaceAddresses(0)
+            ips = [addr['addr'] for addr in interfaces[iface]['addrs'] for x in interfaces]
+
+            print(domain.name(), ips)
+    print ('ips!')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser('Manage Cipafilter virtual machines with libvirt')
+    parser.add_argument('--host', '-H', action='store', default='qemu:///system')
+
+    subparsers = parser.add_subparsers(help='sub-command help')
+
+    cloneparser = subparsers.add_parser('clone', help='quick clone a base machine')
+    cloneparser.add_argument('--source', '-s', action='store', default=DEFAULT_SOURCE_VM)
+    cloneparser.set_defaults(func=clone_main)
+
+    ipparser = subparsers.add_parser('ip', help='show ip addresses of running domains')
+    ipparser.set_defaults(func=ip_main)
+
+    args = parser.parse_args()
+    args.func(args)
+
+
+uri = 'qemu:///system'
+srcDomain = 'cipafilter8.7base'
+
+conn = libvirt.open(uri)
+
+dom = conn.lookupByName('cipafilter8.7base')
+
+tree = etree.parse(StringIO(dom.XMLDesc(0)))
+
+uuid_name = tree.xpath('/domain/name')[0]
+uuid_name.text = uuid_name.text + str('-clone')
+
+uuid_uuid = tree.xpath('/domain/uuid')[0]
+uuid_uuid.text = str(uuid.uuid1())
+
+newxml = etree.tostring(tree, pretty_print=True)
+
+#dom = conn.createXML(newxml)
+
+#print(dom.interfaceAddresses(0))
+
+#dom.create() starts domain
+#dom.interfaceAddresses(0) returns vnet1 info
+
+
+# pool = conn.storagePoolLookupByNAme('cipafilter')
+# pool.listVolumes() -> ['one','two']
+# vol = pool.storageVolLookupByName('name')
+# tree = etree.parse(StringIO(vol.XMLDesc(0)))
+
+# pool.createXML(xml)
+
+
