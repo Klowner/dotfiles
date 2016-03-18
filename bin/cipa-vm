@@ -121,7 +121,7 @@ def clone_machine(conn, dom, volumes, clone_name):
     print('created ' + clone_name)
 
 def clone_main(args):
-    clone_name = 'cipafilter-' + uuid.uuid1().hex[:4].upper()
+    clone_name = 'cipafilter-' + (args.name or uuid.uuid1().hex[:4].upper())
     conn = libvirt.open(args.host)
     dom = find_domains_by_pattern(conn, args.source)
     shutdown_domain(dom)
@@ -150,6 +150,7 @@ if __name__ == '__main__':
 
     cloneparser = subparsers.add_parser('clone', help='quick clone a base machine')
     cloneparser.add_argument('--source', '-s', action='store', default=DEFAULT_SOURCE_VM)
+    cloneparser.add_argument('name', action='store', default=None)
     cloneparser.set_defaults(func=clone_main)
 
     ipparser = subparsers.add_parser('ip', help='show ip addresses of running domains')
