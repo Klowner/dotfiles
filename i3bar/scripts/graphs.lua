@@ -6,9 +6,9 @@ graphs = {
 		return 1
 	end,
 
-	['val_to_5th'] = function (value)
+	['val_to_4th'] = function (value)
 		if type(value) == "number" then
-			return math.floor(((value / 100) * 5) + 0.5) + 1
+			return math.floor(((value / 100) * 4) + 0.5) + 1
 		end
 		return 1
 	end,
@@ -25,6 +25,6 @@ graphs = {
 
 	['battery'] = function (value)
 		local chars = {'', '', '', '', ''}
-		return chars[graphs.val_to_5th(value)]
+		return chars[graphs.val_to_4th(value)]
 	end
 }

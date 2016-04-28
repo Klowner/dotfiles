@@ -1,3 +1,162 @@
+colorizer = {
+	['tohex'] = function (rgb)
+		local res = '#'
+		for i=1,#rgb do
+			res = res .. string.format("%02X", rgb[i])
+		end
+		return res
+	end,
+
+	['torgb'] = function (hex)
+		res = {}
+		for x=1,3 do
+			res[x] = tonumber(string.sub(hex, x*2, x*2+1), 16)
+		end
+		return res
+	end,
+
+	['blend'] = function (amount, a, b)
+		res = {}
+		amount = math.min(amount, 1)
+		for x=1,3 do
+			res[x] = a[x] * (1.0-amount) + b[x] * amount
+		end
+		return res
+	end,
+
+	['gradient'] = function (amount, a, b)
+		return colorizer.tohex(
+			colorizer.blend(
+				amount,
+				colorizer.torgb(a),
+				colorizer.torgb(b)
+			)
+		)
+	end,
+
+	['above_threshold_gradient'] = function (amount, a, b, threshold)
+		if amount <= threshold then
+			return a
+		end
+
+		return colorizer.gradient(
+			(amount - threshold) / (100 - threshold),
+			a,
+			b
+		)
+	end
+}
+
+
+require 'io'
+
+function finder(find_cmd, match_fn)
+	local i = 1
+	local items = {}
+
+	if not match_fn then
+		match_fn = function (line)
+			return line:gmatch("./([A-Za-z0-9]+)$")()
+		end
+	end
+
+	for line in io.popen(find_cmd):lines() do
+		items[i] = match_fn(line)
+		i = i + 1
+	end
+	return items
+end
+
+function finder_configfiles(path)
+	local hostname = io.popen('hostname'):lines()()
+	local i = 1
+	local f
+	local items = {}
+
+	for id, filename in ipairs({path, path .. '.' .. hostname}) do
+		f = io.open(filename, 'rb')
+		if f ~= nil then
+			io.close(f)
+			for line in io.lines(filename) do
+				items[i] = line
+				i = i + 1
+			end
+		end
+	end
+	return items
+end
+
+function finder_battery()
+	return finder('find /sys/class/power_supply -name BAT*',
+		function(line)
+			return line:gmatch(".*/(BAT[0-9]+)$")()
+		end)
+end
+
+function finder_ethernet()
+	return finder('find /sys/class/net/ -name e*')
+end
+
+function finder_wlan()
+	return finder('find /sys/class/net/ -name wl*')
+end
+
+function finder_vnet(path)
+	return finder_configfiles(path .. '/vnet')
+end
+
+function finder_filesystems(path)
+	return finder_configfiles(path .. '/filesystems')
+end
+
+local _cfg
+
+function conky_config_load(config_path)
+	if _cfg == nil then
+		_cfg = {}
+		_cfg['wlan'] = finder_wlan()
+		_cfg['eth'] = finder_ethernet()
+		_cfg['vnet'] = finder_vnet(config_path)
+		_cfg['bat'] = finder_battery()
+		_cfg['fs'] = finder_filesystems(config_path)
+	end
+	return ''
+end
+
+function get_config()
+	return _cfg
+end
+
+graphs = {
+	['val_to_8th'] = function (value)
+		if type(value) == "number" then
+			return math.floor(((value / 100) * 8) + 0.5) + 1
+		end
+		return 1
+	end,
+
+	['val_to_4th'] = function (value)
+		if type(value) == "number" then
+			return math.floor(((value / 100) * 4) + 0.5) + 1
+		end
+		return 1
+	end,
+
+	['vert_single'] = function (value)
+		local chars = {' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'}
+		return chars[graphs.val_to_8th(value)]
+	end,
+
+	['horiz_single'] = function (value)
+		local chars = {' ', ' ','▏', '▍', '▌', '▋', '▊', '▉', '█'}
+		return chars[graphs.val_to_8th(value)]
+	end,
+
+	['battery'] = function (value)
+		local chars = {'', '', '', '', ''}
+		return chars[graphs.val_to_4th(value)]
+	end
+}
 COLOR_NEUTRAL = '#aaaab0'
 COLOR_GOOD = '#00b9d9'
 COLOR_BAD = '#f7208b'

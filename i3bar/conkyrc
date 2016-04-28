@@ -18,7 +18,7 @@ TEXT
 	${lua mystats_dynamic_wireless }
 	${lua mystats_dynamic_ethernet }
 	${lua mystats_dynamic_vnet }
-	{ "full_text" : "vpn ${if_up ppp0}up${else}down${endif}", "color": "${if_up ppp0}\#00b9d9${else}\#f7208b${endif}" },
+	{ "full_text" : "vpn", "color": "${if_up ppp0}\#00b9d9${else}\#f7208b${endif}" },
 	${lua mystats_dynamic_filesystems }
 	${lua mystats_dynamic_battery }
 	{ ${lua mystats_memory } },
