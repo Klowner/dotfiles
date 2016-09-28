@@ -6,10 +6,11 @@ max_text_width 0
 
 short_units yes
 
-lua_load ~/.dotfiles/i3bar/scripts/graphs.lua
-lua_load ~/.dotfiles/i3bar/scripts/colorizer.lua
-lua_load ~/.dotfiles/i3bar/scripts/config.lua
-lua_load ~/.dotfiles/i3bar/scripts/mystats.lua
+#lua_load ~/.dotfiles/i3bar/scripts/graphs.lua
+#lua_load ~/.dotfiles/i3bar/scripts/colorizer.lua
+#lua_load ~/.dotfiles/i3bar/scripts/config.lua
+#lua_load ~/.dotfiles/i3bar/scripts/mystats.lua
+lua_load ~/.dotfiles/i3bar/scripts/concat.lua
 
 
 TEXT
