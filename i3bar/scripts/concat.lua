@@ -157,7 +157,7 @@ graphs = {
 		return chars[graphs.val_to_4th(value)]
 	end
 }
-COLOR_NEUTRAL = '#aaaab0'
+COLOR_NEUTRAL = '#707064'
 COLOR_GOOD = '#00b9d9'
 COLOR_BAD = '#f7208b'
 COLOR_DEGRADED = '#82cdb9'
