@@ -72,4 +72,5 @@ alias gulp="node_modules/.bin/gulp"
 alias scp="noglob scp"
 alias capesc="setxkbmap -option caps:escape"
 
+#/// fuzzy finder config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

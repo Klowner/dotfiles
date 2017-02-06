@@ -20,5 +20,8 @@ if [[ -z $IP ]]; then
 	exit 0;
 fi
 
-echo $(ssh -p$PORT $USERNAME@$IP grep ^root /usr/cipafilter/init.d/config/users | awk '{print $4}')
+PASS=$(ssh -oStrictHostKeyChecking=no -p$PORT $USERNAME@$IP grep ^root /usr/cipafilter/init.d/config/users | awk '{print $4}')
+
+echo $PASS
+echo -en $PASS | xclip -in
 

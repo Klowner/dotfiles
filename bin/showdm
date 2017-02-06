@@ -1,7 +1,7 @@
 #!/bin/bash
 export WINDIR=1
 
-DMENU_FONT='glisp-7'
+DMENU_FONT='artwiz glisp-7'
 DMENU_HEIGHT=16
 
 case "$HOSTNAME" in
@@ -10,7 +10,7 @@ case "$HOSTNAME" in
 	;;
 	*)
 		if [[ -e /usr/bin/yegonesh ]]; then
-			$(yegonesh -- -fn $DMENU_FONT -h $DMENU_HEIGHT -y 16)
+			$(yegonesh -- -fn "$DMENU_FONT" -h $DMENU_HEIGHT -y 16)
 		elif [[ -e /usr/bin/yeganesh ]]; then
 			$(dmenu_path_c | yeganesh -- -fn $DMENU_FONT -h $DMENU_HEIGHT -y 16)
 		else
