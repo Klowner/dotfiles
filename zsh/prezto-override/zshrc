@@ -71,6 +71,8 @@ alias svim="EDITOR=vim sudoedit"
 alias gulp="node_modules/.bin/gulp"
 alias scp="noglob scp"
 alias capesc="setxkbmap -option caps:escape"
+alias rsync="noglob rsync"
+alias genie-local="~/code/GENie/bin/linux/genie"
 
 #/// fuzzy finder config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
