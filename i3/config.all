@@ -184,7 +184,7 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 
 focus_follows_mouse no
-font xft:lime 7
+font xft:artwiz lime 7
 floating_modifier $mod
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -192,7 +192,7 @@ floating_modifier $mod
 bar {
   position top
         status_command ~/.dotfiles/i3bar/conky-i3bar
-        font xft:lime 7
+        font xft:artwiz lime 7
   colors {
     separator #444444
     background #222222
