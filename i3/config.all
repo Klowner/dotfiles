@@ -191,8 +191,8 @@ floating_modifier $mod
 # finds out, if available)
 bar {
   position top
-        status_command ~/.dotfiles/i3bar/conky-i3bar
-        font xft:lime 7
+  status_command ~/.dotfiles/i3bar/conky-i3bar
+  font xft:lime 7
   colors {
     separator #444444
     background #222222

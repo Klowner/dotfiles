@@ -3,6 +3,8 @@ HOSTNAME=$(cat /etc/hostname)
 TARGET_DIR=/tmp/i3-$USER
 I3_CONFIG_GLOBAL=~/.dotfiles/i3/config.all
 I3_CONFIG_HOST=~/.dotfiles/i3/config.${HOSTNAME}
+I3_CONFIG_THEME_GLOBAL=~/.dotfiles/i3/theme.all
+I3_CONFIG_THEME_HOST=~/.dotfiles/i3/theme.${HOSTNAME}
 I3_CONFIG_TARGET=$TARGET_DIR/config
 I3STATUS_TARGET=$TARGET_DIR/i3status
 
@@ -20,12 +22,12 @@ if [[ ! -e $I3_CONFIG_TARGET || $I3_CONFIG_HOST -nt $I3_CONFIG_TARGET || $I3_CON
 	fi
 fi
 
-# Generate i3status
-#if [[ -e ~/.dotfiles/i3/i3status.${HOSTNAME} ]]; then
-#	I3STATUS_SOURCE=~/.dotfiles/i3/i3status.${HOSTNAME}
-#else
-#	I3STATUS_SOURCE=~/.dotfiles/i3/i3status.default
-#fi
+# Inject theme
+if [[ -e "${I3_CONFIG_THEME_HOST}" ]]; then
+	cat "${I3_CONFIG_THEME_HOST}" >> $I3_CONFIG_TARGET
+elif [[ -e "${I3_CONFIG_THEME_GLOBAL}" ]]; then
+	cat "${I3_CONFIG_THEME_GLOBAL}" >> $I3_CONFIG_TARGET
+fi
 
 if [[ -x $I3STATUS_SOURCE ]]; then
 	exec $I3STATUS_SOURCE > $I3STATUS_TARGET

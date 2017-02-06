@@ -1,5 +1,5 @@
-gaps inner 10
-gaps outer 2
+gaps inner 4
+gaps outer 0
 
 # show pointer input toggle
 bindsym $mod+Shift+p exec ~/.dotfiles/bin/xintoggleptr
