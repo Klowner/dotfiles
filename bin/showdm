@@ -1,8 +1,14 @@
 #!/bin/bash
 export WINDIR=1
 
-DMENU_FONT='artwiz glisp-7'
-DMENU_HEIGHT=16
+#DMENU_FONT='artwiz drift.se'
+DMENU_FONT='Envy Code R-26'
+DMENU_HEIGHT=20
+DMENU_Y=128
+DMENU_X=128
+BGCOLOR='#272822'
+FGCOLOR='#FC1C70'
+SELECT_BGCOLOR='#FD1D71'
 
 case "$HOSTNAME" in
 	"finn")
@@ -10,10 +16,19 @@ case "$HOSTNAME" in
 	;;
 	*)
 		if [[ -e /usr/bin/yegonesh ]]; then
-			$(yegonesh -- -fn "$DMENU_FONT" -h $DMENU_HEIGHT -y 16)
+			$(yegonesh -- -fn "$DMENU_FONT" -h $DMENU_HEIGHT -x $DMENU_X -y $DMENU_Y \
+				-w 500 \
+				-o 0.9 \
+				-l 10 \
+				-dim 0.2 \
+				-dc "${BGCOLOR}" \
+				-nb "${BGCOLOR}" \
+				-sb "${BGCOLOR}" \
+				-sf "${SELECT_BGCOLOR}" \
+			)
 		elif [[ -e /usr/bin/yeganesh ]]; then
-			$(dmenu_path_c | yeganesh -- -fn $DMENU_FONT -h $DMENU_HEIGHT -y 16)
+			$(dmenu_path_c | yeganesh -- -fn $DMENU_FONT -h $DMENU_HEIGHT -y ${DMENU_Y})
 		else
-			$(dmenu_path_c | dmenu -fn $DMENU_FONT -h $DMENU_HEIGHT -y 16)
+			$(dmenu_path_c | dmenu -fn $DMENU_FONT -h $DMENU_HEIGHT -y ${DMENU_Y})
 		fi
 esac
