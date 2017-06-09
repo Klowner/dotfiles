@@ -57,6 +57,14 @@ export PATH=$HOME/node_modules/.bin:$PATH
 export GOPATH=$HOME/go
 export PATH=$PATH:$HOME/go/bin
 
+#/// ccache
+if [ -x /usr/bin/colorgcc ]; then
+  export PATH="/usr/lib/colorgcc/bin/:$PATH"
+  export CCACHE_PATH="/usr/bin"
+elif [ -x /usr/bin/ccache ]; then
+  export PATH="/usr/lib/ccache/bin:$PATH"
+fi
+
 #/// Libvirt
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 
