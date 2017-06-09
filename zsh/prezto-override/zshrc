@@ -81,6 +81,7 @@ alias scp="noglob scp"
 alias capesc="setxkbmap -option caps:escape"
 alias rsync="noglob rsync"
 alias genie-local="~/code/GENie/bin/linux/genie"
+alias lights="~/ouimeaux/bin/wemo switch 'WeMo Switch' toggle"
 
 #/// fuzzy finder config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
