@@ -1,3 +1,7 @@
+require './graphs'
+require './colorizer'
+require './config'
+
 COLOR_NEUTRAL = '#aaaab0'
 COLOR_GOOD = '#00b9d9'
 COLOR_BAD = '#f7208b'

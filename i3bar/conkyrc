@@ -3,7 +3,6 @@ own_window no
 out_to_console yes
 background no
 max_text_width 0
-
 short_units yes
 
 #lua_load ~/.dotfiles/i3bar/scripts/graphs.lua
@@ -11,7 +10,6 @@ short_units yes
 #lua_load ~/.dotfiles/i3bar/scripts/config.lua
 #lua_load ~/.dotfiles/i3bar/scripts/mystats.lua
 lua_load ~/.dotfiles/i3bar/scripts/concat.lua
-
 
 TEXT
 [
@@ -23,5 +21,5 @@ TEXT
 	${lua mystats_dynamic_filesystems }
 	${lua mystats_dynamic_battery }
 	{ ${lua mystats_memory } },
-	{ "full_text" : "${time %a, %b %e %m/%d/%Y %r}", "color": "\#aaaab0" }
+	{ "full_text" : "${time %a, %b %e %m/%d/%Y %r}", "color": "\#707064" }
 ],

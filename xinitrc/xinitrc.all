@@ -4,8 +4,8 @@ pasystray &
 dispcalGUI-apply-profiles &
 feh --bg-fill -z ~/wallpaper/*.* &
 thunar --daemon &
-clipit &
-urxvtd &
-pulseaudio --start &
 setxkbmap -option caps:escape &
-dunst -config ~/.dotfiles/dunstrc &
+#clipit &
+#urxvtd &
+#pulseaudio --start &
+#dunst -config ~/.dotfiles/dunstrc &

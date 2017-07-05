@@ -1,0 +1,25 @@
+# begin theme molokai {
+# i3bar
+bar {
+	position top
+	status_command ~/.dotfiles/i3bar/conky-i3bar
+	font xft:artwiz lime 7
+
+	colors {
+		separator #444444
+		background #272822
+		statusline #707064
+		focused_workspace #d70a53 #d70a53 #ffffff
+		active_workspace #00b9d9 #00b9d9 #ffffff
+		inactive_workspace #3b3b35 #3b3b35 #707064
+		urgent_workspace #eb709b #eb709b #ffffff
+	}
+}
+
+# i3
+client.focused #d70a53 #d70a53 #ffffff #8c0333
+client.focused_inactive #333333 #333333 #888888 #333333
+client.unfocused #333333 #333333 #888888 #333333
+client.urgent #eb709b #eb709b #ffffff #eb709b
+
+# } endtheme

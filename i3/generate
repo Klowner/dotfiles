@@ -13,21 +13,28 @@ if [[ ! -e $TARGET_DIR ]]; then
 fi
 
 # Generate i3config
-if [[ ! -e $I3_CONFIG_TARGET || $I3_CONFIG_HOST -nt $I3_CONFIG_TARGET || $I3_CONFIG_GLOBAL -nt $I3_CONFIG_TARGET ]]; then
+if [[ \
+	$I3_CONFIG_HOST         -nt $I3_CONFIG_TARGET || \
+	$I3_CONFIG_GLOBAL       -nt $I3_CONFIG_TARGET || \
+	$I3_CONFIG_THEME_GLOBAL -nt $I3_CONFIG_TARGET || \
+	$I3_CONFIG_THEME_HOST   -nt $I3_CONFIG_TARGET ]]; then
+
 	if [[ -e $I3_CONFIG_HOST ]]; then
 		cat $I3_CONFIG_GLOBAL $I3_CONFIG_HOST > $I3_CONFIG_TARGET
 	else
 		echo $I3_CONFIG_GLOBAL
 		cp $I3_CONFIG_GLOBAL $I3_CONFIG_TARGET
 	fi
+
+	# Inject theme
+	if [[ -e "${I3_CONFIG_THEME_HOST}" ]]; then
+		echo "injecting ${I3_CONFIG_THEME_HOST}"
+		cat "${I3_CONFIG_THEME_HOST}" >> $I3_CONFIG_TARGET
+	elif [[ -e "${I3_CONFIG_THEME_GLOBAL}" ]]; then
+		cat "${I3_CONFIG_THEME_GLOBAL}" >> $I3_CONFIG_TARGET
+	fi
 fi
 
-# Inject theme
-if [[ -e "${I3_CONFIG_THEME_HOST}" ]]; then
-	cat "${I3_CONFIG_THEME_HOST}" >> $I3_CONFIG_TARGET
-elif [[ -e "${I3_CONFIG_THEME_GLOBAL}" ]]; then
-	cat "${I3_CONFIG_THEME_GLOBAL}" >> $I3_CONFIG_TARGET
-fi
 
 if [[ -x $I3STATUS_SOURCE ]]; then
 	exec $I3STATUS_SOURCE > $I3STATUS_TARGET
