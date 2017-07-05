@@ -3,4 +3,6 @@ mkdir -p ${HOME}/screenshot
 TARGET="${HOME}/screenshot/grab-$(date +'%Y%m%d%H%M%S').png"
 maim -s -n -p 1 -f png -m 10 | tee $TARGET | xclip -selection clipboard -t image/png
 
+[ -s ${TARGET} ] || rm ${TARGET}
+
 
