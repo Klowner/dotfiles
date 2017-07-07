@@ -54,7 +54,7 @@ function link() {
     fi
 
     # Update existing or create new symlinks.
-    $(which ln) -vsf $src $dest
+    ln -vsf $src $dest
 }
 
 function unpack_tarball() {
