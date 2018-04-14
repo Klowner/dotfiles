@@ -1,0 +1,35 @@
+#!/bin/sh
+lock() {
+	if [ -e "$(which i3lock)" ]; then
+		i3lock
+	fi
+}
+
+case "$1" in
+    lock)
+        ~/bin/lockscreen
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    suspend)
+        lock && systemctl suspend
+        ;;
+    hibernate)
+        lock && systemctl hibernate
+        ;;
+    blank)
+        sleep 1; xset dpms force off
+        ;;
+    reboot)
+        systemctl reboot
+        ;;
+    shutdown)
+        systemctl poweroff
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|blank|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0

@@ -1,0 +1,2 @@
+#!/bin/bash
+~/bin/xintoggle --slaves --types pointer --lines -1
