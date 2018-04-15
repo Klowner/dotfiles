@@ -75,6 +75,9 @@ setopt correct
 # Always display tags separately
 zstyle ':completion:*' group-name ''
 
+# Case-insensitive matching
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
 # Show completing ____' in the menu thing
 zstyle ':completion:*:descriptions' format $'%{\e[0;35m%}completing %B%d:%b%{\e[0m%}'
 
