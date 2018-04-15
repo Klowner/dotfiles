@@ -1,1 +1,1 @@
-cat $HOME/.cache/wal/sequences
+[[ -f ${HOME}/.cache/wal/sequences ]] && cat $HOME/.cache/wal/sequences

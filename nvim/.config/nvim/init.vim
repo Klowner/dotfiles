@@ -68,6 +68,7 @@ endfunction
 Plug 'airblade/vim-gitgutter', "{{{
 	nmap <leader>g :GitGutterToggle<CR>
 	let g:gitgutter_override_sign_column_highlight = 0
+	autocmd! BufWritePost * :GitGutter
 "}}}}
 
 Plug 'tpope/vim-sensible'
@@ -113,13 +114,19 @@ Plug 'Shougo/deoplete.nvim', "{{{
 	if !exists('g:deoplete#omni#input_patterns')
 		let g:deoplete#omni#input_patterns = {}
 	endif
-	autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-	inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+	"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+	"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+	"inoremap <expr><TAB> pumvisible() ? "echom foo" : "echom bar"
+	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+	function! s:my_cr_function()
+		return deoplete#mappings#smart_close_popup() . "\<CR>"
+	endfunction
 "}}}
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
 Plug 'zchee/deoplete-clang'
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
+Plug 'tweekmonster/deoplete-clang2'
 
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim', "{{{

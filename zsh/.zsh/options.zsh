@@ -41,16 +41,21 @@ bindkey '^N' down-line-or-search
 autoload -Uz colors && colors
 setopt prompt_subst
 
+fish_pwd() {
+	echo '${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/${PWD:t}}//\/~/\~}'
+}
+
 ## Prompts
-
 PROMPT=''
-PROMPT+="%B%F{green}%m%b"                  # Host name
-PROMPT+="%B%F{black}:%b"                   # :
-PROMPT+="%F{white}"
-PROMPT+="%f%~"                             # CWD
-PROMPT+=" ❯"
+#PROMPT+=([[ "$SSH_CLIENT" ]] ? "%B%F{blue}%m%b" || "")                  # Host name
+if [[ ! -z "$SSH_CLIENT" ]] then
+	PROMPT+="%B%F{blue}%m%b%f "
+fi
+PROMPT+="%F{blue}"
+PROMPT+=${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/${PWD:t}}//\/~/\~} # CWD
+#PROMPT+=" ❯"
+PROMPT+=">"
 PROMPT+="%f%s%b "                          # Reset colors
-
 
 # Get LS_COLORS
 if [[ -z "${LS_COLORS}" ]] && [[ -x '/usr/bin/dircolors' ]]; then

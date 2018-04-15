@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if_have() {
+	command -v $1 2>&1> /dev/null
+}
+
+if_have compton && { compton & }
+if_have wal && { wal -t -q -i ~/wallpaper & }
+if_have lxsession && { lxsession -s i3 & }
+if_have pnmixer && { pnmixer & }
+if_have dropbox && { dropbox & }
+if_have syncthing-gtk && { syncthing-gtk & }
