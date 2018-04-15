@@ -1,14 +1,11 @@
 GIT_PROMPT_PREFIX=""
 GIT_PROMPT_SUFFIX="%f%k"
-#GIT_PROMPT_AHEAD="%{$fg{red}%} NUM%{$reset_color%}"
-GIT_PROMPT_AHEAD="%F{magenta}⬇️NUM%f"
-GIT_PROMPT_BEHIND="%F{magenta}⬇️NUM%f"
-GIT_PROMPT_BEHIND="%{$fg[cyan]%}⬇️ NUM%{$reset_color%}"
+GIT_PROMPT_AHEAD="%F{magenta}NUM⬆ %f"
+GIT_PROMPT_BEHIND="%F{magenta}NUM⬇️ %f"
 GIT_PROMPT_MERGING="%{$fg_bold[magenta]%}Y%{$reset_color%}"
 GIT_PROMPT_UNTRACKED="%F{yellow}?%f"
-GIT_PROMPT_MODIFIED="%F{blue}✱ %f"
-GIT_PROMPT_STAGED="%F{green}✚ %f"
-#%{$reset_color%}"
+GIT_PROMPT_MODIFIED="%F{blue}✱ %f"
+GIT_PROMPT_STAGED="%F{green}✚ %f"
 
 parse_git_branch() {
 	(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
