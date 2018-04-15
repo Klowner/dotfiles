@@ -61,6 +61,7 @@ function! ColorSchemeMonokai()
 	hi link GitGutterAdd Directory
 	hi link GitGutterDelete Statement
 	hi link GitGutterChange CursorLineNr
+	hi ALEErrorSign guibg=none guifg=#ff4411
 endfunction
 
 
@@ -144,6 +145,7 @@ Plug 'w0rp/ale', "{{{
 		\ 'c': ['clang']
 		\}
 	let g:ale_python_pylint_options = '--load-plugins pylint_django'
+	let g:ale_sign_error = '✗'
 "}}}
 
 Plug 'majutsushi/tagbar', "{{{
@@ -164,19 +166,15 @@ Plug 'scrooloose/nerdtree', "{{{
 	nmap \e :NERDTreeToggle<CR>
 "}}}
 
-Plug 'vim-airline/vim-airline-themes'
+Plug 'Yavor-Ivanov/airline-monokai-subtle.vim'
 Plug 'vim-airline/vim-airline', "{{{
-	let g:airline_left_sep = '⮀'
-	let g:airline_left_alt_sep = '⮁'
-	let g:airline_right_sep = '⮂'
-	let g:airline_right_alt_sep = '⮃'
 	let g:airline_symbols = {}
 	let g:airline_symbols.branch = '⭠'
 	let g:airline_symbols.readonly = '⭤'
 	let g:airline_symbols.linenr = '⭡'
 	let g:airline#extensions#tabline#enabled = 1
 	let g:airline#extensions#tabline#fnamemod = ':t'
-	let g:airline_theme = 'molokai'
+	let g:airline_theme = 'monokai_subtle'
 "}}}
 
 Plug 'mattn/webapi-vim'

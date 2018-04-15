@@ -42,19 +42,18 @@ autoload -Uz colors && colors
 setopt prompt_subst
 
 fish_pwd() {
-	echo '${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/${PWD:t}}//\/~/\~}'
+	echo ${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/${PWD:t}}//\/~/\~}
 }
 
 ## Prompts
 PROMPT=''
-#PROMPT+=([[ "$SSH_CLIENT" ]] ? "%B%F{blue}%m%b" || "")                  # Host name
 if [[ ! -z "$SSH_CLIENT" ]] then
 	PROMPT+="%B%F{blue}%m%b%f "
 fi
 PROMPT+="%F{blue}"
-PROMPT+=${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/${PWD:t}}//\/~/\~} # CWD
-#PROMPT+=" ❯"
-PROMPT+=">"
+PROMPT+='$(fish_pwd)'
+PROMPT+="❯ "
+#PROMPT+=">"
 PROMPT+="%f%s%b "                          # Reset colors
 
 # Get LS_COLORS
