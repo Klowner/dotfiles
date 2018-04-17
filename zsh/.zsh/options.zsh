@@ -45,16 +45,27 @@ fish_pwd() {
 	echo ${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/${PWD:t}}//\/~/\~}
 }
 
+sorin_pwd() {
+	local current_pwd="${PWD/#$HOME/~}"
+	local ret_directory
+	if [[ "$current_pwd" == "~" ]]; then
+		ret_directory="~"
+		unset MATCH
+	else
+		ret_directory=${${:-${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/${PWD:t}}//\/~/\~}
+	fi
+	echo $ret_directory
+}
+
 ## Prompts
 PROMPT=''
 if [[ ! -z "$SSH_CLIENT" ]] then
 	PROMPT+="%B%F{blue}%m%b%f "
 fi
 PROMPT+="%F{blue}"
-PROMPT+='$(fish_pwd)'
+PROMPT+='$(sorin_pwd)'
 PROMPT+="❯ "
-#PROMPT+=">"
-PROMPT+="%f%s%b "                          # Reset colors
+PROMPT+="%f%s%b "
 
 # Get LS_COLORS
 if [[ -z "${LS_COLORS}" ]] && [[ -x '/usr/bin/dircolors' ]]; then
