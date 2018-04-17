@@ -16,7 +16,7 @@ _ssh_env_cache="$HOME/.ssh/environment-$SHORT_HOST"
 
 # Add symlink for screen/tmux for agent forwarding
 if [[ "$SSH_AUTH_SOCK" ]]; then
-	[[ -L $SSH_AUTH_SOCK ]] || ln -s "$SSH_AUTH_SOCK" /tmp/user-agent-$USER-screen
+	[[ -L $SSH_AUTH_SOCK ]] || ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER-screen
 elif [[ -f "$_ssh_env_cache" ]]; then
 	. $_ssh_env_cache > /dev/null
 	ps x | grep ssh-agent | grep -q $SSH_AGENT_PID || {

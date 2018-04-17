@@ -124,7 +124,6 @@ Plug 'Shougo/deoplete.nvim', "{{{
 	endfunction
 "}}}
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
-Plug 'zchee/deoplete-clang'
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
 Plug 'tweekmonster/deoplete-clang2'

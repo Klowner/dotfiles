@@ -1,6 +1,7 @@
 alias wallpaper="feh --bg-fill -z"
 alias retheme="wal -q -t -i ~/wallpaper"
-alias svim="EDITOR=vim sudoedit"
+alias svim="EDITOR=nvim sudoedit"
+alias vim=nvim
 alias capesc="setxkbmap -option caps:escape"
 alias mapstylus='xinput --map-to-output $(xinput --list --id-only "ELAN2514:00 04F3:2594 Pen Pen (0)") eDP-1'
 #alias rsync="noglob rsync"

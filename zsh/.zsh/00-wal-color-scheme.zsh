@@ -1,1 +1,1 @@
-[[ -f ${HOME}/.cache/wal/sequences ]] && cat $HOME/.cache/wal/sequences
+[[ -f ~/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences)
