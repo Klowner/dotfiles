@@ -49,19 +49,26 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 "" color schemes ---
-Plug 'crusoexia/vim-monokai'
-
+Plug 'fatih/molokai'
+Plug 'rhysd/vim-clang-format'
+Plug 'octol/vim-cpp-enhanced-highlight'
+"
 function! ColorSchemeMonokai()
 	set termguicolors
-	colorscheme monokai
-	hi Normal ctermbg=none guibg=none
-	hi Comment gui=none
-	hi SignColumn ctermbg=none guibg=none
-	hi LineNr ctermbg=none guibg=none ctermfg=236 guifg=#555555
+	let g:molokai_original = 1
+	let g:rehash256 = 1
+	try
+		colorscheme molokai
+	catch
+	endtry
+	"hi Normal ctermbg=none guibg=none
+	"hi Comment gui=none
+	"hi SignColumn ctermbg=none guibg=none
+	"hi LineNr ctermbg=none guibg=none ctermfg=236 guifg=#555555
 	hi link GitGutterAdd Directory
 	hi link GitGutterDelete Statement
 	hi link GitGutterChange CursorLineNr
-	hi ALEErrorSign guibg=none guifg=#ff4411
+	hi ALEErrorSign guibg=none guifg=#ec2c70
 endfunction
 
 
@@ -172,7 +179,6 @@ Plug 'vim-airline/vim-airline', "{{{
 	let g:airline_symbols.readonly = '⭤'
 	let g:airline_symbols.linenr = '⭡'
 	let g:airline#extensions#tabline#enabled = 1
-	let g:airline#extensions#tabline#fnamemod = ':t'
 	let g:airline_theme = 'monokai_subtle'
 "}}}
 
