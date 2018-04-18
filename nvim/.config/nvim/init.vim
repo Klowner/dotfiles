@@ -82,7 +82,12 @@ Plug 'airblade/vim-gitgutter', "{{{
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary', "{{{
+	nmap <leader>c <Plug>Commentary
+	xmap <leader>c <Plug>Commentary
+	omap <leader>c <Plug>Commentary
+	nmap <leader>cc <Plug>CommentaryLine
+"}}}
 Plug 'tpope/vim-dispatch'
 
 Plug 'tpope/vim-fugitive', "{{{
