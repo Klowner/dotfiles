@@ -61,10 +61,10 @@ function! ColorSchemeMonokai()
 		colorscheme molokai
 	catch
 	endtry
-	"hi Normal ctermbg=none guibg=none
+	hi Normal ctermbg=none guibg=none
 	"hi Comment gui=none
-	"hi SignColumn ctermbg=none guibg=none
-	"hi LineNr ctermbg=none guibg=none ctermfg=236 guifg=#555555
+	hi SignColumn ctermbg=none guibg=none
+	hi LineNr ctermbg=none guibg=none ctermfg=236 guifg=#555555
 	hi link GitGutterAdd Directory
 	hi link GitGutterDelete Statement
 	hi link GitGutterChange CursorLineNr

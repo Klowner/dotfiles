@@ -42,7 +42,7 @@ parse_git_state2() {
 	fi
 
 	if [[ -n $GIT_STATE ]]; then
-		echo "$GIT_PROMPT_PREFIX$GIT_STATE$GIT_PROMPT_SUFFIX"
+		echo "$GIT_STATE"
 	fi
 }
 
@@ -93,13 +93,13 @@ parse_git_state() {
 	fi
 
 	if [[ -n $GIT_STATE ]]; then
-		echo "$GIT_PROMPT_PREFIX$GIT_STATE$GIT_PROMPT_SUFFIX"
+		echo "$GIT_STATE"
 	fi
 }
 
 git_prompt_string() {
 	local git_where="$(parse_git_branch)"
-	[ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX%B%F{green}${git_where#(refs/heads/|tags/)} $GIT_PROMPT_SYMBOLS$(parse_git_state)$GIT_PROMPT_SUFFIX"
+	[ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX%F{magenta}${git_where#(refs/heads/|tags/)} $GIT_PROMPT_SYMBOLS$(parse_git_state)$GIT_PROMPT_SUFFIX"
 }
 
 RPS1='$(git_prompt_string)'
