@@ -63,7 +63,8 @@ function! ColorSchemeMonokai()
 	catch
 	endtry
 	hi Normal ctermbg=none guibg=none
-	"hi Comment gui=none
+	hi VertSplit ctermbg=none guibg=none guifg=#000000
+	hi NonText guifg=#333333
 	hi SignColumn ctermbg=none guibg=none
 	hi LineNr ctermbg=none guibg=none ctermfg=236 guifg=#555555
 	hi link GitGutterAdd Directory
@@ -74,6 +75,7 @@ endfunction
 
 
 "" functionality ---
+Plug 'andymass/vim-matchup'
 Plug 'airblade/vim-gitgutter', "{{{
 	nmap <leader>g :GitGutterToggle<CR>
 	let g:gitgutter_override_sign_column_highlight = 0
@@ -106,6 +108,7 @@ Plug 'tpope/vim-fugitive', "{{{
 	map \l :Glog<CR>
 	map \gs :Gstatus<CR>
 "}}}
+
 
 Plug 'Shougo/unite.vim' "{{{
 autocmd FileType unite call s:unite_my_settings()
