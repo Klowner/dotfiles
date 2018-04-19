@@ -1,0 +1,10 @@
+# header guard
+source cpp.vim
+
+snippet guard
+    #ifndef ${1:`g:Neosnippet_GetHeaderGuardString()`}
+    #define $1
+
+    ${0}
+
+    #endif // $1

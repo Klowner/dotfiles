@@ -1,0 +1,11 @@
+# module.exports = function () {}
+snippet mef
+options head
+    module.exports = function (${1:#:argument}) {
+        ${0:TARGET}
+    };
+
+# require
+snippet require
+abbr req
+    require('${1:#:argument}')${0:TARGET}

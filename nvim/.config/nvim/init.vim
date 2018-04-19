@@ -28,21 +28,22 @@ set ignorecase
 set incsearch                              " Search as you type
 set hidden                                 " Sometimes I don't want to save a buffer before switching
 
+set completeopt-=preview
+set matchtime=1
 set modeline
 set modelines=5
-set matchtime=1
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set completeopt-=preview
+set noswapfile
 set scrolloff=8
-
+set shiftwidth=4
+set softtabstop=4
 set spell
+set tabstop=4
 
 " Ensure vim-plug is installed...
 if !filereadable(expand('~/.local/share/nvim/site/autoload/plug.vim'))
 	silent !echo "Installing vim-plug..."
-	silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
 " Section: Plugins {{{1
@@ -77,8 +78,18 @@ Plug 'airblade/vim-gitgutter', "{{{
 	nmap <leader>g :GitGutterToggle<CR>
 	let g:gitgutter_override_sign_column_highlight = 0
 	autocmd! BufWritePost * :GitGutter
-"}}}}
+"}}}
 
+Plug 'embear/vim-localvimrc', "{{{
+	let g:localvimrc_persistent = 1
+
+	function! s:update_settings()
+		let g:ale_php_phpcs_standard=get(g:, 'lint_php_phpcs_standard', '')
+	endfunction
+
+	autocmd User LocalVimRCPost call s:update_settings()
+"}}}
+"
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
@@ -111,9 +122,9 @@ function! s:unite_my_settings()
 				\ 'node_modules/',
 				\ 'tmp/'
 				\ ], '\|'))
-	imap <silent><buffer> <C-j> <Plug>(unite_select_next_line)
-	imap <silent><buffer> <C-k> <Plug>(unite_select_previous_line)
-	imap <silent><buffer> <Esc> <Plug>(unite_exit)
+	" imap <silent><buffer> <C-j> <Plug>(unite_select_next_line)
+	" imap <silent><buffer> <C-k> <Plug>(unite_select_previous_line)
+	" imap <silent><buffer> <Esc> <Plug>(unite_exit)
 	if executable('rg')
 		let g:unite_source_grep_command = 'rg'
 	endif
@@ -122,38 +133,46 @@ function! s:unite_my_settings()
 
 Plug 'Shougo/unite-session'                " provide session (project) support
 Plug 'Shougo/unite-outline'
+
 Plug 'Shougo/deoplete.nvim', "{{{
 	let g:deoplete#enable_at_startup = 1
-	if !exists('g:deoplete#omni#input_patterns')
-		let g:deoplete#omni#input_patterns = {}
-	endif
+	let g:deoplete#enable_smart_case = 1
+	let g:deoplete#auto_complete_start_length = 1
+	" let g:deoplete#ignore_sources = {}
+	" let g:deoplete#ignore_sources._ = ["neosnippet"]
+
+	" if !exists('g:deoplete#omni#input_patterns')
+	" 	let g:deoplete#omni#input_patterns = {}
+	" endif
 	"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 	"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-	"inoremap <expr><TAB> pumvisible() ? "echom foo" : "echom bar"
-	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-	function! s:my_cr_function()
-		return deoplete#mappings#smart_close_popup() . "\<CR>"
-	endfunction
+	" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+	" function! s:my_cr_function()
+	" 	return deoplete#mappings#smart_close_popup() . "\<CR>"
+	" endfunction
 "}}}
+
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim', "{{{
+	let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets,~/.vim/snippets,~/.config/,'.expand(fnamemodify($MYVIMRC, ':p:h').'/snippets/')
+	let g:neosnippet#enable_snipmate_compatibility = 1
+	" imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
+	" smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+	" imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+	" smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+"}}}
+
+
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
 Plug 'tweekmonster/deoplete-clang2'
 
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim', "{{{
-	let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets,~/.vim/snippets'
-	let g:neosnippet#enable_snipmate_compatibility = 1
-	imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
-	smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-	imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
-	smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
-"}}}
-
 Plug 'w0rp/ale', "{{{
 	let g:ale_linters = {
+		\ 'c': ['clang'],
 		\ 'cpp': ['clang'],
-		\ 'c': ['clang']
+		\ 'php': ['phpcs'],
 		\}
 	let g:ale_python_pylint_options = '--load-plugins pylint_django'
 	let g:ale_sign_error = '✗'
@@ -192,7 +211,6 @@ Plug 'mattn/gist-vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim', "{{{
-
 	let g:fzf_colors =
 				\ {
 				\ 'fg':      ['fg', 'Normal'],
@@ -314,6 +332,9 @@ nnoremap <leader>ve :e $MYVIMRC<CR>        " quick open this file
 if executable('rg')
 	set grepprg='rg\ --vimgrep'            " use ripgrep if available
 endif
+
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+			\ "\<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 
 "}}}
 
