@@ -11,13 +11,12 @@ set background=dark
 
 filetype plugin on
 filetype indent on
-
 syntax enable
 
 let mapleader=" "
 let maplocalleader=" "
 
-set autoread                               " Carry over indenting from previous line
+set autoread                               " Automatically reload changed buffers
 set wildmenu                               " Handy auto complete menu
 
 set list
@@ -53,7 +52,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'fatih/molokai'
 Plug 'rhysd/vim-clang-format'
 Plug 'octol/vim-cpp-enhanced-highlight'
-"
+
 function! ColorSchemeMonokai()
 	set termguicolors
 	let g:molokai_original = 1
@@ -75,7 +74,14 @@ endfunction
 
 
 "" functionality ---
-Plug 'andymass/vim-matchup'
+Plug 'andymass/vim-matchup', "{{{
+	augroup matchup_matchparen_highlight
+		autocmd!
+		autocmd ColorScheme * hi clear MatchParen
+		autocmd ColorScheme * hi link MatchParen Function
+	augroup END
+"}}}
+
 Plug 'airblade/vim-gitgutter', "{{{
 	nmap <leader>g :GitGutterToggle<CR>
 	let g:gitgutter_override_sign_column_highlight = 0
@@ -141,35 +147,34 @@ Plug 'Shougo/deoplete.nvim', "{{{
 	let g:deoplete#enable_at_startup = 1
 	let g:deoplete#enable_smart_case = 1
 	let g:deoplete#auto_complete_start_length = 1
-	" let g:deoplete#ignore_sources = {}
-	" let g:deoplete#ignore_sources._ = ["neosnippet"]
+	let g:deoplete#ignore_sources = {}
+	let g:deoplete#ignore_sources._ = ["neosnippet"]
 
-	" if !exists('g:deoplete#omni#input_patterns')
-	" 	let g:deoplete#omni#input_patterns = {}
-	" endif
-	"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-	"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-	" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-	" function! s:my_cr_function()
-	" 	return deoplete#mappings#smart_close_popup() . "\<CR>"
-	" endfunction
+	if !exists('g:deoplete#omni#input_patterns')
+		let g:deoplete#omni#input_patterns = {}
+	endif
+	autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+	inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+	function! s:my_cr_function()
+		return deoplete#mappings#smart_close_popup() . "\<CR>"
+	endfunction
 "}}}
 
 Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim', "{{{
+Plug 'Shougo/neosnippet.vim' "{{{
 	let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets,~/.vim/snippets,~/.config/,'.expand(fnamemodify($MYVIMRC, ':p:h').'/snippets/')
 	let g:neosnippet#enable_snipmate_compatibility = 1
-	" imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
-	" smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-	" imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
-	" smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+"	imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
+"	smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"	imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+"	smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
 "}}}
-
 
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
-Plug 'tweekmonster/deoplete-clang2'
+Plug 'zchee/deoplete-clang'
 
 Plug 'w0rp/ale', "{{{
 	let g:ale_linters = {
@@ -279,6 +284,10 @@ Plug 'junegunn/fzf.vim', "{{{
     nnoremap <leader>/ :Rg<CR>
 "}}}
 
+Plug 'easymotion/vim-easymotion', "{{{
+	map <Leader><Leader> <Plug>(easymotion-prefix)
+"}}}
+
 call plug#end()
 "}}}
 
@@ -336,10 +345,19 @@ if executable('rg')
 	set grepprg='rg\ --vimgrep'            " use ripgrep if available
 endif
 
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-			\ "\<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-"}}}
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+	\ "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ?
+		\ "\<C-n>" : "\<TAB>"
+
+imap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+imap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <silent><CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+	return deoplete#close_popup() . "\<CR>"
+endfunction
 
 " Section: Visual {{{1
 call ColorSchemeMonokai()
