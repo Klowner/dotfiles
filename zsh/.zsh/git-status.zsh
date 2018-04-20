@@ -38,15 +38,19 @@ parse_git_state() {
 	local ahead_and_behind="$(${(z)ahead_and_behind_cmd} 2> /dev/null)"
 	local ahead="$ahead_and_behind[(w)1]"
 	local behind="$ahead_and_behind[(w)2]"
+
 	if (( ahead > 0 )); then
 		GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$ahead}
-	elif (( behind > 0 )); then
+	fi
+
+	if (( behind > 0 )); then
 		GIT_STATE=$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$behind}
 	fi
 
 	if (( added > 0 )); then
 		GIT_STATE=$GIT_STATE${GIT_PROMPT_STAGED}
 	fi
+
 	if (( deleted > 0 )); then
 		GIT_STATE=$GIT_STATE${GIT_PROMPT_DELETED//NUM/$deleted}
 	fi
