@@ -184,6 +184,11 @@ mode "$mode_system" {
 }
 bindsym $mod+Shift+e mode "$mode_system"
 
+bar {
+        position top
+        font xft:terminus 12
+}
+
 focus_follows_mouse no
 font xft:artwiz lime 7
 floating_modifier $mod
