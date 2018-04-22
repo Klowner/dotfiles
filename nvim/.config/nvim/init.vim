@@ -205,13 +205,14 @@ Plug 'scrooloose/nerdtree', "{{{
 "}}}
 
 Plug 'Yavor-Ivanov/airline-monokai-subtle.vim'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline', "{{{
 	let g:airline_symbols = {}
 	let g:airline_symbols.branch = '⭠'
 	let g:airline_symbols.readonly = '⭤'
 	let g:airline_symbols.linenr = '⭡'
 	let g:airline#extensions#tabline#enabled = 1
-	let g:airline_theme = 'monokai_subtle'
+	let g:airline_theme = 'deus'
 "}}}
 
 Plug 'mattn/webapi-vim'
