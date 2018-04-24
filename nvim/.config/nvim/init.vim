@@ -174,7 +174,13 @@ Plug 'Shougo/neosnippet.vim' "{{{
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-clang'
+"Plug 'zchee/deoplete-clang'
+Plug 'tweekmonster/deoplete-clang2', "{{{
+	" curse this plugin for binding <S-TAB> and <TAB> directly, leading me to
+	" sink two hours of my morning into confusing mapping issues.
+	let g:clang2_placeholder_prev=''
+	let g:clang2_placeholder_next=''
+"}}}
 
 Plug 'w0rp/ale', "{{{
 	let g:ale_linters = {
