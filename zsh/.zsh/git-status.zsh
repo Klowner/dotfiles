@@ -1,7 +1,7 @@
 GIT_PROMPT_PREFIX=""
 GIT_PROMPT_SUFFIX="%f%k"
 GIT_PROMPT_AHEAD="%F{yellow}NUM⬆ %f"
-GIT_PROMPT_BEHIND="%F{green}NUM⬇️ %f"
+GIT_PROMPT_BEHIND="%F{green}NUM⬇ %f"
 GIT_PROMPT_DELETED="%F{red}NUM◉ %f"
 GIT_PROMPT_MERGING="%{$fg_bold[magenta]%}Y%{$reset_color%}"
 GIT_PROMPT_UNTRACKED="%F{yellow}?%f"
