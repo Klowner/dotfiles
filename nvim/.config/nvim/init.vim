@@ -115,7 +115,7 @@ Plug 'tpope/vim-fugitive', "{{{
 	map \gs :Gstatus<CR>
 "}}}
 
-
+Plug 'Shougo/echodoc'
 Plug 'Shougo/unite.vim' "{{{
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()

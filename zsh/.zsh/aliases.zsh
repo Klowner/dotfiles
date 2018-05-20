@@ -16,6 +16,11 @@ elif [[ -n "${BASH_VERSION}" ]]; then
 	alias ls='ls -p --color=auto $LS_OPTIONS'
 fi
 
+# Alias dig to drill on boxes where I don't have dig but do have drill
+if (( ! $+commands[dig] && $+commands[drill] )) then
+	alias dig='drill'
+fi
+
 # Handy `ls` aliases
 alias ll='ls -alF'
 alias la='ls -A'
