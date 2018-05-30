@@ -72,6 +72,8 @@ function! ColorSchemeMonokai()
 	hi ALEErrorSign guibg=none guifg=#ec2c70
 endfunction
 
+"" syntax ---
+Plug 'quabug/vim-gdscript'
 
 "" functionality ---
 Plug 'andymass/vim-matchup', "{{{

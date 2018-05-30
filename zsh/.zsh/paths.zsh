@@ -24,4 +24,4 @@ if (( $+commands[ccache] )); then
 	export PATH="/usr/lib/ccache/bin/:$PATH"
 fi
 
-
+export VIRSH_DEFAULT_CONNECT_URI="qemu:///system"
