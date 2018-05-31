@@ -297,6 +297,8 @@ Plug 'easymotion/vim-easymotion', "{{{
 	map <Leader><Leader> <Plug>(easymotion-prefix)
 "}}}
 
+Plug 'leafgarland/typescript-vim'
+
 call plug#end()
 "}}}
 
