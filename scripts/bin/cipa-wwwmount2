@@ -1,6 +1,13 @@
-#!/bin/sh
-
+#!/bin/bash
 USERNAME=${USERNAME:-mriedesel.cipa}
+IP=$1
+DIRPATH=$2
+
+if [[ -z $IP || -z $DIRPATH ]]; then
+	echo "To mount:"
+	echo "  $0 <ip> <localdir> <remotedir>"
+	exit 0;
+fi
 
 echo $USERNAME
 

@@ -15,9 +15,9 @@ export PATH=$PATH:$HOME/.luarocks/bin
 export PATH=$PATH:$HOME/.gem/ruby/2.4.0/bin
 
 #/// ccache / colorgcc
-if (( $+commands[colorgcc] )); then
-	export PATH="/usr/lib/colorgcc/bin/:$PATH"
-fi
+# if (( $+commands[colorgcc] )); then
+# 	export PATH="/usr/lib/colorgcc/bin/:$PATH"
+# fi
 
 if (( $+commands[ccache] )); then
 	export CCACHE_PATH="/usr/bin"
