@@ -62,9 +62,11 @@ def input_devices():
 
     devices = []
     for row in run_command('xinput list').split('\n'):
+        print(row)
         match = re_device_list.search(row)
         if match:
             groups = map(lambda x:x.strip(), match.groups())
+            print(list(groups))
 
             devices.append(Device(*groups))
 

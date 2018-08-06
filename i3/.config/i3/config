@@ -184,8 +184,10 @@ client.background $bar_bg
 
 bar {
 	position top
-	font Envy Code R 9, Awesome 8
+	font xft:Envy Code R 8
+	#font Envy Code R 9, Awesome 8
 	tray_output primary
+	status_command ~/.config/i3bar/conky-i3bar
 
 	colors {
 		separator $fg1
