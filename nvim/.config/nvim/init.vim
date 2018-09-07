@@ -74,6 +74,8 @@ endfunction
 
 "" syntax ---
 Plug 'quabug/vim-gdscript'
+" Plug 'HerringtonDarkholme/yats.vim'
+Plug 'ianks/vim-tsx'
 
 "" functionality ---
 Plug 'andymass/vim-matchup', "{{{
@@ -144,6 +146,8 @@ function! s:unite_my_settings()
 
 Plug 'Shougo/unite-session'                " provide session (project) support
 Plug 'Shougo/unite-outline'
+
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 Plug 'Shougo/deoplete.nvim', "{{{
 	let g:deoplete#enable_at_startup = 1
