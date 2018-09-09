@@ -329,8 +329,14 @@ endfunction
 map <C-n> :bnext<CR>                       " change buffers with ctrl+n & ctrl_p
 map <C-p> :bprev<CR>
 
-nnoremap <C-j> :lnext<CR>                  " quickfix navigation
-nnoremap <C-k> :lprev<CR>
+" Window switching controls that are faster
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
+
+" nnoremap <C-j> :lnext<CR>                  " quickfix navigation
+" nnoremap <C-k> :lprev<CR>
 
 vmap <C-o> :sort<CR>                       " sort lines in visual mode with ctrl-o
 
