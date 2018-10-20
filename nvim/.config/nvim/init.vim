@@ -73,9 +73,11 @@ function! ColorSchemeMonokai()
 endfunction
 
 "" syntax ---
-Plug 'quabug/vim-gdscript'
-" Plug 'HerringtonDarkholme/yats.vim'
+Plug 'calviken/vim-gdscript3'
 Plug 'ianks/vim-tsx'
+Plug 'cakebaker/scss-syntax.vim'
+
+" Plug 'HerringtonDarkholme/yats.vim'
 
 "" functionality ---
 Plug 'andymass/vim-matchup', "{{{
@@ -149,6 +151,7 @@ Plug 'Shougo/unite-outline'
 
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
+
 Plug 'Shougo/deoplete.nvim', "{{{
 	let g:deoplete#enable_at_startup = 1
 	let g:deoplete#enable_smart_case = 1
@@ -177,21 +180,23 @@ Plug 'Shougo/neosnippet.vim' "{{{
 "	smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
 "}}}
 
+Plug 'Rip-Rip/clang_complete'
+Plug 'Shougo/deoplete-clangx'
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
 "Plug 'zchee/deoplete-clang'
-Plug 'tweekmonster/deoplete-clang2', "{{{
-	" curse this plugin for binding <S-TAB> and <TAB> directly, leading me to
-	" sink two hours of my morning into confusing mapping issues.
-	let g:clang2_placeholder_prev=''
-	let g:clang2_placeholder_next=''
-"}}}
+"Plug 'tweekmonster/deoplete-clang2', "{{{
+"	" curse this plugin for binding <S-TAB> and <TAB> directly, leading me to
+"	" sink two hours of my morning into confusing mapping issues.
+"	let g:clang2_placeholder_prev=''
+"	let g:clang2_placeholder_next=''
+""}}}
 
 Plug 'w0rp/ale', "{{{
 	let g:ale_linters = {
 		\ 'c': ['clang'],
-		\ 'cpp': ['clang'],
+		\ 'cpp': ['clangx'],
 		\ 'php': ['phpcs'],
 		\}
 	let g:ale_python_pylint_options = '--load-plugins pylint_django'
