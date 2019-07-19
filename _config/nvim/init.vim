@@ -143,7 +143,10 @@ if executable('rg')
 endif
 
 " theme / visual
-colorscheme wal
+try
+	colorscheme wal
+catch
+endtry
 hi clear SpellBad                   " italicize misspellings
 hi SpellBad gui=underline cterm=italic
 

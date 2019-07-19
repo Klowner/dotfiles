@@ -129,6 +129,15 @@ for path in _config/*; do
     link $basedir/_config/$path $homedir/.config/${path}
 done
 
+note "Installing bin/ directory..."
+mkdir -v -p $bindir
+if [ -d _bin ]; then
+    for path in _bin/*; do
+        relpath=${path##*/}
+        link $basedir/$path $bindir/$relpath
+    done
+fi
+
 note "Done."
 
 # vim:ts=4:sw=4:et:
