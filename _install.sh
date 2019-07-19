@@ -25,9 +25,10 @@ function die() {
     exit 1
 }
 
-function link() {
-    src=$1
-    dst=$2
+function install() {
+    method=$1
+    src=$2
+    dst=$3
     if [ -e $dst ]; then
         if [ -L $dst ]; then
             # already symlinked
@@ -43,8 +44,26 @@ function link() {
         fi
     fi
 
-    # Update existing or create new symlinks
-    ln -vsf $src $dst
+    case $method in
+        link)
+            # Update existing or create new symlinks
+            ln -vsf $src $dst
+            ;;
+        copy)
+            cp -a $src $dst
+            ;;
+        *)
+            warn "Unknown install method: $1"
+            ;;
+    esac
+}
+
+function link() {
+    install link $1 $2
+}
+
+function copy() {
+    install copy $1 $2
 }
 
 function unpack_tarball() {
@@ -93,7 +112,15 @@ for path in * ; do
     if [ $(expr match $path '^_') -eq 1 ]; then
         continue
     fi
-    link $basedir/$path $homedir/.$path
+
+    src=$basedir/$path
+    dst=$homedir/.$path
+
+    if [ -L $src ]; then
+        copy $src $dst
+    else
+        link $src $dst
+    fi
 done
 
 mkdir -p $homedir/.config
