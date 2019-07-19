@@ -5,7 +5,7 @@ basedir=$homedir/.dotfiles
 bindir=$homedir/bin
 gitbase=git://github.com/Klowner/dotfiles.git
 gitorigin=git@github.com:Klowner/dotfiles.git
-gitbranch=refresh
+gitbranch=${GIT_BRANCH:-master}
 tarball=http://github.com/Klowner/dotfiles/tarball/$gitbranch
 
 function has() {
@@ -13,11 +13,11 @@ function has() {
 }
 
 function note() {
-    echo "^[[32;1m * ^[[0m$*"
+    echo -e "\e[32;1m * \e[0m$*"
 }
 
 function warn() {
-    echo "^[[31;1m * ^[[0m$*"
+    echo -e "\e[31;1m * \e[0m$*"
 }
 
 function die() {
