@@ -1,0 +1,222 @@
+
+[colors]
+	background = ${xrdb:color0:#333}
+	foreground = ${xrdb:color5:#aaa}
+	foreground-alt = ${xrdb:color6:#fff}
+	alert = ${xrdb:color3:#f00}
+
+[global/wm]
+	margin-top = 0
+	margin-bottom = 0
+
+[settings]
+	throttle-output = 5
+	throttle-output-for = 10
+	throttle-input-for = 30
+	compositing-background = source
+	screenchange-reload = true
+
+
+
+[bar/base]
+	monitor = ${env:MONITOR}
+	override-redirect = false
+	dpi = 92
+	width = 100%
+	height = 24
+	top = true
+
+	background = ${colors.background}
+	foreground = ${colors.foreground}
+	border-bottom-size = 2
+	border-color = ${xrdb:color2:#333}
+
+	padding = 1
+	module-margin = 2
+
+	line-color = $f00
+	fixed-center = true
+
+	font-0 = Roboto:style=Black:size=10;1
+	font-1 = Material\-Icons:style=Regular:size=12;2
+	font-2 = Unifont:style=Regular:size=14;0
+
+	scroll-up = i3wm-wsnext
+	scroll-down = i3wm-wsprev
+
+	cursor-click = pointer
+
+[bar/primary]
+	inherit = bar/base
+	modules-left = i3
+	modules-right = wired-network filesystem memory date pulseaudio
+
+	tray-position = right
+	tray-background: ${bar.background}
+	tray-maxsize = 24444
+
+[bar/secondary]
+	inherit = bar/base
+
+	top = true
+	modules-left = i3
+	;modules-center = window
+
+	font-0 = Roboto:style=Black:size=10;1
+	font-1 = Material\-Design\-Iconic\-Font:style=Design-Iconic-Font:size=18;2
+	font-2 = Unifont:style=Regular:size=14;0
+	background = ${colors.background}
+	foreground = ${colors.foreground}
+	border-bottom-size = 2
+	border-color = ${xrdb:color2:#333}
+
+
+[module/window]
+	type = internal/xwindow
+	label = %title:0:200:...%
+
+
+[module/xkeyboard]
+	type = internal/xkeyboard
+
+
+[module/i3]
+	type = internal/i3
+	format = <label-state> <label-mode>
+	index-sort = true
+	wrapping-scroll = false
+
+	; Only show workspaces on the same output as the bar
+	pin-workspaces = true
+
+	label-mode-padding = 2
+	label-mode-foreground = ${colors.foreground}
+	label-mode-background = ${colors.background}
+
+	; focused = Active workspace on focused monitor
+	label-focused = %name%
+	label-focused-foreground = ${self.label-mode-background}
+	label-focused-background = ${self.label-mode-foreground}
+	label-focused-padding = ${self.label-mode-padding}
+
+	; unfocused = Inactive workspace on any monitor
+	label-unfocused = %name%
+	label-unfocused-foreground = ${self.label-mode-foreground}
+	label-unfocused-padding = ${self.label-mode-padding}
+
+	; visible = Active workspace on unfocused monitor
+	label-visible = %name%
+	label-visible-foreground = ${colors.foreground-alt}
+	label-visible-background = ${self.label-mode-background}
+	label-visible-padding = ${self.label-mode-padding}
+	label-visible-underline = 2
+
+	; urgent = Workspace with urgency hint set
+	label-urgent = %name%
+	label-urgent-background = ${colors.background}
+	label-urgent-foreground = ${colors.alert}
+	label-urgent-padding = 2
+
+	; Separator in between workspaces
+	label-separator =
+
+
+[module/xbacklight]
+	type = internal/xbacklight
+
+	format = <label> <bar>
+	label = BL
+
+	bar-width = 10
+	bar-indicator = |
+	bar-indicator-foreground = #fff
+	bar-indicator-font = 2
+	bar-fill = ─
+	bar-fill-font = 2
+	bar-fill-foreground = ${colors.foreground}
+	bar-empty = ─
+	bar-empty-font = 2
+	bar-empty-foreground = ${colors.foreground-alt}
+
+
+[module/wired-network]
+	type = internal/network
+	interface = enp0s25
+
+	label-connected = %downspeed:8% %upspeed:8%
+	label-disconnected = "X"
+
+	bar-signal-format = %fill%%indicator%%empty%
+	bar-signal-width = 5
+	bar-signal-indicator = |
+	bar-signal-fill = .
+	bar-signal-empty = ' '
+	animation-packetloss-0 = ⚠
+	animation-packetloss-0-foreground = #ffa64c
+	animation-packetloss-1 = 📶
+	animation-packetloss-1-foreground = #000000
+	; Framerate in milliseconds
+	animation-packetloss-framerate = 500
+
+	format-packetloss = <animation-packetloss> <label-connected>
+	format-connected = <label-connected>
+	format-disconnected = <label-disconnected>
+
+[module/memory]
+	type = internal/memory
+	interval = 3
+	format = <label>
+	;format-prefix = " "
+	format-prefix = 
+	label = " %gb_used% (%percentage_used%% of %gb_total%)"
+
+[module/pulseaudio]
+	type = internal/pulseaudio
+	format-volume = <bar-volume>
+	interval = 5
+;	ramp-volume-0 = 
+;	ramp-volume-1 = 
+;	ramp-volume-2 = 
+	ramp-volume-foreground = #f0f
+	label-muted = 
+
+	bar-volume-format=%fill%%indicator%%empty%
+	bar-volume-width = 20
+	bar-volume-foreground-0 = ${colors.foreground}
+	bar-volume-foreground-1 = ${colors.alert}
+	bar-volume-gradient = true
+
+	bar-volume-fill = -
+	bar-volume-indicator = |
+	bar-volume-empty = -
+
+	bar-volume-indicator-color = #0f0
+	;bar-volume-indicator = |
+	;bar-volume-indicator-font = 2
+	;bar-volume-fill = ─
+	;bar-volume-fill-font = 2
+	;bar-volume-empty = ─
+	;bar-volume-empty-font = 2
+	;bar-volume-empty-foreground = ${colors.foreground}
+
+[module/date]
+	type = internal/date
+	interval = 1
+	date = "%a %Y/%m/%d"
+	;date-alt = "%a, %b %e"
+	;date-alt = " %Y-%m-%d"
+	time = %r
+	label = " %date%  %time%"
+
+[module/filesystem]
+	type = internal/fs
+	mount-0 = /
+
+	interval = 10
+	fixed-values = true
+	spacing = 4
+
+	label-unmounted =
+	label-mounted = %mountpoint% %used% (%percentage_used%% of %total%)
+
+; vim:ft=cfg:
