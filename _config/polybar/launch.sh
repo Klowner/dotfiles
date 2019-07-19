@@ -1,5 +1,5 @@
 #!/bin/sh
-POLYBAR_CONFIG=/home/mark/dotfiles-refresh/.config/polybar/config
+POLYBAR_CONFIG=$(dirname $0)/config
 
 # kill polybar and wait for shutdown
 killall -q polybar
