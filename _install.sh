@@ -77,7 +77,7 @@ else
     # with git and then fallback to tarball.
     if has git; then
         note "Cloning from git..."
-        git clone $gitbase $basedir
+        git clone --single-branch --branch $gitbranch $gitbase $basedir
         cd $basedir
         git submodule init
         git submodule update --init --recursive
@@ -93,12 +93,13 @@ for path in * ; do
     if [ $(expr match $path '^_') -eq 1 ]; then
         continue
     fi
-    echo link $basedir/$path $HOME/.$path
+    link $basedir/$path $homedir/.$path
 done
 
-mkdir -p $HOME/.config
+mkdir -p $homedir/.config
 for path in _config/*; do
-    echo link $basedir/_config/$path $HOME/.config/$path
+    path=${path##*/}
+    link $basedir/_config/$path $homedir/.config/${path}
 done
 
 note "Done."
