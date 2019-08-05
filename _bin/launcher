@@ -1,0 +1,48 @@
+#!/bin/sh
+
+function prepend_alpha() {
+	_rgb=$1
+	_alpha=$2
+	echo ${_rgb//\#/\#${_alpha}}
+}
+
+function color() {
+	_index=$1
+	_alpha=${2:-}
+	_color=${colors[$_index]}
+	if [ "$_alpha" != "" ]; then
+		echo $(prepend_alpha $_color $_alpha)
+	else
+		echo $_color
+	fi
+}
+
+# read colors from wal into array 'colors'
+if [ -f ~/.cache/wal/colors ]; then
+	IFS=$'\n' read -d '' -r -a colors < ~/.cache/wal/colors
+fi
+
+_bg=$(color 0 "aa")
+_bg2=$(color 0 "55")
+_fg=${colors[5]}
+_fg2=${colors[8]}
+_clear="#00000000"
+
+rofi -show drun -modi drun \
+	-color-window "$_bg, $_bg, $_fg" \
+	-color-normal "$_clear, $_fg, $_bg2, $_fg, $_bg" \
+	-color-active "$_clear, $_fg, $_clear, $_fg, $_clear" \
+	-opacity 10 \
+	-width 80 \
+	-padding 20 \
+	-bw 2 \
+	-separator-style none \
+	-line-padding 3 \
+	-icon-theme "Paper" \
+	-location 0 \
+	-hide-scrollbar \
+	-show-icons true \
+	-font "Abel 11" \
+	-display-run ">" \
+	-theme-str "#prompt-colon { enabled: false; }"
+

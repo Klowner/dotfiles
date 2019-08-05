@@ -5,6 +5,7 @@ set $mod Mod4
 bindsym $mod+Return exec alacritty
 bindsym $mod+Home exec thunar
 bindsym $mod+c exec chromium
+bindsym $mod+d exec --no-startup-id ~/bin/launcher
 
 # i3 actions
 bindsym $mod+Shift+c reload
