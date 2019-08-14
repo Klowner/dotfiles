@@ -49,11 +49,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'dylanaraps/wal.vim'
 
 " syntax
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'calviken/vim-gdscript3'
 Plug 'ianks/vim-tsx'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'posva/vim-vue'
+Plug 'leafgarland/typescript-vim'
 Plug 'lepture/vim-jinja'
+Plug 'posva/vim-vue'
 
 " functionality
 Plug 'tpope/vim-sensible'
