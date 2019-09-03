@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # quick-launch
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 bindsym $mod+Home exec thunar
 bindsym $mod+c exec chromium
 bindsym $mod+d exec --no-startup-id ~/bin/launcher
@@ -156,3 +156,4 @@ client.unfocused            $bgalt     $bgalt    $fg     $bg     $bgalt
 # autostart
 exec_always --no-startup-id wal -q -t -i ~/wallpaper --saturate 0.8
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+
