@@ -18,8 +18,8 @@ let maplocalleader=" "
 set autoread        " automatically reload changed files
 set wildmenu        " handy auto complete menu
 
-set list
-set listchars=tab:·\ ,trail:▂,extends:»,precedes:«
+"set list
+"set listchars=tab:·\ ,trail:▂,extends:»,precedes:«
 set infercase       " completion recognizes capitalization
 set smartcase
 set ignorecase
@@ -52,7 +52,7 @@ Plug 'dylanaraps/wal.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'calviken/vim-gdscript3'
 Plug 'ianks/vim-tsx'
-Plug 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'lepture/vim-jinja'
 Plug 'posva/vim-vue'
 
@@ -62,6 +62,7 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary', "{{{
     nmap <leader>c <Plug>Commentary
     xmap <leader>c <Plug>Commentary
@@ -74,16 +75,16 @@ Plug 'tpope/vim-fugitive', "{{{
     map \gs :Gstatus<CR>
 "}}}
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
-Plug 'w0rp/ale', "{{{
-    let g:ale_linters = {
-        \ 'c': ['clang'],
-        \ 'cpp': ['clangx'],
-        \ 'php': ['phpcs'],
-        \ 'javascript': ['eslint'],
-        \}
-    let g:ale_python_pylint_options = '--load-plugins pylint_django'
-    let g:ale_sign_error = '⬤'
-"}}}
+"Plug 'w0rp/ale', "{{{
+"    let g:ale_linters = {
+"        \ 'c': ['clang'],
+"        \ 'cpp': ['clangx'],
+"        \ 'php': ['phpcs'],
+"        \ 'javascript': ['eslint'],
+"        \}
+"    let g:ale_python_pylint_options = '--load-plugins pylint_django'
+"    let g:ale_sign_error = '⬤'
+""}}}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline', "{{{
     let g:airline_symbols = {}
@@ -98,23 +99,74 @@ Plug 'mattn/gist-vim'
 Plug 'easymotion/vim-easymotion', "{{{
     map <Leader><Leader> <Plug>(easymotion-prefix)
 "}}}
-if has('nvim')
-	Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-else
-	Plug 'Shougo/deoplete.nvim'
-	Plug 'roxma/nvim-yarp'
-	Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#sources#syntax#min_keyword_length = 2
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim', "{{{
-	let g:neosnippet#snippets_directory = '~/.vim/bundle/'.expand(fnamemodify($MYVIMRC, ':p:h').'/snippets/')
-	let g:neosnippet#enable_snipmate_compatibility = 1
-"}}}
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+
+" if has('nvim')
+" 	Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+" else
+" 	Plug 'Shougo/deoplete.nvim'
+" 	Plug 'roxma/nvim-yarp'
+" 	Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#sources#syntax#min_keyword_length = 2
+" Plug 'Shougo/denite.nvim'
+"Plug 'Shougo/neosnippet-snippets'
+"Plug 'Shougo/neosnippet.vim', "{{{
+"	let g:neosnippet#snippets_directory = '~/.vim/bundle/'.expand(fnamemodify($MYVIMRC, ':p:h').'/snippets/')
+"	let g:neosnippet#enable_snipmate_compatibility = 1
+""}}}
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim',  "{{{
+    function! s:buflist()
+	redir => ls
+	silent ls
+	redir END
+	return split(ls,'\n')
+    endfunction
+
+    function! s:bufopen(e)
+	execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+    endfunction
+
+    nnoremap <silent> <Leader><Enter> :call fzf#run({
+		\ 'source': reverse(<sid>buflist()),
+		\ 'sink': function('<sid>bufopen'),
+		\ 'options': '+m',
+		\ 'down': len(<sid>buflist()) + 2
+		\})<CR>
+
+    
+    function! s:FuzzyFiles()
+        let gitparent=system('git rev-parse --show-toplevel')[:-2]
+        let rootdir='.'
+
+        if empty(matchstr(gitparent, '^fatal:.*'))
+            silent call fzf#run({
+                        \ 'dir':     gitparent,
+                        \ 'source':  '(git ls-tree -r --name-only HEAD | rg --files)',
+                        \ 'sink':    'e',
+                        \})
+        else
+            silent call fzf#run({
+                        \ 'dir':     '.',
+                        \ 'source':  'rg --files',
+                        \ 'sink':    'e',
+                        \})
+        endif
+    endfunction
+
+    command! -bang -nargs=* Rg
+                \ call fzf#vim#grep(
+                \  'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+                \  <bang>0 ? fzf#vim#with_preview('up:60%')
+                \          : fzf#vim#with_preview('right:50%:hidden', '?'),
+                \  <bang>0)
+
+    nnoremap <silent> ; :call <sid>FuzzyFiles()<CR>
+    nnoremap <leader>/ :Rg<CR>
+	
 "}}}
 call plug#end()
 
@@ -138,7 +190,7 @@ nnoremap zn ]s                      " next misspelling
 nnoremap zp [s                      " prev misspelling
 nnoremap zf <Esc>1z=                " replace misspelling with first suggestion
 nnoremap z! :set local spell!<CR>   " toggle spellcheck
-nnoremap <leader>ve :e $MYVIMRC<CR> " quick open this file
+nnoremap <leader>ve :e $MYVIMRC<CR> " quick open this (literally this) file
 if executable('rg')
     set grepprg='rg\ --vimgrep'     " use ripgrep if available
 endif
@@ -165,6 +217,13 @@ augroup END
 function! NetrwMapping()
 	noremap <buffer> \e :bd<CR>
 endfunction
+
+" close if final buffer is netrw or the quickfix
+augroup finalcountdown
+    au!
+    autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+    nmap - :Lexplore<cr>
+augroup END
 
 " read .vimlocal if available
 if filereadable(expand('~/.vimlocal'))
