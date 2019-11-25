@@ -18,8 +18,8 @@ let maplocalleader=" "
 set autoread        " automatically reload changed files
 set wildmenu        " handy auto complete menu
 
-"set list
-"set listchars=tab:·\ ,trail:▂,extends:»,precedes:«
+set list
+set listchars=tab:·\ ,trail:▂,extends:»,precedes:«
 set infercase       " completion recognizes capitalization
 set smartcase
 set ignorecase
@@ -52,9 +52,10 @@ Plug 'dylanaraps/wal.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'calviken/vim-gdscript3'
 Plug 'ianks/vim-tsx'
-Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+Plug 'leafgarland/typescript-vim'
 Plug 'lepture/vim-jinja'
 Plug 'posva/vim-vue'
+Plug 'nikvdp/ejs-syntax'
 
 " functionality
 Plug 'tpope/vim-sensible'
@@ -75,16 +76,16 @@ Plug 'tpope/vim-fugitive', "{{{
     map \gs :Gstatus<CR>
 "}}}
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
-"Plug 'w0rp/ale', "{{{
-"    let g:ale_linters = {
-"        \ 'c': ['clang'],
-"        \ 'cpp': ['clangx'],
-"        \ 'php': ['phpcs'],
-"        \ 'javascript': ['eslint'],
-"        \}
-"    let g:ale_python_pylint_options = '--load-plugins pylint_django'
-"    let g:ale_sign_error = '⬤'
-""}}}
+Plug 'w0rp/ale', "{{{
+    let g:ale_linters = {
+        \ 'c': ['clang'],
+        \ 'cpp': ['clangx'],
+        \ 'php': ['phpcs'],
+        \ 'javascript': ['eslint'],
+        \}
+    let g:ale_python_pylint_options = '--load-plugins pylint_django'
+    let g:ale_sign_error = '⬤'
+"}}}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline', "{{{
     let g:airline_symbols = {}
@@ -99,7 +100,7 @@ Plug 'mattn/gist-vim'
 Plug 'easymotion/vim-easymotion', "{{{
     map <Leader><Leader> <Plug>(easymotion-prefix)
 "}}}
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+"Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 " if has('nvim')
 " 	Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
