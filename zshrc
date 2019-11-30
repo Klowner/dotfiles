@@ -9,7 +9,7 @@ setopt COMPLETE_IN_WORD     # Allow completion from within a word/phrase
 setopt PROMPT_SUBST         # Enable parameter expansion, etc. in prompt
 
 # aliases
-alias retheme='wal -q -t -i ~/wallpaper -saturate 0.8'
+alias retheme='wal -q -t -i ~/wallpaper -saturate 0.9'
 alias sudo='sudo '
 alias tmux='TERM=xterm-256color tmux'
 alias svim='sudo vim'
