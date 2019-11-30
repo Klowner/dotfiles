@@ -37,9 +37,9 @@ function install() {
             # rename files with an ".old" extension
             warn "$dst already exists, renaming to $dst.old"
             backup=$dst.old
-            if [ -e $backup ]; then
-                die "$backup already exists. Aborting."
-            fi
+            # if [ -e $backup ]; then
+            #     die "$backup already exists. Aborting."
+            # fi
             mv -v $dst $backup
         fi
     fi
