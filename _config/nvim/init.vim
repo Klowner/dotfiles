@@ -25,6 +25,9 @@ set smartcase
 set ignorecase
 set incsearch       " search as you type
 set hidden          " sometimes I don't want to save a buffer before switching away from it
+set cmdheight=2
+set updatetime=300
+set signcolumn=yes
 
 set completeopt-=preview
 set matchtime=1
@@ -76,16 +79,18 @@ Plug 'tpope/vim-fugitive', "{{{
     map \gs :Gstatus<CR>
 "}}}
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
-Plug 'w0rp/ale', "{{{
-    let g:ale_linters = {
-        \ 'c': ['clang'],
-        \ 'cpp': ['clangx'],
-        \ 'php': ['phpcs'],
-        \ 'javascript': ['eslint'],
-        \}
-    let g:ale_python_pylint_options = '--load-plugins pylint_django'
-    let g:ale_sign_error = '⬤'
-"}}}
+"Plug 'w0rp/ale', "{{{
+"    let g:ale_linters = {
+"        \ 'c': ['clang'],
+"        \ 'cpp': ['clangx'],
+"        \ 'php': ['phpcs'],
+"        \ 'javascript': ['eslint'],
+"        \}
+"    let g:ale_python_pylint_options = '--load-plugins pylint_django'
+"    let g:ale_sign_error = '⬤'
+""}}}
+" Use release branch (Recommend)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline', "{{{
     let g:airline_symbols = {}

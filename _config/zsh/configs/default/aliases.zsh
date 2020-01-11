@@ -1,5 +1,5 @@
 alias wallpaper="feh --bg-fill -z"
-alias retheme="wal -q -t -i ~/wallpaper"
+alias retheme="wal -q -t -i ~/wallpaper --saturate 0.8"
 alias svim="sudo nvim"
 alias capesc="setxkbmap -option caps:escape"
 alias mapstylus='xinput --map-to-output $(xinput --list --id-only "ELAN2514:00 04F3:2594 Pen Pen (0)") eDP-1'
@@ -33,6 +33,6 @@ alias egrep='egrep --color=auto'
 alias edit='${EDITOR}:-vim}'
 
 # Prefer neovim if available
-if (( $+commands[nvim] )) then
-	alias vim='nvim'
-fi
+# if (( $+commands[nvim] )) then
+# 	alias vim='nvim'
+# fi
