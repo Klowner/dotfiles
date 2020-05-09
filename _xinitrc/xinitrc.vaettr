@@ -1,0 +1,5 @@
+#!/bin/sh
+# compton &
+# wal -t -q -i ~/wallpaper &
+# lxsession -s i3 &
+# syncthing-gtk -m &
