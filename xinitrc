@@ -1,5 +1,5 @@
 #!/bin/sh
-
+cd $HOME
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
 	for f in /etc/X11/xinit/xinitrc.d/*; do
 		[ -x "$f" ] && . "$f"
@@ -14,7 +14,7 @@ fi
 eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
 export SSH_AUTH_SOCK
 
-# setxkbmap -option caps:swapescape &
+setxkbmap -option caps:swapescape &
 
 # Per-host init
 filepath=$(dirname $(readlink -f $0))
