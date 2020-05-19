@@ -35,7 +35,6 @@ set lazyredraw                          " don't redraw while executing macros
 set magic                               " enable magic for regexps
 set showmatch                           " show matching bracket pairs
 set matchtime=1
-set number relativenumber               " show relative line numbers by default
 
 set noswapfile
 set modeline
@@ -253,6 +252,8 @@ nnoremap <leader>pc :PlugClean<cr>      " clean removed plugins
 nnoremap zn ]s                          " next misspelling
 nnoremap zp [s                          " prev misspelling
 nnoremap zf <Esc>1z=                    " replace misspelling with first suggestion
+
+nnoremap <leader>n :set number!<cr>     " toggle numbering
 
 nnoremap <leader>ve :e $MYVIMRC<cr>     " quick open (literally) this file
 
