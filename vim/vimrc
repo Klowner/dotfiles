@@ -25,7 +25,7 @@ set backspace=eol,start,indent          " make backspace not be stupid
 set whichwrap+=<,>,h,l
 
 set list
-set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:⦙\ 
+set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:→\
 set ignorecase                          " ignore case when searching
 set smartcase                           " be "smart" about case when searching
 set hlsearch                            " highlight search results
@@ -232,6 +232,11 @@ endtry
 hi clear SpellBad
 hi SpellBad gui=underline cterm=italic
 
+" Highlight trailing space as error
+match ErrorMsg '\s\+$'
+
+" List items are always weird distracting colors
+hi SpecialKey ctermfg=238
 
 "--- Mappings
 map <C-n> :bnext<cr>                " next buffer
@@ -284,7 +289,8 @@ let g:netrw_winsize = 25
 let g:netrw_browse_split = 4
 augroup netrw_mapping
     autocmd!
-    autocmd filetype netrw call NetrwMapping()
+    autocmd FileType netrw call NetrwMapping()
+    autocmd FileType netrw setl bufhidden=wipe
 augroup END
 function! NetrwMapping()
     noremap <buffer> \e :bd<CR>
