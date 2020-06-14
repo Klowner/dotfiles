@@ -19,5 +19,6 @@
 				}
 			}
 		}
-	}
+	},
+	"tsserver.log": "off"
 }
