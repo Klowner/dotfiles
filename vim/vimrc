@@ -25,7 +25,7 @@ set backspace=eol,start,indent          " make backspace not be stupid
 set whichwrap+=<,>,h,l
 
 set list
-set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:→\
+set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:→\ 
 set ignorecase                          " ignore case when searching
 set smartcase                           " be "smart" about case when searching
 set hlsearch                            " highlight search results
@@ -43,9 +43,10 @@ set spell                               " spell checking, woo
 set foldcolumn=1
 set ruler                               " always show current position
 
-set tabstop=4                           " who the heck uses 8-space tabs?
-set shiftwidth=4
-set smarttab
+" set tabstop=4                           " who the heck uses 8-space tabs?
+" set shiftwidth=4
+" set smarttab
+set shiftwidth=2
 
 " auto-install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -63,7 +64,6 @@ Plug 'dylanaraps/wal.vim'
 " syntax
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'calviken/vim-gdscript3'
-"Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'lepture/vim-jinja'
 Plug 'posva/vim-vue'
@@ -89,24 +89,37 @@ map \b :Gblame<CR>
 map \l :Glog<CR>
 map \gs :Gstatus<CR>
 "}}}
+Plug 'justinmk/vim-dirvish', "{{{
+nmap \e <Plug>(dirvish_up)
+augroup dirvish_mapping
+  autocmd!
+  autocmd! FileType dirvish call DirvishMapping()
+augroup END
+function! DirvishMapping()
+  nmap <buffer> \e gq>
+endfunction
+"}}}
+Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/vim-gist'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion', "{{{
   map <leader><leader> <plug>(easymotion-prefix)
 "}}}
 Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}, "{{{
-let g:coc_global_extensions = [
-      \ 'coc-css',
-      \ 'coc-emoji',
-      \ 'coc-eslint',
-      \ 'coc-json',
-      \ 'coc-prettier',
-      \ 'coc-rls',
-      \ 'coc-tslint',
-      \ 'coc-tslint-plugin',
-      \ 'coc-tsserver',
-      \ 'coc-yaml',
-      \ ]
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}, "{{{
+" let g:coc_global_extensions = [
+"       \ 'coc-css',
+"       \ 'coc-emoji',
+"       \ 'coc-eslint',
+"       \ 'coc-json',
+"       \ 'coc-prettier',
+"       \ 'coc-rls',
+"       \ 'coc-tslint',
+"       \ 'coc-tslint-plugin',
+"       \ 'coc-tsserver',
+"       \ 'coc-yaml',
+"       \ ]
 set signcolumn=yes
 set updatetime=300
 set shortmess+=c
@@ -216,7 +229,7 @@ nnoremap <leader>/ :Rg<CR>
 call plug#end()
 
 "--- Visuals
-highlight ExtraWhitespace ctermbg=20
+highlight ExtraWhitespace ctermbg=20 ctermfg=1
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -231,9 +244,6 @@ endtry
 " Display mispellings as italicised
 hi clear SpellBad
 hi SpellBad gui=underline cterm=italic
-
-" Highlight trailing space as error
-match ErrorMsg '\s\+$'
 
 " List items are always weird distracting colors
 hi SpecialKey ctermfg=238
@@ -281,7 +291,7 @@ if filereadable(expand('~/.vimlocal'))
 endif
 
 " netrw
-nnoremap \e :Lexplore!<CR>
+" nnoremap <buffer> \e <Plug>VinegarUp
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_altv = 1

@@ -154,5 +154,6 @@ client.unfocused			$bgalt	   $bgalt	 $fg	 $bg	 $bgalt
 # client.background		   $bg
 
 # autostart
-exec_always --no-startup-id wal -q -t -i ~/wallpaper --saturate 0.8
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id wal -q -t -i ~/wallpaper --saturate 0.8
+exec_always ~/.config/polybar/launch.sh
+
