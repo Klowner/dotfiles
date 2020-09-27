@@ -83,6 +83,7 @@ nmap <leader>c <Plug>Commentary
 xmap <leader>c <Plug>Commentary
 omap <leader>c <Plug>Commentary
 nmap <leader>cc <Plug>CommentaryLine
+autocmd FileType vue setlocal commentstring=//\ %s
 "}}}
 Plug 'tpope/vim-fugitive', "{{{
 map \b :Gblame<CR>
