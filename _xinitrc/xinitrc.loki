@@ -1,5 +1,5 @@
 #!/bin/sh
-compton &
+~/.screenlayout/4display.sh
 wal -t -q -i ~/wallpaper &
-lxsession -s i3 &
-syncthing-gtk -m &
+#lxsession -s i3 &
+#syncthing-gtk -m &

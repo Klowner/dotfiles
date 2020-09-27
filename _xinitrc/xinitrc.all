@@ -5,7 +5,7 @@ if_have() {
 }
 
 if_have setxkbmap && { setxkbmap -option caps:swapescape & }
-if_have compton && { compton & }
+if_have picom && { picom & }
 if_have wal && { wal -t -q -i ~/wallpaper & }
 if_have lxsession && { lxsession -s i3 & }
 if_have pnmixer && { pnmixer & }
