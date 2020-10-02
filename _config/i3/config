@@ -118,7 +118,7 @@ bindsym $mod+r mode "resize"
 # nice system menu
 set $mode_system System (e) logout, (r) reboot, (shift+s) shutdown
 mode "$mode_system" {
-	bindsym e exec --no-startup-id ~/bin/i3exit exit, mode "default"
+	bindsym e exec --no-startup-id ~/bin/i3exit logout, mode "default"
 	bindsym r exec --no-startup-id ~/bin/i3exit reboot, mode "default"
 	bindsym Shift+s exec --no-startup-id ~/bin/i3exit shutdown, mode "default"
 
@@ -154,6 +154,6 @@ client.unfocused			$bgalt	   $bgalt	 $fg	 $bg	 $bgalt
 # client.background		   $bg
 
 # autostart
-exec --no-startup-id wal -q -t -i ~/wallpaper --saturate 0.8
+#exec --no-startup-id wal -q -t -i ~/wallpaper --saturate 0.8
 exec_always ~/.config/polybar/launch.sh
 
