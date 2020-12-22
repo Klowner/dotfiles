@@ -25,3 +25,7 @@ if (( $+commands[ccache] )); then
 fi
 
 export VIRSH_DEFAULT_CONNECT_URI="qemu:///system"
+
+#/// Android SDK
+export ANDROID_NDK_ROOT=/opt/android-ndk
+export ANDROID_HOME=/opt/android-sdk

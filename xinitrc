@@ -14,8 +14,6 @@ fi
 eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
 export SSH_AUTH_SOCK
 
-setxkbmap -option caps:swapescape &
-
 # Per-host init
 filepath=$(dirname $(readlink -f $0))
 for f in "all" "$(hostname)"; do

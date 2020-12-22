@@ -52,7 +52,7 @@
 	modules-right = wired-network filesystem memory date pulseaudio
 
 	tray-position = right
-	tray-background: ${bar.background}
+	tray-background = ${bar.background}
 	tray-maxsize = 24444
 
 [bar/secondary]

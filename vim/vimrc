@@ -107,7 +107,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion', "{{{
   map <leader><leader> <plug>(easymotion-prefix)
 "}}}
-Plug 'sheerun/vim-polyglot'
+Plug 'habamax/vim-godot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}, "{{{
 " let g:coc_global_extensions = [
 "       \ 'coc-css',
@@ -122,7 +123,7 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}, "{{{
 "       \ 'coc-yaml',
 "       \ ]
 set signcolumn=yes
-set updatetime=300
+set updatetime=750
 set shortmess+=c
 inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
@@ -140,6 +141,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+nmap <silent> ]p :<C-u>CocPrev<CR>
+nmap <silent> [p :<C-u>CocNext<CR>
 
 nmap <leader>f <Plug>(coc-fix-current)
 
@@ -245,6 +249,7 @@ endtry
 " Display mispellings as italicised
 hi clear SpellBad
 hi SpellBad gui=underline cterm=italic
+hi Pmenu ctermbg=16
 
 " List items are always weird distracting colors
 hi SpecialKey ctermfg=238
