@@ -26,8 +26,9 @@ set ignorecase
 set incsearch       " search as you type
 set hidden          " sometimes I don't want to save a buffer before switching away from it
 set cmdheight=2
-set updatetime=300
+set updatetime=750
 set signcolumn=yes
+set shortmess+=c
 
 set completeopt-=preview
 set matchtime=1
@@ -50,6 +51,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " color schemes
 Plug 'dylanaraps/wal.vim'
+Plug 'sickill/vim-monokai'
 
 " syntax
 Plug 'cakebaker/scss-syntax.vim'
@@ -57,8 +59,10 @@ Plug 'calviken/vim-gdscript3'
 Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'lepture/vim-jinja'
-Plug 'posva/vim-vue'
 Plug 'nikvdp/ejs-syntax'
+Plug 'noahfrederick/vim-noctu'
+Plug 'posva/vim-vue'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " functionality
 Plug 'tpope/vim-sensible'
@@ -72,25 +76,60 @@ Plug 'tpope/vim-commentary', "{{{
     xmap <leader>c <Plug>Commentary
     omap <leader>c <Plug>Commentary
     nmap <leader>cc <Plug>CommentaryLine
+    autocmd FileType vue setlocal commentstring=//\ %s
 "}}}
+
 Plug 'tpope/vim-fugitive', "{{{
     map \b :Gblame<CR>
     map \l :Glog<CR>
     map \gs :Gstatus<CR>
 "}}}
-Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
-"Plug 'w0rp/ale', "{{{
-"    let g:ale_linters = {
-"        \ 'c': ['clang'],
-"        \ 'cpp': ['clangx'],
-"        \ 'php': ['phpcs'],
-"        \ 'javascript': ['eslint'],
-"        \}
-"    let g:ale_python_pylint_options = '--load-plugins pylint_django'
-"    let g:ale_sign_error = '⬤'
-""}}}
-" Use release branch (Recommend)
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}, "{{{
+  inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+  " Remap keys for gotos
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+
+  nmap <silent> ]p :<C-u>CocPrev<CR>
+  nmap <silent> [p :<C-u>CocNext<CR>
+
+  nmap <leader>f <Plug>(coc-fix-current)
+
+  " Use <c-space> to trigger completion.
+  inoremap <silent><expr> <c-space> coc#refresh()
+
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " Use K to show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+  function! s:show_documentation()
+   if (index(['vim','help'], &filetype) >= 0)
+     execute 'h '.expand('<cword>')
+   else
+     call CocAction('doHover')
+   endif
+  endfunction
+
+  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+  " Coc only does snippet and additional edit on confirm.
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"}}}
+
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline', "{{{
     let g:airline_symbols = {}
@@ -102,48 +141,32 @@ Plug 'vim-airline/vim-airline', "{{{
 "}}}
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion', "{{{
     map <Leader><Leader> <Plug>(easymotion-prefix)
 "}}}
-"Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
-" if has('nvim')
-" 	Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-" else
-" 	Plug 'Shougo/deoplete.nvim'
-" 	Plug 'roxma/nvim-yarp'
-" 	Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#enable_smart_case = 1
-" let g:deoplete#sources#syntax#min_keyword_length = 2
-" Plug 'Shougo/denite.nvim'
-"Plug 'Shougo/neosnippet-snippets'
-"Plug 'Shougo/neosnippet.vim', "{{{
-"	let g:neosnippet#snippets_directory = '~/.vim/bundle/'.expand(fnamemodify($MYVIMRC, ':p:h').'/snippets/')
-"	let g:neosnippet#enable_snipmate_compatibility = 1
-""}}}
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim',  "{{{
     function! s:buflist()
-	redir => ls
-	silent ls
-	redir END
-	return split(ls,'\n')
+        redir => ls
+        silent ls
+        redir END
+        return split(ls,'\n')
     endfunction
 
     function! s:bufopen(e)
-	execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+        execute 'buffer' matchstr(a:e, '^[ 0-9]*')
     endfunction
 
     nnoremap <silent> <Leader><Enter> :call fzf#run({
-		\ 'source': reverse(<sid>buflist()),
-		\ 'sink': function('<sid>bufopen'),
-		\ 'options': '+m',
-		\ 'down': len(<sid>buflist()) + 2
-		\})<CR>
+                \ 'source': reverse(<sid>buflist()),
+                \ 'sink': function('<sid>bufopen'),
+                \ 'options': '+m',
+                \ 'down': len(<sid>buflist()) + 2
+                \})<CR>
 
-    
+
     function! s:FuzzyFiles()
         let gitparent=system('git rev-parse --show-toplevel')[:-2]
         let rootdir='.'
@@ -176,38 +199,61 @@ Plug 'junegunn/fzf.vim',  "{{{
 "}}}
 call plug#end()
 
-" key bindings
-map <C-n> :bnext<CR>
-map <C-p> :bprev<CR>
-nmap <C-j> <C-W>j                   " faster window movement
-nmap <C-k> <C-W>k
-nmap <C-h> <C-W>h
-nmap <C-l> <C-W>l
-vmap <C-o> :sort<CR>                " sort lines in visual mode with ctrl-o
-map <F7> mzgg=G`z<CR>               " autoformat document
-nmap <leader>n :set invnumber<CR>   " toggle line numbers
-vnoremap < <gv                      " stay in visual mode when shifting
-vnoremap > >gv
-nnoremap <leader>pu :PlugUpdate<CR> " vim-plug actions
-nnoremap <leader>pi :PlugInstall<CR>
-nnoremap <leader>pc :PlugClean<CR>
-nnoremap <leader>o :jumps<CR>       " show jumps list
-nnoremap zn ]s                      " next misspelling
-nnoremap zp [s                      " prev misspelling
-nnoremap zf <Esc>1z=                " replace misspelling with first suggestion
-nnoremap z! :set local spell!<CR>   " toggle spellcheck
-nnoremap <leader>ve :e $MYVIMRC<CR> " quick open this (literally this) file
-if executable('rg')
-    set grepprg='rg\ --vimgrep'     " use ripgrep if available
-endif
-
 " theme / visual
 try
-	colorscheme wal
+	" colorscheme wal
+        colorscheme monokai
 catch
 endtry
 hi clear SpellBad                   " italicize misspellings
 hi SpellBad gui=underline cterm=italic
+
+highlight ExtraWhitespace ctermbg=20 ctermfg=1
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+" List items are always weird distracting colors
+hi SpecialKey ctermfg=238
+
+" key mappings
+map <C-n> :bnext<cr>                " next buffer
+map <C-p> :bprev<cr>                " prev buffer
+
+nmap <C-j> <C-W>j                   " focus window down
+nmap <C-k> <C-W>k                   " focus window up
+nmap <C-h> <C-W>h                   " focus window left
+nmap <C-l> <C-W>l                   " focus window right
+
+vnoremap <C-o> :sort<cr>                " visual select and sort
+noremap <F7> mzgg=G`z<cr>               " auto-format entire document
+
+nnoremap <leader>pu :PlugUpdate<cr>     " update plugins managed by vim-plugged
+nnoremap <leader>pi :PlugInstall<cr>    " install new plugins
+nnoremap <leader>pc :PlugClean<cr>      " clean removed plugins
+
+nnoremap zn ]s                          " next misspelling
+nnoremap zp [s                          " prev misspelling
+nnoremap zf <Esc>1z=                    " replace misspelling with first suggestion
+
+nnoremap <leader>n :set number!<cr>     " toggle numbering
+
+nnoremap <leader>ve :e $MYVIMRC<cr>     " quick open (literally) this file
+
+nmap <leader>w :w!<cr>                  " fast save
+
+" clear trailing white space
+nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
+" prefer ripgrep if available
+if executable('rg')
+    set grepprg="rg --vimgrep"
+endif
+
+" save with sudo
+command! W execute 'w !sudo tee %> /dev/null' <bar> edit!
 
 " netrw
 nnoremap \e :Lexplore!<CR>

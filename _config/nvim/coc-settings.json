@@ -1,0 +1,29 @@
+{
+	"languageserver": {
+		"ccls": {
+			"command": "ccls",
+			"filetypes": [
+				"c",
+				"cpp"
+			],
+			"rootPatterns": [
+				".ccls",
+				".git/",
+				".hg/",
+				".vim/",
+				"compile_commands.json"
+			],
+			"initializationOptions":{
+				"cache": {
+					"directory": "/tmp/ccls"
+				}
+			}
+		},
+		"godot": {
+			"host": "127.0.0.1",
+			"filetypes": ["gdscript"],
+			"port": 6008
+		}
+	},
+	"tsserver.log": "off"
+}
