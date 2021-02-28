@@ -32,7 +32,8 @@ alias egrep='egrep --color=auto'
 # Default editor alias
 alias edit='${EDITOR}:-vim}'
 
-# Prefer neovim if available
-# if (( $+commands[nvim] )) then
-# 	alias vim='nvim'
-# fi
+#Prefer neovim if available
+if (( $+commands[nvim] )) then
+	alias vim='nvim'
+	alias vimdiff='nvim -d'
+fi

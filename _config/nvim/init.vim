@@ -40,6 +40,7 @@ set shiftwidth=4
 set softtabstop=4
 set spell
 set tabstop=4
+set termguicolors
 
 " install vim-plug
 if !filereadable(expand('~/.local/share/nvim/site/autoload/plug.vim'))
@@ -51,7 +52,17 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " color schemes
 Plug 'dylanaraps/wal.vim'
-Plug 'sickill/vim-monokai'
+Plug 'crusoexia/vim-monokai', "{{{
+  let g:monokai_term_italic = 1
+  let g:monokai_gui_italic = 1
+"}}}
+Plug 'sainnhe/sonokai', "{{{
+  " let g:sonokai_style = "andromeda"
+  let g:sonokai_style = "atlantis"
+  " let g:sonokai_style = "default"
+  " let g:sonokai_style = "maia"
+  " let g:sonokai_style = "shusia"
+"}}}
 
 " syntax
 Plug 'cakebaker/scss-syntax.vim'
@@ -85,6 +96,10 @@ Plug 'tpope/vim-fugitive', "{{{
     map \gs :Gstatus<CR>
 "}}}
 
+" Plug 'sheerun/vim-polyglot'
+Plug 'preservim/tagbar', "{{{
+  map \t :TagbarToggle<CR>
+"}}}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}, "{{{
   inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -137,7 +152,7 @@ Plug 'vim-airline/vim-airline', "{{{
     let g:airline_symbols.readonly = '⭤'
     let g:airline_symbols.linenr = '⭡'
     let g:airline#extensions#tabline#enabled = 1
-    let g:airline_theme = 'wal'
+    let g:airline_theme = 'sonokai'
 "}}}
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
@@ -202,7 +217,8 @@ call plug#end()
 " theme / visual
 try
 	" colorscheme wal
-        colorscheme monokai
+    " colorscheme monokai
+    colorscheme sonokai
 catch
 endtry
 hi clear SpellBad                   " italicize misspellings

@@ -130,10 +130,10 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 # appearance
 font xft:artwiz lime 7
-new_window pixel 2
+new_window pixel 5
 font xft:Roboto 13
-gaps inner 8
-gaps outer 0
+# gaps inner 8
+# gaps outer 0
 
 # app specific launch flags
 for_window [class="Peek"] floating enable

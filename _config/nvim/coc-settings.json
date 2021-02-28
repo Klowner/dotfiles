@@ -25,5 +25,5 @@
 			"port": 6008
 		}
 	},
-	"tsserver.log": "off"
+	"tsserver.log": "true"
 }

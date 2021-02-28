@@ -108,8 +108,7 @@ Plug 'easymotion/vim-easymotion', "{{{
   map <leader><leader> <plug>(easymotion-prefix)
 "}}}
 Plug 'habamax/vim-godot'
-"Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}, "{{{
+Plug 'neoclide/coc.nvim', {'branch': 'release'}, "{{{
 " let g:coc_global_extensions = [
 "       \ 'coc-css',
 "       \ 'coc-emoji',
@@ -122,6 +121,7 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}, "{{{
 "       \ 'coc-tsserver',
 "       \ 'coc-yaml',
 "       \ ]
+Plug 'pappasam/coc-jedi', {'do': 'yarn install --frozen-lockfile'}
 set signcolumn=yes
 set updatetime=750
 set shortmess+=c
