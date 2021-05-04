@@ -63,7 +63,14 @@ Plug 'sainnhe/sonokai', "{{{
   " let g:sonokai_style = "maia"
   " let g:sonokai_style = "shusia"
 "}}}
-
+Plug 'nanotech/jellybeans.vim', "{{{
+  let g:jellybeans_use_term_italics=1
+  let g:jellybeans_use_gui_italics=1
+  " let g:jellybeans_use_lowcolor_black=1
+"}}}
+" Plug 'tomasr/molokai'
+" Plug 'fmoralesc/molokayo'
+"
 " syntax
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'calviken/vim-gdscript3'
@@ -74,6 +81,8 @@ Plug 'nikvdp/ejs-syntax'
 Plug 'noahfrederick/vim-noctu'
 Plug 'posva/vim-vue'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'pantharshit00/vim-prisma'
+Plug 'alexlafroscia/postcss-syntax.vim'
 
 " functionality
 Plug 'tpope/vim-sensible'
@@ -153,6 +162,7 @@ Plug 'vim-airline/vim-airline', "{{{
     let g:airline_symbols.linenr = '⭡'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_theme = 'sonokai'
+    " let g:airline_theme = 'jellybeans'
 "}}}
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
@@ -185,7 +195,6 @@ Plug 'junegunn/fzf.vim',  "{{{
     function! s:FuzzyFiles()
         let gitparent=system('git rev-parse --show-toplevel')[:-2]
         let rootdir='.'
-
         if empty(matchstr(gitparent, '^fatal:.*'))
             silent call fzf#run({
                         \ 'dir':     gitparent,
@@ -203,9 +212,9 @@ Plug 'junegunn/fzf.vim',  "{{{
 
     command! -bang -nargs=* Rg
                 \ call fzf#vim#grep(
-                \  'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+                \  'rg --column --line-number --no-heading  --color=always --smart-case '.shellescape(<q-args>), 1,
                 \  <bang>0 ? fzf#vim#with_preview('up:60%')
-                \          : fzf#vim#with_preview('right:50%:hidden', '?'),
+                \          : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:80%:hidden', '?'),
                 \  <bang>0)
 
     nnoremap <silent> ; :call <sid>FuzzyFiles()<CR>
@@ -216,8 +225,7 @@ call plug#end()
 
 " theme / visual
 try
-	" colorscheme wal
-    " colorscheme monokai
+    " colorscheme jellybeans
     colorscheme sonokai
 catch
 endtry

@@ -29,6 +29,7 @@ for group in default ${HOST}; do
 	fi
 done
 
+[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.aliases ] && source ~/.aliases
