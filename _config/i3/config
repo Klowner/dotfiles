@@ -137,6 +137,7 @@ font xft:Roboto 13
 
 # app specific launch flags
 for_window [class="Peek"] floating enable
+for_window [class="Puppet Pounders"] floating enable
 
 set_from_resource $fg i3wm.color7
 set_from_resource $bg i3wm.color2

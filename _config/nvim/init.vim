@@ -83,6 +83,7 @@ Plug 'posva/vim-vue'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'pantharshit00/vim-prisma'
 Plug 'alexlafroscia/postcss-syntax.vim'
+Plug 'habamax/vim-godot'
 
 " functionality
 Plug 'tpope/vim-sensible'

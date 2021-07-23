@@ -25,5 +25,13 @@
 			"port": 6008
 		}
 	},
-	"tsserver.log": "true"
+	"tsserver.log": "true",
+	"tsserver.tsdk": ".yarn/sdks/typescript/lib",
+	"eslint": {
+		"packageManager": "yarn",
+		"nodePath": ".yarn/sdks",
+		"format": {
+			"enable": true
+		}
+	}
 }
