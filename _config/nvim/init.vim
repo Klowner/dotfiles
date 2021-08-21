@@ -41,7 +41,7 @@ set softtabstop=4
 set spell
 set tabstop=4
 set termguicolors
-
+set filetype 
 " install vim-plug
 if !filereadable(expand('~/.local/share/nvim/site/autoload/plug.vim'))
     silent !echo "Installing vim-plug..."
@@ -63,6 +63,12 @@ Plug 'sainnhe/sonokai', "{{{
   " let g:sonokai_style = "maia"
   " let g:sonokai_style = "shusia"
 "}}}
+Plug 'ghifarit53/tokyonight-vim', "{{{
+  let g:tokyonight_style = 'night'
+  let g:tokyonight_enable_italic = 1
+  let g:tokyonight_trasnparent_background = 1
+"}}}
+Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'nanotech/jellybeans.vim', "{{{
   let g:jellybeans_use_term_italics=1
   let g:jellybeans_use_gui_italics=1
@@ -83,7 +89,6 @@ Plug 'posva/vim-vue'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'pantharshit00/vim-prisma'
 Plug 'alexlafroscia/postcss-syntax.vim'
-Plug 'habamax/vim-godot'
 
 " functionality
 Plug 'tpope/vim-sensible'
@@ -222,12 +227,14 @@ Plug 'junegunn/fzf.vim',  "{{{
     nnoremap <leader>/ :Rg<CR>
 	
 "}}}
+Plug 'habamax/vim-godot', "{{{
+
+"}}}
 call plug#end()
 
 " theme / visual
 try
-    " colorscheme jellybeans
-    colorscheme sonokai
+    colorscheme dracula
 catch
 endtry
 hi clear SpellBad                   " italicize misspellings

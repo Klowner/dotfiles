@@ -8,6 +8,8 @@ setopt EXTENDED_HISTORY     # Include more information about command executed, e
 setopt COMPLETE_IN_WORD     # Allow completion from within a word/phrase
 setopt PROMPT_SUBST         # Enable parameter expansion, etc. in prompt
 
+export LS_OPTIONS='--group-directories-first'
+
 # aliases
 alias retheme='wal -q -t -i ~/wallpaper -saturate 0.9'
 alias sudo='sudo '

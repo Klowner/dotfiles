@@ -132,19 +132,20 @@ bindsym $mod+Shift+e mode "$mode_system"
 font xft:artwiz lime 7
 default_border pixel 5
 font xft:Roboto 13
-# gaps inner 8
+#gaps inner 8
 # gaps outer 0
+gaps inner 5
 
 # app specific launch flags
 for_window [class="Peek"] floating enable
-for_window [class="Puppet Pounders"] floating enable
 
-set_from_resource $fg i3wm.color7
-set_from_resource $bg i3wm.color2
-set_from_resource $bgalt i3wm.color8
-# set $fg #ff00ff
-# set $bg #00ff00
-# set $bgalt #ff00ff
+#set_from_resource $fg i3wm.color7
+#set_from_resource $bg i3wm.color2
+#set_from_resource $bgalt i3wm.color8
+include "$HOME/.cache/wal/colors-sway"
+set $fg $color3
+set $bg $color1
+set $bgalt $color7
 workspace_layout default
 
 # class						brdr	bg	   txt	   indic   childbdr
@@ -158,5 +159,29 @@ client.unfocused			$bgalt	   $bgalt	 $fg	 $bg	 $bgalt
 
 # autostart
 #exec --no-startup-id wal -q -t -i ~/wallpaper --saturate 0.8
-exec_always ~/.config/polybar/launch.sh
+# exec_always ~/.config/polybar/launch.sh
+exec_always mako
 
+input "type:keyboard" {
+	xkb_options caps:swapescape
+}
+
+set $monitor-center DP-1
+set $monitor-left DVI-D-1
+set $monitor-right DVI-I-1
+
+output $monitor-center pos 1080 500 res 3840x2160
+output $monitor-left pos 0 0 res 1920x1080 transform 90
+output $monitor-right pos 4920 0 res 1920x1080 transform 270
+
+# output $monitor-center bg $wallpaper fill
+# output $monitor-left bg $wallpaper fill
+# output $monitor-right bg $wallpaper fill
+output * bg $wallpaper fill
+
+bar {
+	swaybar_command waybar
+}
+
+set $opacity 0.9
+for_window [app_id="kitty"] opacity $opacity;

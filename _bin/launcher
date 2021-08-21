@@ -28,21 +28,27 @@ _fg=${colors[5]}
 _fg2=${colors[8]}
 _clear="#00000000"
 
-rofi -show drun -modi drun \
-	-color-window "$_bg, $_bg, $_fg" \
-	-color-normal "$_clear, $_fg, $_bg2, $_fg, $_bg" \
-	-color-active "$_clear, $_fg, $_clear, $_fg, $_clear" \
-	-opacity 10 \
-	-width 80 \
-	-padding 20 \
-	-bw 2 \
-	-separator-style none \
-	-line-padding 3 \
-	-icon-theme "Paper" \
-	-location 0 \
-	-hide-scrollbar \
-	-show-icons true \
-	-font "Abel 11" \
-	-display-run ">" \
-	-theme-str "#prompt-colon { enabled: false; }"
+
+if command -v rofi &> /dev/null; then
+	rofi -show drun -modi drun \
+		-color-window "$_bg, $_bg, $_fg" \
+		-color-normal "$_clear, $_fg, $_bg2, $_fg, $_bg" \
+		-color-active "$_clear, $_fg, $_clear, $_fg, $_clear" \
+		-opacity 10 \
+		-width 80 \
+		-padding 20 \
+		-bw 2 \
+		-separator-style none \
+		-line-padding 3 \
+		-icon-theme "Paper" \
+		-location 0 \
+		-hide-scrollbar \
+		-show-icons true \
+		-font "Abel 11" \
+		-display-run ">" \
+		-theme-str "#prompt-colon { enabled: false; }"
+elif command -v wofi &> /dev/null; then
+	COMMAND=wofi
+	$COMMAND --show drun
+fi
 

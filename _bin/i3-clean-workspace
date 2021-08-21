@@ -1,0 +1,5 @@
+#!/bin/sh
+WORKSPACES=$(i3-msg -t get_workspaces)
+# echo $WORKSPACES | jq
+
+echo $WORKSPACES
