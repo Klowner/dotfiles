@@ -1,8 +1,24 @@
 #!/bin/sh
-mkdir -p ${HOME}/screenshot
-TARGET="${HOME}/screenshot/grab-$(date +'%Y%m%d%H%M%S').png"
-maim -s -n -o -p 1 -f png -m 10 -u | tee $TARGET | xclip -selection clipboard -t image/png
+with_maim() {
+    mkdir -p ${HOME}/screenshot
+    TARGET="${HOME}/screenshot/grab-$(date +'%Y%m%d%H%M%S').png"
+    maim -s -n -o -p 1 -f png -m 10 -u | tee $TARGET | xclip -selection clipboard -t image/png
+    [ -s ${TARGET} ] || rm ${TARGET}
+}
 
-[ -s ${TARGET} ] || rm ${TARGET}
+with_grim() {
+    # requires: grim, wl-clipboard, and slurp.
+    mkdir -p ${HOME}/screenshot
+    TARGET="${HOME}/screenshot/grab-$(date +'%Y%m%d%H%M%S').png"
+    grim -g "$(slurp)" $TARGET
+    if [ -s $TARGET ]; then
+        wl-copy < $TARGET
+    fi
+}
+
+case "${XDG_SESSION_TYPE}" in
+    wayland) with_grim;;
+    *) with_maim;;
+esac
 
 
