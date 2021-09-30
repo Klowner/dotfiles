@@ -89,6 +89,7 @@ Plug 'posva/vim-vue'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'pantharshit00/vim-prisma'
 Plug 'alexlafroscia/postcss-syntax.vim'
+Plug 'cespare/vim-toml'
 
 " functionality
 Plug 'tpope/vim-sensible'
@@ -106,9 +107,9 @@ Plug 'tpope/vim-commentary', "{{{
 "}}}
 
 Plug 'tpope/vim-fugitive', "{{{
-    map \b :Gblame<CR>
-    map \l :Glog<CR>
-    map \gs :Gstatus<CR>
+    map \b :Git blame<CR>
+    map \l :Git log<CR>
+    map \gs :Git status<CR>
 "}}}
 
 " Plug 'sheerun/vim-polyglot'
@@ -133,6 +134,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}, "{{{
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
 
+  " navigate diagnostics
+  nmap <silent> ]d :<Plug>(coc-diagnostic-next)<CR>
+  nmap <silent> [d :<Plug>(coc-diagnostic-prev)<CR>
+
+  " navigate current list
   nmap <silent> ]p :<C-u>CocPrev<CR>
   nmap <silent> [p :<C-u>CocNext<CR>
 
@@ -140,6 +146,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}, "{{{
 
   " Use <c-space> to trigger completion.
   inoremap <silent><expr> <c-space> coc#refresh()
+
+  " Remap for rename current word
+  nmap <leader>rn <Plug>(coc-rename)
+
+  " Remap for do codeAction of selection region
+  xmap <leader>a <Plug>(coc-codeaction-selected)
+  nmap <leader>a <Plug>(coc-codeaction-selected)
 
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
