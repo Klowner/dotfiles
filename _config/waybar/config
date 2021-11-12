@@ -1,18 +1,9 @@
 {
 	"layer": "top",
-	"modules-left": ["sway/workspaces", "mpd", "sway/mode"],
+	"modules-left": ["sway/workspaces", "sway/mode"],
 	"modules-center": [],
-	"modules-right": ["network", "pulseaudio", "temperature", "cpu", "memory", "clock"],
-	"mpd": {
-		"tooltip": false,
-		"format": "{stateIcon} {artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
-		"format-disconnected": "ﳌ",
-		"format-stopped": "",
-        "state-icons": {
-            "playing": "",
-            "paused": ""
-        }
-	},
+	"modules-right": ["network", "pulseaudio", "temperature", "cpu", "memory", "clock", "tray"],
+	"enable-bar-scroll": true,
 	"pulseaudio": {
 		"tooltip": false,
 		"scroll-step": 5,
@@ -20,6 +11,9 @@
 		"format-icons": {
 			"default": ["奄", "奔", "墳"]
 		}
+	},
+	"temperature": {
+		"format": "{temperatureF}°F",
 	},
 	"network": {
 		"tooltip": false,
@@ -33,5 +27,12 @@
 	"memory": {
 		"tooltip": false,
 		"format": " {}%"
-	}
+	},
+	"tray": {
+		"icon-size": 24,
+		"spacing": 5,
+	},
+	"clock": {
+		"format": "{:%a, %b %d %I:%M%p %Z %d/%m/%Y}",
+	},
 }

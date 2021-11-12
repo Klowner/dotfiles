@@ -1,0 +1,5 @@
+#!/bin/sh
+if_have() {
+	command -v $1 2>&1> /dev/null
+}
+~/.screenlayout/horiz-vert-4k-flip.sh

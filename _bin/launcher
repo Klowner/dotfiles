@@ -49,6 +49,6 @@ if command -v rofi &> /dev/null; then
 		-theme-str "#prompt-colon { enabled: false; }"
 elif command -v wofi &> /dev/null; then
 	COMMAND=wofi
-	$COMMAND --show drun
+	$COMMAND --show drun --color=$HOME/.cache/wal/colors
 fi
 

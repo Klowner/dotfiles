@@ -171,3 +171,5 @@ bar {
 
 set $opacity 0.9
 for_window [app_id="kitty"] opacity $opacity;
+
+exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"

@@ -1,167 +1,65 @@
-/*
- ********************************************
- *░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░*
- *░░█▀█░█░░░█░█░█▀▀░░░█░█░█░░░▀█▀░█▀▄░█▀█░░*
- *░░█▀▀░█░░░█░█░▀▀█░░░█░█░█░░░░█░░█▀▄░█▀█░░*
- *░░▀░░░▀▀▀░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░░▀░░▀░▀░▀░▀░░*
- *░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░*
- ********************************************
- */
+@import url('/home/mark/.cache/wal/colors-waybar.css');
 
 * {
-	border: none;
-	border-radius: 0;
-	font-family: Nerd Font Hack;
-	font-size: 14px;
-	min-height: 24px;
+    border: none;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Font Awesome, "Ubuntu", "Droid", "MesloLGL Nerd Font", Roboto, sans-serif;
 }
 
 window#waybar {
-	background: transparent;
+    color: @foreground;
+    background: rgba(0, 0, 0, 0);
 }
 
-window#waybar.hidden {
-	opacity: 0.2;
+.modules-right,
+.modules-left {
+    margin: 0;
+    padding: 2px 10px;
+    background-color: alpha(@background, 0.7);
 }
-
-#window {
-    margin-top: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
-	border-radius: 26px;
-	transition: none;
-	/*
-    color: #f8f8f2;
-	background: #282a36;
-    */
-    color: transparent;
-	background: transparent;
+.modules-right {
+    border-radius: 0 0 0 10px;
 }
-
-window#waybar.termite #window,
-window#waybar.Firefox #window,
-window#waybar.Navigator #window,
-window#waybar.PCSX2 #window {
-    color: #4d4d4d;
-	background: #e6e6e6;
-}
-
-#workspaces {
-	margin-top: 8px;
-	margin-left: 12px;
-	margin-bottom: 0;
-	border-radius: 26px;
-	background: #282a36;
-	transition: none;
+.modules-left {
+    border-radius: 0 0 10px 0;
 }
 
 #workspaces button {
-	transition: none;
-	color: #f8f8f2;
-	background: transparent;
-	font-size: 16px;
+    border-radius: 2px;
 }
-
-#workspaces button.focused {
-	color: #9aedfe;
-}
-
 #workspaces button:hover {
-	transition: none;
-	box-shadow: inherit;
-	text-shadow: inherit;
-	color: #ff79c6;
+    color: @color1;
+    animation-duration: 0.5s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+#workspaces button.focused {
+    color: @color2;
+}
+#workspaces button.urgent {
+    animation-duration: 0.5s;
+    animation-name: blink;
+    background-color: @color15;
+    animation-iteration-count: infinite;
 }
 
-#mpd {
-	margin-top: 8px;
-	margin-left: 8px;
-	padding-left: 16px;
-	padding-right: 16px;
-	margin-bottom: 0;
-	border-radius: 26px;
-	background: #282a36;
-	transition: none;
-	color: #4d4d4d;
-	background: #5af78e;
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#tray,
+#mode {
+    padding: 0 10px;
 }
 
-#mpd.disconnected,
-#mpd.stopped {
-	color: #f8f8f2;
-	background: #282a36;
+@keyframes blink {
+    to {
+	padding-bottom: 3px;
+    }
 }
-
-#network {
-	margin-top: 8px;
-	margin-left: 8px;
-	padding-left: 16px;
-	padding-right: 16px;
-	margin-bottom: 0;
-	border-radius: 26px;
-	transition: none;
-	color: #4d4d4d;
-	background: #bd93f9;
-}
-
-#pulseaudio {
-	margin-top: 8px;
-	margin-left: 8px;
-	padding-left: 16px;
-	padding-right: 16px;
-	margin-bottom: 0;
-	border-radius: 26px;
-	transition: none;
-	color: #4d4d4d;
-	background: #9aedfe;
-}
-
-#temperature {
-	margin-top: 8px;
-	margin-left: 8px;
-	padding-left: 16px;
-	padding-right: 16px;
-	margin-bottom: 0;
-	border-radius: 26px;
-	transition: none;
-	color: #4d4d4d;
-	background: #5af78e;
-}
-
-#cpu {
-	margin-top: 8px;
-	margin-left: 8px;
-	padding-left: 16px;
-	padding-right: 16px;
-	margin-bottom: 0;
-	border-radius: 26px;
-	transition: none;
-	color: #4d4d4d;
-	background: #f1fa8c;
-}
-
-#memory {
-	margin-top: 8px;
-	margin-left: 8px;
-	padding-left: 16px;
-	padding-right: 16px;
-	margin-bottom: 0;
-	border-radius: 26px;
-	transition: none;
-	color: #4d4d4d;
-	background: #ff6e67;
-}
-
-#clock {
-	margin-top: 8px;
-	margin-left: 8px;
-	margin-right: 12px;
-	padding-left: 16px;
-	padding-right: 16px;
-	margin-bottom: 0;
-	border-radius: 26px;
-	transition: none;
-	color: #f8f8f2;
-	background: #282a36;
-}
-
