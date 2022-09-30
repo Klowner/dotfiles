@@ -79,7 +79,7 @@ Plug 'nanotech/jellybeans.vim', "{{{
 "
 " syntax
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'calviken/vim-gdscript3'
+"Plug 'calviken/vim-gdscript3'
 Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'lepture/vim-jinja'
@@ -90,6 +90,7 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'pantharshit00/vim-prisma'
 Plug 'alexlafroscia/postcss-syntax.vim'
 Plug 'cespare/vim-toml'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " functionality
 Plug 'tpope/vim-sensible'
@@ -117,12 +118,17 @@ Plug 'preservim/tagbar', "{{{
   map \t :TagbarToggle<CR>
 "}}}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}, "{{{
-  inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  " inoremap <silent><expr> <TAB>
+  "     \ pumvisible() ? "\<C-n>" :
+  "     \ <SID>check_back_space() ? "\<TAB>" :
+  "     \ coc#refresh()
 
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1) :
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
   function! s:check_back_space() abort
     let col = col('.') - 1
@@ -170,7 +176,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}, "{{{
 
   " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
   " Coc only does snippet and additional edit on confirm.
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 "}}}
 
 Plug 'vim-airline/vim-airline-themes'
@@ -185,7 +192,7 @@ Plug 'vim-airline/vim-airline', "{{{
 "}}}
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'easymotion/vim-easymotion', "{{{
     map <Leader><Leader> <Plug>(easymotion-prefix)
 "}}}
@@ -259,6 +266,9 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+" Initialize colorizer
+lua require'colorizer'.setup()
 
 " List items are always weird distracting colors
 hi SpecialKey ctermfg=238
