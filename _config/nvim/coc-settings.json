@@ -25,5 +25,7 @@
 			"port": 6008
 		}
 	},
-	"tsserver.log": "normal"
+	"tsserver.log": "normal",
+	"svelte.enable-ts-plugin": true,
+	"svelte.language-server.ls-path": "node_modules/svelte-language-server/bin/server.js"
 }
