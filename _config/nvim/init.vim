@@ -82,7 +82,7 @@ Plug 'cakebaker/scss-syntax.vim'
 "Plug 'calviken/vim-gdscript3'
 Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
-Plug 'lepture/vim-jinja'
+"Plug 'lepture/vim-jinja'
 Plug 'nikvdp/ejs-syntax'
 Plug 'noahfrederick/vim-noctu'
 Plug 'posva/vim-vue'
@@ -91,6 +91,11 @@ Plug 'pantharshit00/vim-prisma'
 Plug 'alexlafroscia/postcss-syntax.vim'
 Plug 'cespare/vim-toml'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'rhysd/vim-grammarous', "{{{
+    " nmap <leader><n> <Plug>(grammarous-move-to-next-error)
+    " nmap <leader><p> <Plug>(grammarous-move-to-previous-error)
+    let g:grammarous#jar_url = 'https://www.languagetool.org/download/LanguageTool-5.9.zip'
+"}}}
 
 " functionality
 Plug 'tpope/vim-sensible'
@@ -248,10 +253,12 @@ Plug 'junegunn/fzf.vim',  "{{{
 	
 "}}}
 Plug 'habamax/vim-godot', "{{{
-
+"}}}
+Plug 'leafOfTree/vim-svelte-plugin', "{{{
+    let g:vim_svelte_plugin_load_full_syntax = 1
+    let g:vim_svelte_plugin_use_typescript = 1
 "}}}
 call plug#end()
-
 " theme / visual
 try
     colorscheme dracula
