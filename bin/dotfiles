@@ -3,10 +3,11 @@
 # curl https://raw.github.com/Klowner/dotfiles/main/bin/dotfiles | bash
 basedir="${DOTFILES_ROOT:-$HOME/.dotfiles}"
 bindir="${DOTFILES_BIN:-$HOME/bin}"
+branch="${DOTFILES_BRANCH:-main}"
 repo="Klowner/dotfiles"
 gitbase="git://github.com/${repo}.git"
 gitremote="git@github.com:${repo}"
-tarball="http://github.com/${repo}/tarball/master"
+tarball="http://github.com/${repo}/tarball/${branch}"
 
 function has() {
   return $(which $1 &> /dev/null)
@@ -126,6 +127,12 @@ function install() {
 function git_migrate() {
   if missing git; then
     return
+  fi
+  if [ ! -d "${basedir}/.git" ]; then
+    note "Migrating dotfiles to git repository..."
+    git clone $gitremote --no-checkout --branch ${branch} "${basedir}/migrate"
+    git mv "${basedir}/migrate/.git" "${basedir}/.git"
+    rm -rf "${basedir}/migrate"
   fi
 }
 
