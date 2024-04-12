@@ -5,7 +5,7 @@ DOTFILES_REMOTE="${DOTFILES_REMOTE:-git@github.com:Klowner/dotfiles}"
 DOTFILES_BRANCH="${DOTFILES_BRANCH:-main}"
 DOTFILES_WORK_TREE="${DOTFILES_WORK_TREE:-$HOME}"
 DOTFILES_ALIAS="/usr/bin/git --git-dir=${DOTFILES_ROOT} --work-tree=${DOTFILES_WORK_TREE}"
-DEPENDENCIES=(git zsh)
+DEPENDENCIES=(git zsh ssh)
 
 function has() {
   return $(which $1 &> /dev/null)
@@ -62,6 +62,11 @@ function install() {
   dotfiles config --local status.showUntrackedFiles no
 }
 
+function echo_alias {
+  echo $DOTFILES_ALIAS
+  exit 0
+}
+
 # If this script is being piped from curl
 if ! tty >/dev/null; then
   install
@@ -72,10 +77,12 @@ fi
 case "${1:-help}" in
   info) info;;
   install) install;;
+  alias) echo_alias;;
   help)
     echo "dotfiles commands: "
     echo " - install"
     echo " - info"
+    echo " - alias"
     echo "all other commands will be forwarded to git"
     ;;
   *) eval $DOTFILES_ALIAS $*;;
