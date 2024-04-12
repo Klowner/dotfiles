@@ -1,10 +1,10 @@
-#!/bin/sh -e
+#!/bin/zsh -e
 DOTFILES_HOME="${DOTFILES_HOME:-$HOME}"
 DOTFILES_ROOT="${DOTFILES_ROOT:-$DOTFILES_HOME/.dotfiles}"
 DOTFILES_REMOTE="${DOTFILES_REMOTE:-git@github.com:Klowner/dotfiles}"
 DOTFILES_WORK_TREE="${DOTFILES_WORK_TREE:-$HOME}"
 DOTFILES_ALIAS="/usr/bin/git --git-dir=${DOTFILES_ROOT} --work-tree=${DOTFILES_WORK_TREE}"
-DEPENDENCIES=(git)
+DEPENDENCIES=(git zsh)
 
 function has() {
   return $(which $1 &> /dev/null)
@@ -25,7 +25,7 @@ function info() {
 function smart_clone() {
   if [ -d $DOTFILES_ROOT ]; then
     EXISTING_REMOTE=$(git --git-dir=${DOTFILES_ROOT} remote get-url origin)
-    if [ $EXISTING_REMOTE == $DOTFILES_REMOTE ]; then
+    if [ "$EXISTING_REMOTE" = "$DOTFILES_REMOTE" ]; then
       dotfiles fetch
     else
       die "$DOTFILES_ROOT already exists, aborting."
@@ -45,7 +45,6 @@ function dotfiles() {
   eval $DOTFILES_ALIAS $*
 }
 
-
 function backup_existing() {
   dotfiles checkout
   DST="${DOTFILES_ROOT}-backup"
@@ -62,6 +61,13 @@ function install() {
   dotfiles config --local status.showUntrackedFiles no
 }
 
+# If this script is being piped from curl
+if ! tty >/dev/null; then
+  install
+  exit 0
+fi
+
+# Command line mode
 case "${1:-help}" in
   info) info;;
   install) install;;
