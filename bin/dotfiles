@@ -1,204 +1,77 @@
-#!/bin/bash -e
-# Installation:
-# curl https://raw.github.com/Klowner/dotfiles/main/bin/dotfiles | bash
-basedir="${DOTFILES_ROOT:-$HOME/.dotfiles}"
-bindir="${DOTFILES_BIN:-$HOME/bin}"
-repo="Klowner/dotfiles"
-gitbase="git://github.com/${repo}.git"
-gitbranch="${DOTFILES_BRANCH:-main}"
-gitremote="git@github.com:${repo}"
-tarball="http://github.com/${repo}/tarball/${gitbranch}"
+#!/bin/sh -e
+DOTFILES_HOME="${DOTFILES_HOME:-$HOME}"
+DOTFILES_ROOT="${DOTFILES_ROOT:-$DOTFILES_HOME/.dotfiles}"
+DOTFILES_REMOTE="${DOTFILES_REMOTE:-git@github.com:Klowner/dotfiles}"
+DOTFILES_WORK_TREE="${DOTFILES_WORK_TREE:-$HOME}"
+DOTFILES_ALIAS="/usr/bin/git --git-dir=${DOTFILES_ROOT} --work-tree=${DOTFILES_WORK_TREE}"
+DEPENDENCIES=(git)
 
 function has() {
   return $(which $1 &> /dev/null)
 }
 
-function missing() {
-  ! has $1
-}
-
-function stat() {
-  GIT_DIR=${basedir}/.git git diff --stat
-}
-
-function note() {
-  echo "[32;1m * [0m$*"
-}
-
-function warn() {
-  echo "[31;1m * [0m$*"
-}
-
 function die() {
-  warn $*
+  echo $*
   exit 1
 }
 
-function destination() {
-  path=$1
-  path=${path/\_/.}
-  path=${path//\_//}
-  echo $path
+function info() {
+  echo "DOTFILES_ROOT:       ${DOTFILES_ROOT}"
+  echo "DOTFILES_REMOTE:     ${DOTFILES_REMOTE}"
+  echo "DOTFILES_WORK_TREE:  ${DOTFILES_WORK_TREE}"
+  echo "DOTFILES_ALIAS:      ${DOTFILES_ALIAS}"
 }
 
-function dirname() {
-  path=$1
-  path=${path%"${path##*[!/]}"}
-  path=${path%/*}
-  echo $path
-}
-
-function reverse_destination() {
-  path=$1
-  path=${path/\./_/}
-  echo $path
-  echo path $path
-}
-
-function link() {
-  src=$1
-  dst=$2
-  if [ -e $dst ]; then
-    if [ -L $dst ]; then
-      # Symlink already exists
-      return
+function smart_clone() {
+  if [ -d $DOTFILES_ROOT ]; then
+    EXISTING_REMOTE=$(git --git-dir=${DOTFILES_ROOT} remote get-url origin)
+    if [ $EXISTING_REMOTE == $DOTFILES_REMOTE ]; then
+      dotfiles fetch
     else
-      # Rename existing files with ".old" extension
-      warn "$dst already exists, renaming to $dst.old"
-      backup=$dst.old
-      if [ -e $backup ]; then
-        die "$backup already exists. Aborting."
-      fi
-      mv -v $dst $backup
+      die "$DOTFILES_ROOT already exists, aborting."
     fi
+  else
+    git clone --bare $DOTFILES_REMOTE $DOTFILES_ROOT
   fi
-  # Update existing or create new symlink
-  ln -vsf $src $dst
 }
 
-function install_via_tarball() {
-  note "Downloading tarball..."
-  mkdir -vp $basedir
-  cd $basedir
-  tempfile=TEMP.tar.gz
-  if has curl; then
-    curl -L $tarball >$tempfile
-  elif has wget; then
-    wget -O $tempfile $tarball
-  else:
-    die "Can't download tarball."
-  fi
-  tar --strip-components 1 -xzvf $tempfile
-  rm -v $tempfile
+function check_requirements() {
+  for DEP in ${DEPENDENCIES[@]}; do
+    has $DEP || die "${DEP} not found, please install and try again."
+  done
 }
 
-function install_via_git() {
-  note "Cloning dotfiles git repository..."
-  git clone ${gitremote} ${basedir}
+function dotfiles() {
+  eval $DOTFILES_ALIAS $*
 }
 
 
-function bootstrap() {
-  note "Bootstrapping..."
-  if missing curl && missing wget; then
-    die "missing: curl or wget"
-  fi
-  if missing git; then
-    die "missing: git"
-  fi
-
-  if [ -e $basedir ]; then
-    # Try to determine if these dotfiles already installed
-    if [ -e "${basedir}/.git" ]; then
-      local current_remote=$(GIT_DIR=${basedir}/.git git remote -v | grep origin\.\*\(fetch\) | awk '{print $2}')
-      if [ $current_remote = $gitremote ]; then
-        die "Dotfiles already installed!"
-      fi
-    fi
-    warn "$basedir exists, moving to ${basedir}.bak"
-    mv "${basedir}" "${basedir}.bak"
-  fi
-  install_via_tarball
+function backup_existing() {
+  dotfiles checkout
+  DST="${DOTFILES_ROOT}-backup"
+  SRC="${DOTFILES_WORK_TREE}"
+  mkdir -p $DST && \
+  dotfiles checkout 2>&1 | grep -E "\s+\." | awk {'print $1'} | \
+    xargs -d $'\n' sh -c "for arg do mkdir -p ${DST}/\${arg%/*} && mv -v ${SRC}/\$arg ${DST}/\$arg; done" _
 }
 
 function install() {
-  note "Symlinking configuration files..."
-  for path in _*; do
-    dst=$(destination $path)
-    dstdir=$(dirname $dst)
-    echo "$path"
-    case $path in
-      .|..|.git)
-        continue
-        ;;
-      *)
-        link $basedir/$path $HOME/$dst
-        ;;
-    esac
-  done
-
-  note "Installing ~/bin script links... ${bindir}"
-  mkdir -v -p ${bindir}
-  if [ -d ${bindir} ]; then
-    for path in ${basedir}/bin/*; do
-      link $path ${bindir}/${path##*/}
-    done
-  fi
-  note "Done"
+  check_requirements
+  smart_clone
+  dotfiles checkout || backup_existing && dotfiles checkout
+  dotfiles config --local status.showUntrackedFiles no
 }
 
-function git_migrate() {
-  if missing git; then
-    return
-  fi
-  if [ ! -d "${basedir}/.git" ]; then
-    note "Migrating dotfiles to git repository..."
-    git clone $gitremote --no-checkout --branch ${gitbranch} "${basedir}/migrate"
-    git mv "${basedir}/migrate/.git" "${basedir}/.git"
-    rm -rf "${basedir}/migrate"
-  fi
-}
-
-function add() {
-  path=$1
-  dst="${path/"$HOME"/}" # remove leading $HOME from path
-  dst="${dst/\//}" # remove leading slash
-  dst="${dst//[.|\/]/_}" # replace slashes with underscores
-
-  note "Adding $path..."
-  cp -avr $path $basedir/$dst
-  mv $path $path.old
-  link $basedir/$dst $path
-}
-
-function info() {
-  echo "location:   ${basedir}"
-  echo "commands:   ${bindir}"
-  echo "git:        ${gitremote}:${gitbranch}"
-}
-
-# Hopefully detect if this script is being piped to bash
-if [ "${0/*\//}" != "dotfiles" ]; then
-  bootstrap && \
-  install && \
-  exit
-fi
-
-git_migrate
-
-cmd=${1:-help}
-case $cmd in
+case "${1:-help}" in
+  info) info;;
   install) install;;
-  add)     add ${@:2};;
-  info)    info;;
-  status)  stat;;
   help)
-    echo "Commands:"
-    echo " - install      Install to $basedir"
-    echo " - add <path>"
-    echo " - info         Print script variables"
-    echo " - status       Show changed items in .dotfiles"
+    echo "dotfiles commands: "
+    echo " - install"
+    echo " - info"
+    echo "all other commands will be forwarded to git"
     ;;
+  *) eval $DOTFILES_ALIAS $*;;
 esac
 
 # vim:ts=2:sw=2:et:
