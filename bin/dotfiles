@@ -1,4 +1,5 @@
 #!/bin/zsh -e
+# Install via curl -o- -L https://raw.githubusercontent.com/Klowner/dotfiles/bearmode/bin/dotfiles | zsh
 DOTFILES_HOME="${DOTFILES_HOME:-$HOME}"
 DOTFILES_ROOT="${DOTFILES_ROOT:-$DOTFILES_HOME/.dotfiles}"
 DOTFILES_REMOTE="${DOTFILES_REMOTE:-git@github.com:Klowner/dotfiles}"
