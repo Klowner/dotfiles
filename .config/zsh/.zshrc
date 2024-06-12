@@ -30,7 +30,10 @@ SAVEHIST=50000
 
 
 # Additional configuration files
-[ -d ~/.config/zsh/config.d/ ] && source <(cat ~/.config/zsh/config.d/*)
+[ -d "${ZDOTDIR}/config.d/" ] && source <(cat ${ZDOTDIR}/config.d/*)
+
+# Host specific config
+[ -f "${ZDOTDIR}/zshrc.${HOST}" ] && source "${ZDOTDIR}/zshrc.${HOST}"
 
 # Optional local config
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
