@@ -1,4 +1,5 @@
-mode "resize" {
+set $mode_resize "<b>Resize</b><i>eo</i>"
+mode --pango_markup $mode_resize {
 	$bindsym h resize shrink width 10 px or 10 ppt
 	$bindsym j resize grow height 10 px or 10 ppt
 	$bindsym k resize shrink height 10 px or 10 ppt
@@ -14,4 +15,4 @@ mode "resize" {
 	$bindsym Return mode "default"
 	$bindsym Escape mode "default"
 }
-$bindsym $mod+r mode "resize"
+$bindsym $mod+r mode $mode_resize

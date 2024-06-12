@@ -1,6 +1,9 @@
 # shellcheck disable=SC2148,SC2086,SC2154,SC2046,SC2016
 ### Variables
 #
+set $theme "$sway-config-dir/themes/dracula"
+include $theme/theme.conf
+
 # Logo key. Use Mod1 for Alt and Mod4 for Super.
 set $mod Mod4
 set $alt_mod Mod1
@@ -26,10 +29,10 @@ set $term kitty
 set $term_cwd $term -D "$(swaycwd 2>/dev/null || echo $HOME)"
 
 # onscreen bar
-set $onscreen_bar /usr/share/sway/scripts/wob.sh "$accent-color" "$background-color"
+set $onscreen_bar $sway-scripts-dir/wob.sh "$accent-color" "$background-color"
 
 # brightness control
-set $brightness /usr/share/sway/scripts/brightness.sh
+set $brightness $sway-scripts-dir/brightness.sh
 set $brightness_up $brightness up | $onscreen_bar
 set $brightness_down $brightness down | $onscreen_bar
 
@@ -83,7 +86,7 @@ include /etc/sway/autostart
 seat seat0 hide_cursor 5000
 
 # pulseaudio command
-set $pulseaudio $once $term_float pulsemixer
+set $pulseaudio pavucontrol
 
 # help command
 set $help /usr/share/sway/scripts/help.sh --toggle

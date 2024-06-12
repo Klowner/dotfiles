@@ -20,7 +20,7 @@ notify() {
 }
 
 if [ $status != 0 ]; then
-    target_path=$(xdg-user-dir SCREENSHOT)
+    target_path=$(xdg-user-dir SCREENSHOTS)
     timestamp=$(date +'recording_%Y%m%d-%H%M%S')
 
     notify "Select a region to record" -t 1000
