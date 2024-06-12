@@ -1,2 +1,95 @@
-@import "/usr/share/sway/templates/waybar/style.css";
+@import url("../../.cache/wal/colors-waybar.css");
+
+@define-color warning_color @color15;
+@define-color error_color @color14;
+@define-color focused_color @color8;
+
+@keyframes blink-warning {
+  70% {
+    color: @wm_icon_bg;
+  }
+  to {
+    color: @wm_icon_bg;
+    background-color: @warning_color;
+  }
+}
+
+@keyframes blink-critical {
+  70% {
+    color: @wm_icon_bg;
+  }
+  to {
+    color: @wm_icon_bg;
+    background-color: @error_color;
+  }
+}
+
+
+* {
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  min-height: 0;
+  padding: 0;
+  font-family: Font Awesome, "JetBrainsMono NF", "Roboto Mono", "Ubuntu", "Droid", "MesloLGL Nerd Font", Roboto, sans-serif;
+}
+
+window#waybar {
+  color: @foreground;
+  background: rgba(0, 0, 0, 0);
+}
+
+.modules-right,
+.modules-left {
+  margin: 0;
+  padding: 2px 10px;
+  background-color: alpha(@background, 0.7);
+}
+.modules-right {
+  border-radius: 0 0 0 10px;
+}
+.modules-left {
+  border-radius: 0 0 10px 0;
+}
+
+#backlight,
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#custom-adaptive-light,
+#custom-clipboard,
+#custom-dnd,
+#custom-github,
+#custom-idle-inhibitor,
+#custom-menu,
+#custom-scratchpad,
+#custom-sunset,
+#custom-weather,
+#custom-zeit,
+#language,
+#memory,
+#mode,
+#network,
+#network,
+#pulseaudio,
+#temperature,
+#tray
+{
+  padding: 0 10px;
+}
+
+#workspaces button {
+  padding-bottom: 2px;
+  color: @foreground;
+}
+
+#workspaces button.focused {
+  border-color: @focused_color;
+}
+
+#workspaces button.urgent {
+  border-color: @error_color;
+  color: @error_color;
+}
 

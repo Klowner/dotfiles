@@ -1,7 +1,7 @@
 # shellcheck disable=SC2148,SC2086,SC2154,SC2046,SC2016
 ### Variables
 #
-set $theme "$sway-config-dir/themes/dracula"
+set $theme "$sway-config-dir/themes/dynamic"
 include $theme/theme.conf
 
 # Logo key. Use Mod1 for Alt and Mod4 for Super.
@@ -80,7 +80,7 @@ set $sleep_timeout_ac 3600
 set $sleep_delay 2
 
 ### Autostart applications definition. Can be removed soon-ish as it is being imported in userspace.
-include /etc/sway/autostart
+#include /etc/sway/autostart
 
 # hide cursor after 5 seconds of inactivty
 seat seat0 hide_cursor 5000

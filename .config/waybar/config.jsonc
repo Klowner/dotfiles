@@ -18,7 +18,7 @@
     "position": "top",
 
     "modules-left": ["custom/menu", "sway/workspaces", "custom/scratchpad"],
-    "modules-center": ["custom/wf-recorder", "sway/mode", "custom/weather"],
+    "modules-center": ["custom/wf-recorder", "sway/mode"],
     "modules-right": [
         // informational
         "sway/language",
@@ -33,11 +33,10 @@
         // connecting
         "network",
         "bluetooth",
-        "custom/valent",
 
         // media
         "custom/playerctl",
-        "custom/idle_inhibitor",
+        "custom/idle-inhibitor",
         "custom/dnd",
         "pulseaudio",
         "backlight",
@@ -69,7 +68,7 @@
 
     "clock": {
         "interval": 60,
-        "format": "{:%e %b %Y %H:%M}",
+        "format": "{:%a, %b %d %I:%M%p %Z %d/%m/%Y}",
         "tooltip": true,
         "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>",
         "on-click": "swaymsg exec \\$calendar"
@@ -159,9 +158,9 @@
         "format": "󰀼 {}",
         "interval": 3600,
         "return-type": "json",
-        "exec-if": "$HOME/.config/scripts/checkupdates.sh check",
-        "exec": "$HOME/.config/scripts/checkupdates.sh status",
-        "on-click": "$HOME/.config/scripts/checkupdates.sh check && swaymsg exec \\$update-manager",
+        "exec-if": "$HOME/.config/sway/scripts/checkupdates.sh check",
+        "exec": "$HOME/.config/sway/scripts/checkupdates.sh status",
+        "on-click": "$HOME/.config/sway/scripts/checkupdates.sh check && swaymsg exec \\$update-manager",
         "on-click-middle": "waybar-signal pacman",
         "signal": 14
     },
@@ -189,7 +188,7 @@
             "one": "󰖯",
             "many": "󰖲"
         },
-        "exec": "/bin/sh $HOME/.config/scripts/scratchpad.sh",
+        "exec": "/bin/sh $HOME/.config/sway/scripts/scratchpad.sh",
         "on-click": "swaymsg 'scratchpad show'",
         "signal": 7
     },
@@ -203,9 +202,9 @@
             "on": "󰌵",
             "off": "󰌶"
         },
-        "exec": "fallback_latitude=50.1 fallback_longitude=8.7 latitude= longitude= $HOME/.config/scripts/sunset.sh",
-        "on-click": "$HOME/.config/scripts/sunset.sh toggle",
-        "exec-if": "$HOME/.config/scripts/sunset.sh check",
+        "exec": "fallback_latitude=50.1 fallback_longitude=8.7 latitude= longitude= $HOME/.config/sway/scripts/sunset.sh",
+        "on-click": "$HOME/.config/sway/scripts/sunset.sh toggle",
+        "exec-if": "$HOME/.config/sway/scripts/sunset.sh check",
         "signal": 6
     },
 
@@ -279,8 +278,8 @@
             "tracking": "󰖷",
             "stopped": "󰋣"
         },
-        "exec": "$HOME/.config/waybar/scripts/zeit.sh status",
-        "on-click": "$HOME/.config/scripts/zeit.sh click; waybar-signal zeit",
+        "exec": "$HOME/.config/sway/scripts/zeit.sh status",
+        "on-click": "$HOME/.config/sway/scripts/zeit.sh click; waybar-signal zeit",
         "exec-if": "[ -x \"$(command -v zeit)\" ]",
         "signal": 10
     },
@@ -293,9 +292,9 @@
             "default": "󰚢",
             "dnd": "󰚣"
         },
-        "on-click": "$HOME/.config/scripts/dnd.sh toggle; waybar-signal dnd",
-        "on-click-right": "$HOME/.config/scripts/dnd.sh restore",
-        "exec": "$HOME/.config/scripts/dnd.sh status",
+        "on-click": "$HOME/.config/sway/scripts/dnd.sh toggle; waybar-signal dnd",
+        "on-click-right": "$HOME/.config/sway/scripts/dnd.sh restore",
+        "exec": "$HOME/.config/sway/scripts/dnd.sh status",
         "signal": 11
     },
 
@@ -308,9 +307,9 @@
             "on": "󰃡",
             "off": "󰃠"
         },
-        "exec": "$HOME/.config/scripts/wluma.sh",
-        "on-click": "$HOME/.config/scripts/wluma.sh toggle",
-        "exec-if": "$HOME/.config/scripts/wluma.sh check",
+        "exec": "$HOME/.config/sway/scripts/wluma.sh",
+        "on-click": "$HOME/.config/sway/scripts/wluma.sh toggle",
+        "exec-if": "$HOME/.config/sway/scripts/wluma.sh check",
         "signal": 12
     },
 
@@ -318,7 +317,7 @@
         "format": "{icon}",
         "tooltip": true,
         "interval": 60,
-        "exec": "$HOME/.config/scripts/valent.py",
+        "exec": "$HOME/.config/sway/scripts/valent.py",
         "exec-if": "[ -x \"$(command -v valent)\" ]",
         "return-type": "json",
         "format-icons": {
@@ -333,7 +332,7 @@
         "signal": 13
     },
 
-    "custom/idle_inhibitor": {
+    "custom/idle-inhibitor": {
         "interval": 60,
         "return-type": "json",
         "format": "{icon}",
