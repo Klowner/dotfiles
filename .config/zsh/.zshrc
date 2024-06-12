@@ -28,7 +28,6 @@ HISTFILE=${XDG_CACHE_DIR:-~/.cache}/.zhistory
 HISTSIZE=50000
 SAVEHIST=50000
 
-
 # Additional configuration files
 [ -d "${ZDOTDIR}/config.d/" ] && source <(cat ${ZDOTDIR}/config.d/*)
 

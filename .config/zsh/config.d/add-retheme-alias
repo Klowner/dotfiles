@@ -1,0 +1,1 @@
+alias retheme="wal -q -t -i $(xdg-user-dir WALLPAPERS)"
