@@ -1,0 +1,9 @@
+zmodule prompt-pwd
+zmodule git-info
+zmodule s1ck94
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule completion
+zmodule zsh-users/zsh-autosuggestions
+zmodule ssh
+zmodule utility
+zmodule pacman

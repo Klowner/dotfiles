@@ -1,0 +1,127 @@
+[user]
+	name = Mark Riedesel
+	email = mark@klowner.com
+
+[core]
+	editor = nvim
+	whitespace = trailing-space,space-before-tab,cr-at-eol
+	pager = less -x4
+
+[gist]
+	private = yes
+
+[github]
+	user = klowner
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	blame = auto
+
+[log]
+	decorate = short
+
+[status]
+	relativePaths = false
+
+[push]
+	default = simple
+
+[pack]
+	windowMemory = 2048m
+
+[alias]
+	branchlog = !git log ${1+}${1-master}..HEAD --reverse --date=short --format=\"git:%h %ad %s\"
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+	lgd = log --color --graph --date=format:%m/%d --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad, %cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+
+	# from http://stackoverflow.com/questions/591923/make-git-automatically-remove-trailing-whitespace-before-committing/15398512
+	# Logic:
+	#
+	# The 'git stash save' fails if the tree is clean (instead of
+	# creating an empty stash :P). So, we only 'stash' and 'pop' if
+	# the tree is dirty.
+	#
+	# The 'git rebase --whitespace=fix HEAD~' throws away the commit
+	# if it's empty, and adding '--keep-empty' prevents the whitespace
+	# from being fixed. So, we first check that the index is dirty.
+	#
+	# Also:
+	# - '(! git diff-index --quiet --cached HEAD)' is true (zero) if
+	#   the index is dirty
+	# - '(! git diff-files --quiet .)' is true if the tree is dirty
+	#
+	# The 'rebase --whitespace=fix' trick is from here:
+	# http://stackoverflow.com/a/19156679/470844
+	fixws = !"\
+		  if (! git diff-files --quiet .) && \
+		     (! git diff-index --quiet --cached HEAD) ; then \
+		    git commit -m FIXWS_SAVE_INDEX && \
+		    git stash save FIXWS_SAVE_TREE && \
+		    git rebase --whitespace=fix HEAD~ && \
+		    git reset --soft HEAD~ && \
+		    git stash pop ; \
+		  elif (! git diff-index --quiet --cached HEAD) ; then \
+		    git commit -m FIXWS_SAVE_INDEX && \
+		    git rebase --whitespace=fix HEAD~ && \
+		    git reset --soft HEAD~ ; \
+		fi"
+
+
+	# The different cases are:
+	# # - dirty tree and dirty index
+	# # - dirty tree and clean index
+	# # - clean tree and dirty index
+	# #
+	# # We have to consider separate cases because the 'git rebase
+	# # --whitespace=fix' is not compatible with empty commits (adding
+	# # '--keep-empty' makes Git not fix the whitespace :P).
+	fixws-global-tree-and-index = !"\
+		  if (! git diff-files --quiet .) && \
+		     (! git diff-index --quiet --cached HEAD) ; then \
+		    git commit -m FIXWS_SAVE_INDEX && \
+		    git add -u :/ && \
+		    git commit -m FIXWS_SAVE_TREE && \
+		    git rebase --whitespace=fix HEAD~2 && \
+		    git reset HEAD~ && \
+		    git reset --soft HEAD~ ; \
+		  elif (! git diff-files --quiet .) ; then \
+		    git add -u :/ && \
+		    git commit -m FIXWS_SAVE_TREE && \
+		    git rebase --whitespace=fix HEAD~ && \
+		    git reset HEAD~ ; \
+		  elif (! git diff-index --quiet --cached HEAD) ; then \
+		    git commit -m FIXWS_SAVE_INDEX && \
+		    git rebase --whitespace=fix HEAD~ && \
+		    git reset --soft HEAD~ ; \
+		  fi"
+
+[merge]
+	tool = diffconflicts
+
+[mergetool "diffconflicts"]
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	trustExitCode = true
+	keepBackup = false
+
+[diff]
+	tool = meld
+[apply]
+	whitespace = fix
+
+[filter "spellfile"]
+	smudge = cat
+	clean = sort -u
+
+[rerere]
+	enabled = true
+[pull]
+	ff = only
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
