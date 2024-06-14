@@ -51,6 +51,9 @@ window#waybar {
 .modules-left {
   border-radius: 0 0 10px 0;
 }
+.modules-center {
+  background: red;
+}
 
 #backlight,
 #battery,
@@ -76,7 +79,7 @@ window#waybar {
 #temperature,
 #tray
 {
-  padding: 0 10px;
+  padding: 0 8px;
 }
 
 #workspaces button {
