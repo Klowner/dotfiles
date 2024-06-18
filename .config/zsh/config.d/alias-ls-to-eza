@@ -1,0 +1,10 @@
+# vim: set ft=zsh:
+if [[ -z $commands[eza] ]]; then
+	return 0;
+fi
+
+alias ls='eza'                 # ls
+alias l='eza -lbF --git'       # List, size, type git
+alias ll='eza -lbGF --git'     # Long list
+alias llm='eza -lbGF --git --sort=modified'     # Long list
+

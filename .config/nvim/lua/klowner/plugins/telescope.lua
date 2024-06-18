@@ -30,6 +30,7 @@ return {
             ["<C-j>"] = actions.move_selection_next, -- move to next result
             ["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
             ["<C-t>"] = require("trouble.sources.telescope").open,
+            ['<esc>'] = actions.close, -- close immediately when escape is pressed
           },
         },
       },
@@ -40,6 +41,9 @@ return {
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
 
+    -- TODO: something
+    keymap.set("n", ";", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
+    keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
     keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
     keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
     keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
