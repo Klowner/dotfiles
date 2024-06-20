@@ -18,18 +18,12 @@ vim.g.maplocalleader = " "
 -- options
 local opt = vim.opt
 opt.relativenumber = true
-opt.number = true
+-- opt.number = true
 opt.autoread = true   -- automatically reload modified files
 opt.wildmenu = true   -- handle autocompletion menu
 
 opt.wrap = false
-opt.list = true
---opt.listchars = {
---	{ tab = '>' },
---	{ trail = '▂' },
---	{ extends = '»' },
---	{ precedes = '«' },
---}
+-- opt.list = true
 
 opt.modelines = 5
 opt.matchtime = 1
