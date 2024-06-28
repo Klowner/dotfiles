@@ -1,0 +1,26 @@
+* {
+	font-size: 12pt;
+	font-family: Envy Code R
+}
+
+window {
+	background-color: rgba(--wofi-rgb-color0, 0.8);
+}
+
+#entry:selected {
+	background-color: rgba(--wofi-rgb-color3, 0.8);
+}
+#text:selected {
+	color: rgb(--wofi-rgb-color0);
+}
+
+#text {
+	color: rgb(--wofi-rgb-color3);
+	padding: 5px;
+}
+
+#input {
+	margin: 5px;
+	border: 3px solid rgb(--wofi-rgb-color2);
+	background-color: rgb(--wofi-rgb-color0);
+}

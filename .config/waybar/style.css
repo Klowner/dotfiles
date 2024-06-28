@@ -24,7 +24,6 @@
   }
 }
 
-
 * {
   border-radius: 0;
   border: none;
@@ -50,9 +49,6 @@ window#waybar {
 }
 .modules-left {
   border-radius: 0 0 10px 0;
-}
-.modules-center {
-  background: red;
 }
 
 #backlight,
