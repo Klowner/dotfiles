@@ -2,7 +2,7 @@
 $bindsym $mod+Return exec kitty
 $bindsym $mod+Home exec thunar
 $bindsym $mod+b exec firefox
-$bindsym $mod+d exec --no-startup-id ~/bin/launcher
+$bindsym $mod+d exec wofi --show drun --color $HOME/.cache/wal/colors --allow-images
 
 # quick-access screenshot
 $bindsym $mod+g exec $screenshot_selection
