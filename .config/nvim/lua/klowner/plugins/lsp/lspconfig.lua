@@ -132,6 +132,8 @@ return {
           },
         })
       end,
+
+      lspconfig.gdscript.setup({})
     })
   end,
 }

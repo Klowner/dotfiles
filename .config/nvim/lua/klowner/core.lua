@@ -23,7 +23,6 @@ opt.autoread = true   -- automatically reload modified files
 opt.wildmenu = true   -- handle autocompletion menu
 
 opt.wrap = false
--- opt.list = true
 
 opt.modelines = 5
 opt.matchtime = 1
@@ -39,6 +38,10 @@ opt.smartcase = true                       -- ...unless mixed case is used in se
 opt.backspace = "indent,eol,start"         -- allow backspace on indent, eol, or insert mode start position
 opt.cursorline = true
 opt.swapfile = false                       -- disable swap file
+
+-- highlight trailing white space
+vim.fn.matchadd('errorMsg', [[\s\+$]])
+
 
 -- use system clipboard as default register
 opt.clipboard:append("unnamedplus")
