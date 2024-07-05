@@ -63,6 +63,7 @@ window#waybar {
 #custom-github,
 #custom-idle-inhibitor,
 #custom-menu,
+#custom-playerctl,
 #custom-scratchpad,
 #custom-sunset,
 #custom-weather,
@@ -76,7 +77,7 @@ window#waybar {
 #temperature,
 #tray
 {
-  padding: 0 8px;
+  padding: 0 10px;
 }
 
 #workspaces button {

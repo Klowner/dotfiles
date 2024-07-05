@@ -7,9 +7,6 @@ return {
 	config = function ()
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status")
-		local gitsigns = require("gitsigns")
-
-
 
 		lualine.setup({
 			sections = {

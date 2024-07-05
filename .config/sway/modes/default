@@ -2,10 +2,10 @@
 $bindsym $mod+Return exec kitty
 $bindsym $mod+Home exec thunar
 $bindsym $mod+b exec firefox
-$bindsym $mod+d exec wofi --show drun --color $HOME/.cache/wal/colors --allow-images
+$bindsym $mod+d exec $menu
 
 # quick-access screenshot
-$bindsym $mod+g exec $screenshot_selection
+$bindsym $mod+g exec $HOME/bin/screengrab
 $bindsym $mod+Shift+g exec $screenshot_selection
 
 # session actions

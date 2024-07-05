@@ -1,0 +1,12 @@
+set $monitor-left DP-1
+set $monitor-center DP-3
+set $kamvas HDMI-A-1
+
+output $monitor-left pos 0 0 res 2560x1440 transform 270
+output $monitor-center pos 1440 400 res 3840x2160
+output $kamvas pos 2350 2560
+
+set $kamvas-stylus '9580:109:HID_256c:006d_Pen'
+set $kamvas-pad '9580:109:HID_256c:006d_Pad'
+input $kamvas-stylus map_to_output $kamvas
+input $kamvas-pad map_to_output $kamvas
