@@ -1,0 +1,1 @@
+[ -d "$HOME/.journal" ] && alias journal="~/.journal/journal"
