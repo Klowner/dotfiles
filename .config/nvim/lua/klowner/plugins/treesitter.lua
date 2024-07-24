@@ -43,6 +43,7 @@ return {
         "gitignore",
         "query",
         "vimdoc",
+        "vue",
         "c",
       },
       incremental_selection = {
