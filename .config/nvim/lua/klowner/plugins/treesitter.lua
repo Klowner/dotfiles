@@ -4,6 +4,7 @@ return {
   build = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
+    "nvim-treesitter/nvim-treesitter-textobjects",
   },
   config = function()
     -- import nvim-treesitter plugin
@@ -11,6 +12,7 @@ return {
 
     -- configure treesitter
     treesitter.setup({ -- enable syntax highlighting
+      auto_install = true,
       highlight = {
         enable = true,
       },

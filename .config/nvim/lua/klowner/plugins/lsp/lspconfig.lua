@@ -133,8 +133,38 @@ return {
         })
       end,
 
-      lspconfig.gdscript.setup({})
+      ["tsserver"] = function ()
+        local mason_registry = require 'mason-registry'
+        local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path()
+
+        lspconfig['tsserver'].setup({
+          init_options = {
+            plugins = {
+              {
+                name = '@vue/typescript-plugin',
+                location = vue_language_server_path,
+                languages = { 'vue' },
+              },
+            },
+          },
+        })
+      end,
+
+      ["volar"] = function ()
+        lspconfig['volar'].setup {
+          init_options = {
+            vue = {
+              hybridMode = false,
+            },
+          },
+          filetypes = {
+            'vue',
+          },
+        }
+      end,
     })
+
+    lspconfig.gdscript.setup {}
   end,
 }
 
