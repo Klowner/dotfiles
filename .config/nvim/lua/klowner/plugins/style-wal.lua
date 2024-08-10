@@ -18,9 +18,11 @@ local function add_tweaks()
 	-- always set IblIndent to a slightly brighter version of the background color
 	vim.cmd('hi IblIndent guifg=' .. brightness(get_color('Normal', 'bg'), 20))
 end
-
 return {
 	'AlphaTechnolog/pywal.nvim',
+	cond = function ()
+		return vim.fn.executable('wal') == 1
+	end,
 	config = function ()
 		vim.cmd('colorscheme pywal')
 		add_tweaks()
