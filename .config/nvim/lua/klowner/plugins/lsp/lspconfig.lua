@@ -6,6 +6,7 @@ return {
     "hrsh7th/cmp-nvim-lsp-signature-help",
     { "antosha417/nvim-lsp-file-operations", config = true },
     { "folke/neodev.nvim", opts = {} },
+    'j-hui/fidget.nvim',
   },
   config = function()
     -- import lspconfig plugin

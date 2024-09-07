@@ -84,3 +84,9 @@ end
 
 -- :W to save with sudo
 -- vim.api.nvim_create_user_command('')
+-- vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+--   group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = false }),
+--   callback = function ()
+--     vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})
+--   end
+-- })

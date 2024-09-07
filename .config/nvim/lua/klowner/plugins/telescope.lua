@@ -2,10 +2,12 @@ return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = {
+    "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-tree/nvim-web-devicons",
     "folke/todo-comments.nvim",
+    "nvim-telescope/telescope-media-files.nvim",
   },
   config = function()
     local telescope = require("telescope")
@@ -37,6 +39,7 @@ return {
     })
 
     telescope.load_extension("fzf")
+    telescope.load_extension("media_files")
 
     -- set keymaps
     local keymap = vim.keymap -- for conciseness

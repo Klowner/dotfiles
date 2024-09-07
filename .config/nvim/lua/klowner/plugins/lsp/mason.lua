@@ -39,6 +39,7 @@ return {
         "svelte",
         "tailwindcss",
         "tsserver",
+        "rust_analyzer",
       },
     })
 
