@@ -21,7 +21,8 @@ end
 return {
 	'AlphaTechnolog/pywal.nvim',
 	cond = function ()
-		return vim.fn.executable('wal') == 1
+		return false
+		-- return vim.fn.executable('wal') == 1
 	end,
 	config = function ()
 		vim.cmd('colorscheme pywal')
