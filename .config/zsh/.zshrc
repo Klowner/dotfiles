@@ -12,11 +12,13 @@ setopt numericglobsort          # Sort filenames numerically when it makes sense
 setopt nobeep                   # No beep
 setopt appendhistory            # Immediately append history instead of overwriting
 setopt histignorealldups        # If a new command is a duplicate, remove the older one
+setopt histsavenodups           # Save no duplicates
 setopt autocd                   # If only directory path is entered, cd there.
 setopt inc_append_history       # Save commands are added to the history immediately, otherwise only when shell exits.
 setopt histignorespace          # Don't save commands that start with space
 setopt extended_history         # Include extra info about executed commands
 setopt hist_reduce_blanks       # Reduce blanks from commands in history
+alias history="fc -l 1"
 
 zstyle ':completion:*' rehash true   # Automatically find new executables in path
 zstyle ':completion:*' accept-exact '*(N)'

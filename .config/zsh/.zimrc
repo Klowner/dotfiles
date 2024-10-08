@@ -7,3 +7,4 @@ zmodule zsh-users/zsh-autosuggestions
 zmodule ssh
 zmodule utility
 zmodule pacman
+zmodule zsh-users/zsh-history-substring-search
