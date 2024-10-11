@@ -3,8 +3,9 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   dependencies = {
-    "windwp/nvim-ts-autotag",
+    "geigerzaehler/tree-sitter-jinja2",
     "nvim-treesitter/nvim-treesitter-textobjects",
+    "windwp/nvim-ts-autotag",
   },
   config = function()
     -- import nvim-treesitter plugin
