@@ -38,7 +38,7 @@ return {
         "pyright",
         "svelte",
         "tailwindcss",
-        "tsserver",
+        "ts_ls",
         "rust_analyzer",
       },
     })
