@@ -30,7 +30,7 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 opt.autoindent = true
 opt.scrolloff = 7
-opt.spell = true                           -- enable spellcheck
+opt.spell = false                           -- enable spellcheck
 
 opt.ignorecase = true                      -- ignore case while searching
 opt.smartcase = true                       -- ...unless mixed case is used in search terms
@@ -57,6 +57,7 @@ local keymap = vim.keymap
 
 keymap.set('', '<C-n>', ':bnext<CR>', {desc="Jump to next buffer"})
 keymap.set('', '<C-p>', ':bprev<CR>', {desc="Jump to previous buffer"})
+keymap.set('', '<C-s>', ':set spell!<CR>', {desc="Toggle spellcheck"})
 
 keymap.set('', '<C-h>', '<C-W>h', {desc="Focus window left"})
 keymap.set('', '<C-j>', '<C-W>j', {desc="Focus window down"})
